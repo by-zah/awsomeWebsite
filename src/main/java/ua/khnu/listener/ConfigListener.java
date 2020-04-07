@@ -3,7 +3,10 @@ package ua.khnu.listener;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import ua.khnu.db.transaction.TransactionHandler;
+import ua.khnu.entuty.User;
 import ua.khnu.exception.InitException;
+import ua.khnu.reposetory.Repository;
+import ua.khnu.reposetory.UserRepository;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -13,6 +16,10 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.sql.SQLException;
+import java.util.Arrays;
 
 @WebListener
 public class ConfigListener implements ServletContextListener {
@@ -22,9 +29,11 @@ public class ConfigListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         ServletContext servletContext = sce.getServletContext();
         initLog4J(servletContext);
+        initDB();
+        Repository<User> userRepository = (Repository<User>) getTransactionProxy(UserRepository.class);
     }
 
-    private void initDB(ServletContext servletContext){
+    private void initDB(){
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
@@ -50,5 +59,16 @@ public class ConfigListener implements ServletContextListener {
 
     private void log(String msg) {
         System.out.println("[ContextListener] " + msg);
+    }
+
+    private <T> Repository<?> getTransactionProxy(Class<T> aClass){
+        try {
+            ClassLoader cl = aClass.getClassLoader();
+            Repository<?> rep = (Repository<?>) aClass.getConstructor().newInstance();
+            Object px =Proxy.newProxyInstance(cl,aClass.getInterfaces(),new TransactionHandler(rep));
+            return (Repository)px ;
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            throw new InitException("Can`t init repository");
+        }
     }
 }

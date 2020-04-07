@@ -8,11 +8,15 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 public class TransactionHandler implements InvocationHandler {
     private static final Logger LOG = Logger.getLogger(TransactionHandler.class);
     private static DataSource ds;
+    private Object target;
+
+    public TransactionHandler(Object target) {
+        this.target = target;
+    }
 
     public static void setDs(DataSource ds) {
         if (TransactionHandler.ds == null) {
@@ -23,9 +27,7 @@ public class TransactionHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        boolean hasAnnotation = Arrays.stream(method.getDeclaredAnnotations())
-                .anyMatch(a -> a.annotationType().equals(Transaction.class));
-        if (!hasAnnotation) {
+        if (method.getDeclaredAnnotation(Transaction.class) == null) {
             return method.invoke(proxy, args);
         }
         Object res = null;
@@ -34,7 +36,7 @@ public class TransactionHandler implements InvocationHandler {
             connection = ds.getConnection();
             connection.setAutoCommit(false);
             ConnectionHolder.setConnection(connection);
-            res = method.invoke(proxy, args);
+            res = method.invoke(target, args);
             connection.commit();
         } catch (SQLException e) {
             rollback(connection);

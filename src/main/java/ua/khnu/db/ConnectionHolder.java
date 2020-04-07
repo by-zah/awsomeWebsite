@@ -9,8 +9,8 @@ public class ConnectionHolder {
         throw new UnsupportedOperationException();
     }
 
-    public static ThreadLocal<Connection> getConnection() {
-        return connection;
+    public static Connection getConnection() {
+        return connection.get();
     }
 
     public static void setConnection(Connection connectionVal) {

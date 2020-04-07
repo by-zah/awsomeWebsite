@@ -87,6 +87,7 @@
               <configuration>
                 <port>8080</port>
                   <path>/</path>
+                <contextFile>${project.basedir}/src/main/webapp/META-INF/context.xml</contextFile>
               </configuration>
           </plugin>
       </plugins>
