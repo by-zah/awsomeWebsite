@@ -29,7 +29,11 @@ CREATE TABLE `active_orders` (
   `currentStatus` varchar(50) DEFAULT NULL,
   `datePlaced` date DEFAULT NULL,
   `comment` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user` (`userID`),
+  KEY `shippingMethod` (`shippingMethodID`),
+  CONSTRAINT `shippingMethod` FOREIGN KEY (`shippingMethodID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `active_orders` */
@@ -64,7 +68,11 @@ CREATE TABLE `product` (
   `categoryID` int(11) DEFAULT NULL,
   `vendorID` int(11) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `category` (`categoryID`),
+  KEY `vendor` (`vendorID`),
+  CONSTRAINT `category` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `vendor` FOREIGN KEY (`vendorID`) REFERENCES `vendors` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `product` */
@@ -86,7 +94,9 @@ CREATE TABLE `products_attributes` (
   `price` double DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `amountAvailable` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `product` (`productID`),
+  CONSTRAINT `product` FOREIGN KEY (`productID`) REFERENCES `product` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `products_attributes` */
@@ -106,7 +116,9 @@ CREATE TABLE `products_orders` (
   `productOrderID` int(11) DEFAULT NULL,
   `productsAttributesID` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
-  `currentPrice` double DEFAULT NULL
+  `currentPrice` double DEFAULT NULL,
+  KEY `productAttribute` (`productsAttributesID`),
+  CONSTRAINT `productAttribute` FOREIGN KEY (`productsAttributesID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `products_orders` */
@@ -164,7 +176,9 @@ CREATE TABLE `users` (
   `paymentMethod` varchar(50) DEFAULT NULL,
   `shippingAddressID` int(11) DEFAULT NULL,
   `contactNumber` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `shippingAddress` (`shippingAddressID`),
+  CONSTRAINT `shippingAddress` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_adresses` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `users` */
