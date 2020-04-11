@@ -15,6 +15,6 @@ public class UserService {
     }
 
     public User getUserById(int id){
-        return userRepository.query("SELECT * FROM users where id="+id);
+        return userRepository.query("SELECT * FROM users where users.id="+id);
     }
 }
