@@ -2,18 +2,28 @@ package ua.khnu.listener;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+import ua.khnu.entity.User;
+import ua.khnu.init.BeanInit;
+import ua.khnu.reposetory.UserRepository;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
+@Component
 @WebListener
 public class ConfigListener implements ServletContextListener {
     private static final Logger LOG = Logger.getLogger(ConfigListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.scan("ua.khnu");
+        ctx.register(BeanInit.class);
+        ctx.refresh();
         ServletContext servletContext = sce.getServletContext();
         initLog4J(servletContext);
     }
