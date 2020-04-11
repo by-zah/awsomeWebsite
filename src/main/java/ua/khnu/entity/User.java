@@ -1,12 +1,18 @@
-package ua.khnu.entuty;
+package ua.khnu.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
 public class User {
     private int id;
     private String login;
     private String password;
     private String email;
     private String paymentMethod;
-    private String shippingAddress;
+    private ShippingAddress shippingAddress;
     private String number;
 
     public int getId() {
@@ -49,11 +55,12 @@ public class User {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getShippingAddress() {
+    public ShippingAddress getShippingAddress() {
         return shippingAddress;
     }
 
-    public void setShippingAddress(String shippingAddress) {
+    @Autowired
+    public void setShippingAddress(ShippingAddress shippingAddress) {
         this.shippingAddress = shippingAddress;
     }
 
@@ -63,5 +70,18 @@ public class User {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", shippingAddress=" + shippingAddress +
+                ", number='" + number + '\'' +
+                '}';
     }
 }
