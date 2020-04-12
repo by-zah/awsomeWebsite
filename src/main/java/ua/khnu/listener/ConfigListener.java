@@ -24,16 +24,6 @@ public class ConfigListener implements ServletContextListener {
         ctx.refresh();
         ServletContext servletContext = sce.getServletContext();
         initLog4J(servletContext);
-        UserService userService = ctx.getBean(UserService.class);
-        User user = new User();
-        user.setLogin("aaaa");
-        user.setPassword("bbb");
-        user.setEmail("mail");
-        user.setNumber("000");
-        user.setPaymentMethod("qqq");
-        System.out.println(userService.addNewUser(user));
-        user.setEmail("update");
-        userService.updateUser(user);
     }
 
     private void initLog4J(ServletContext servletContext) {
