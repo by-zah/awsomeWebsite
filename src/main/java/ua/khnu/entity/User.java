@@ -1,18 +1,18 @@
 package ua.khnu.entity;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
 @Scope("prototype")
-public class User {
-    private int id;
+public class User implements Serializable {
+    private transient int id;
     private String login;
     private String password;
     private String email;
     private String paymentMethod;
-    private ShippingAddress shippingAddress;
     private String number;
 
     public int getId() {
@@ -55,15 +55,6 @@ public class User {
         this.paymentMethod = paymentMethod;
     }
 
-    public ShippingAddress getShippingAddress() {
-        return shippingAddress;
-    }
-
-    @Autowired
-    public void setShippingAddress(ShippingAddress shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
-
     public String getNumber() {
         return number;
     }
@@ -80,7 +71,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", paymentMethod='" + paymentMethod + '\'' +
-                ", shippingAddress=" + shippingAddress +
                 ", number='" + number + '\'' +
                 '}';
     }

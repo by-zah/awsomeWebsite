@@ -3,6 +3,7 @@ package ua.khnu.listener;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ua.khnu.entity.User;
 import ua.khnu.init.BeanInit;
 import ua.khnu.service.UserService;
 
@@ -23,6 +24,16 @@ public class ConfigListener implements ServletContextListener {
         ctx.refresh();
         ServletContext servletContext = sce.getServletContext();
         initLog4J(servletContext);
+        UserService userService = ctx.getBean(UserService.class);
+        User user = new User();
+        user.setLogin("aaaa");
+        user.setPassword("bbb");
+        user.setEmail("mail");
+        user.setNumber("000");
+        user.setPaymentMethod("qqq");
+        System.out.println(userService.addNewUser(user));
+        user.setEmail("update");
+        userService.updateUser(user);
     }
 
     private void initLog4J(ServletContext servletContext) {

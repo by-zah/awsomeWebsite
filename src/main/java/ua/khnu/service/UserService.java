@@ -14,7 +14,15 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User getUserById(int id){
-        return userRepository.query("SELECT * FROM users where users.id="+id);
+    public User getUserById(int id) {
+        return userRepository.query("SELECT * FROM users where users.id=" + id);
+    }
+
+    public User addNewUser(User user) {
+        return userRepository.add(user);
+    }
+
+    public boolean updateUser(User user) {
+        return userRepository.update(user);
     }
 }
