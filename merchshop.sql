@@ -25,6 +25,7 @@ CREATE TABLE `active_orders` (
   `userID` int(11) DEFAULT NULL,
   `productOrder` int(11) DEFAULT NULL,
   `shippingMethodID` int(11) DEFAULT NULL,
+  `shippingAddressID` int(11) DEFAULT NULL,
   `price` double DEFAULT NULL,
   `currentStatus` varchar(50) DEFAULT NULL,
   `datePlaced` date DEFAULT NULL,
@@ -32,6 +33,8 @@ CREATE TABLE `active_orders` (
   PRIMARY KEY (`id`),
   KEY `user` (`userID`),
   KEY `shippingMethod` (`shippingMethodID`),
+  KEY `shippingAddressID` (`shippingAddressID`),
+  CONSTRAINT `shippingAddressID` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_addresses` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `shippingMethod` FOREIGN KEY (`shippingMethodID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `user` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
@@ -123,11 +126,11 @@ CREATE TABLE `products_orders` (
 
 /*Data for the table `products_orders` */
 
-/*Table structure for table `shipping_adresses` */
+/*Table structure for table `shipping_addresses` */
 
-DROP TABLE IF EXISTS `shipping_adresses`;
+DROP TABLE IF EXISTS `shipping_addresses`;
 
-CREATE TABLE `shipping_adresses` (
+CREATE TABLE `shipping_addresses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(30) DEFAULT NULL,
   `region` varchar(30) DEFAULT NULL,
@@ -137,9 +140,9 @@ CREATE TABLE `shipping_adresses` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
 
-/*Data for the table `shipping_adresses` */
+/*Data for the table `shipping_addresses` */
 
-insert  into `shipping_adresses`(`id`,`city`,`region`,`street`,`building`,`index`) values 
+insert  into `shipping_addresses`(`id`,`city`,`region`,`street`,`building`,`index`) values 
 (1,'Кривой Рог','Днепропетровская область','Кармелюка','19','50048'),
 (2,'Тернополь','Тернопольская область','Будного','34','60071'),
 (3,'Ивано-Франковск','Ивано-Франковская область','Грушевського','22','80026'),
@@ -174,20 +177,17 @@ CREATE TABLE `users` (
   `password` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `paymentMethod` varchar(50) DEFAULT NULL,
-  `shippingAddressID` int(11) DEFAULT NULL,
   `contactNumber` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `shippingAddress` (`shippingAddressID`),
-  CONSTRAINT `shippingAddress` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_adresses` (`id`) ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `users` */
 
-insert  into `users`(`id`,`login`,`password`,`email`,`paymentMethod`,`shippingAddressID`,`contactNumber`) values 
-(1,'tvoyamamka','123456','tvoyamamka@gmail.com','visa 4601',1,'+380395556741'),
-(2,'tvoibatya','654321','tvoibatya@gmail.com','mastercard 3228',3,'+380109455546'),
-(3,'dimarostov','pythonlove','liciy_ne_prigovor@yahoo.com','-',2,'+380395556410'),
-(4,'lazurikDB','sqltop','nokoronaviruspls@gmail.com','mastercard 1337',4,'+380400655592');
+insert  into `users`(`id`,`login`,`password`,`email`,`paymentMethod`,`contactNumber`) values 
+(1,'tvoyamamka','123456','tvoyamamka@gmail.com','visa 4601','+380395556741'),
+(2,'tvoibatya','654321','tvoibatya@gmail.com','mastercard 3228','+380109455546'),
+(3,'dimarostov','pythonlove','liciy_ne_prigovor@yahoo.com','-','+380395556410'),
+(4,'lazurikDB','sqltop','nokoronaviruspls@gmail.com','mastercard 1337','+380400655592');
 
 /*Table structure for table `vendors` */
 
