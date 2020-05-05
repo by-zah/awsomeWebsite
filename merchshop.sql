@@ -3,6 +3,7 @@ SQLyog Community v12.4.3 (64 bit)
 MySQL - 10.4.11-MariaDB : Database - merchshopdb
 *********************************************************************
 */
+
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
