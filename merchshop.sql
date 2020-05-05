@@ -146,7 +146,7 @@ CREATE TABLE `products_in` (
 /*Data for the table `products_in` */
 
 insert  into `products_in`(`id`,`productAttributeID`,`amountIN`,`dateIN`) values 
-(1,1,10,'2020-05-05 17:12:45'),
+(1,1,10,'2020-05-05 17:12:46'),
 (2,2,2,'2020-05-05 17:12:56'),
 (3,3,4,'2020-05-05 17:13:09'),
 (4,4,3,'2020-05-05 17:13:24'),
