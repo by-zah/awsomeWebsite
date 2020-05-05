@@ -4,25 +4,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.khnu.entity.User;
 import ua.khnu.reposetory.UserRepository;
+import ua.khnu.util.MD5Hash;
+
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class UserService {
-    private UserRepository userRepository;
+    private UserRepository repository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserService(UserRepository repository) {
+        this.repository = repository;
     }
 
-    public User getUserById(int id) {
-        return userRepository.query("SELECT * FROM users where users.id=" + id);
+    /**
+     * @param user User object that should be added to DB
+     * @return User object with generated id field
+     */
+    public User createNewUser(User user) {
+        user.setPassword(MD5Hash.getHash(user.getPassword()));
+        return repository.add(user);
     }
 
-    public User addNewUser(User user) {
-        return userRepository.add(user);
+    public boolean deleteUserById(int id) {
+        return repository.delete(id);
     }
 
     public boolean updateUser(User user) {
-        return userRepository.update(user);
+        return repository.update(user);
+    }
+
+    private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
+
+    public Optional<User> getUserById(int id) {
+        List<User> users = repository.query(GET_USER_BY_ID, id);
+        if (users.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(users.get(0));
     }
 }
