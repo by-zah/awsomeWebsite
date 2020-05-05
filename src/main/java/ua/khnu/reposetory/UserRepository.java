@@ -19,8 +19,13 @@ public class UserRepository {
     private static final Logger LOG = Logger.getLogger(UserRepository.class);
     private static final String DELETE = "DELETE FROM users WHERE id=?";
     private static final String UPDATE = "UPDATE users " +
-            "SET login=?,password=?,email=?,paymentMethod=?,contactNumber=?" +
+            "SET email=?,password=?,contactNumber=?,mailingEnabled=?" +
             " WHERE id=?";
+    public static final String ID = "id";
+    public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    public static final String CONTACT_NUMBER = "contactNumber";
+    public static final String MAILING_ENABLED = "mailingEnabled";
     private String[] columnNames;
     private JdbcTemplate jdbcAccessor;
     private SimpleJdbcInsert simpleJdbcInsert;
@@ -31,7 +36,7 @@ public class UserRepository {
         this.jdbcAccessor = jdbcAccessor;
         initColumnNames();
         simpleJdbcInsert = new SimpleJdbcInsert(ds)
-                .withTableName("users").usingGeneratedKeyColumns("id")
+                .withTableName("users").usingGeneratedKeyColumns(ID)
                 .usingColumns(columnNames);
     }
 
@@ -64,42 +69,39 @@ public class UserRepository {
     }
 
     private Map<String, Object> extractParameters(User user) {
-        Map<String, Object> params = new HashMap<>(5);
+        Map<String, Object> params = new HashMap<>(columnNames.length-1);
         Object[] values = extractValues(user);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < columnNames.length; i++) {
             params.put(columnNames[i], values[i]);
         }
         return params;
     }
 
     private Object[] extractValues(User user) {
-        Object[] values = new Object[5];
-        values[0] = user.getLogin();
+        Object[] values = new Object[4];
+        values[0] = user.getEmail();
         values[1] = user.getPassword();
-        values[2] = user.getEmail();
-        values[3] = user.getPaymentMethod();
-        values[4] = user.getNumber();
+        values[2] = user.getNumber();
+        values[3] = user.isMailEnable();
         return values;
     }
 
     private void initColumnNames() {
-        this.columnNames = new String[5];
-        columnNames[0] = "login";
-        columnNames[1] = "password";
-        columnNames[2] = "email";
-        columnNames[3] = "paymentMethod";
-        columnNames[4] = "contactNumber";
+        this.columnNames = new String[4];
+        columnNames[0] = EMAIL;
+        columnNames[1] = PASSWORD;
+        columnNames[2] = CONTACT_NUMBER;
+        columnNames[3] = MAILING_ENABLED;
     }
 
     private List<User> getUserListFromResultList(List<Map<String, Object>> resList) {
         return resList.stream().map(m -> {
             User user = new User();
-            user.setId((Integer) m.get("id"));
-            user.setLogin((String) m.get("login"));
-            user.setPassword((String) m.get("password"));
-            user.setEmail((String) m.get("email"));
-            user.setPaymentMethod((String) m.get("paymentMethod"));
-            user.setNumber((String) m.get("contactNumber"));
+            user.setId((Integer) m.get(ID));
+            user.setPassword((String) m.get(PASSWORD));
+            user.setEmail((String) m.get(EMAIL));
+            user.setNumber((String) m.get(CONTACT_NUMBER));
+            user.setMailEnable((Boolean) m.get(MAILING_ENABLED));
             return user;
         }).collect(Collectors.toList());
     }
