@@ -38,7 +38,16 @@ public class UserService {
     private static final String GET_USER_BY_ID = "SELECT * FROM users WHERE id=?";
 
     public Optional<User> getUserById(int id) {
-        List<User> users = repository.query(GET_USER_BY_ID, id);
+        return getFirstOptionalFromList(repository.query(GET_USER_BY_ID, id));
+    }
+
+    private static final String GET_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?";
+
+    public Optional<User> getUserByEmail(String email){
+        return getFirstOptionalFromList(repository.query(GET_USER_BY_EMAIL,email));
+    }
+
+    private Optional<User> getFirstOptionalFromList(List<User> users){
         if (users.isEmpty()) {
             return Optional.empty();
         }
