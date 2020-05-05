@@ -1,14 +1,10 @@
 package ua.khnu.entity;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 
-@Component
-@Scope("prototype")
+
 public class User implements Serializable {
-    private transient int id;
+    private int id;
     private String login;
     private String password;
     private String email;
