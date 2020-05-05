@@ -51,8 +51,8 @@ public class UserRepository {
         return getUserListFromResultList(jdbcAccessor.queryForList(query, args));
     }
 
-    public boolean delete(User user) {
-        return jdbcAccessor.update(DELETE, user.getId()) > 0;
+    public boolean delete(int id) {
+        return jdbcAccessor.update(DELETE, id) > 0;
     }
 
     public boolean update(User user) {
