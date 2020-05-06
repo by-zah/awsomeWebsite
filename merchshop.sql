@@ -39,7 +39,8 @@ CREATE TABLE `active_orders` (
   KEY `shippingAddressID` (`shippingAddressID`),
   CONSTRAINT `active_orders_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `active_orders_ibfk_2` FOREIGN KEY (`shippingMethodID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE,
-  CONSTRAINT `active_orders_ibfk_3` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE
+  CONSTRAINT `active_orders_ibfk_3` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_addresses` (`id`) ON UPDATE CASCADE
+
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `active_orders` */
@@ -146,7 +147,7 @@ CREATE TABLE `products_in` (
 /*Data for the table `products_in` */
 
 insert  into `products_in`(`id`,`productAttributeID`,`amountIN`,`dateIN`) values 
-(1,1,10,'2020-05-05 17:12:45'),
+(1,1,10,'2020-05-05 17:12:46'),
 (2,2,2,'2020-05-05 17:12:56'),
 (3,3,4,'2020-05-05 17:13:09'),
 (4,4,3,'2020-05-05 17:13:24'),
