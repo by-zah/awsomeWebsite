@@ -47,7 +47,7 @@ public abstract class Product {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setPrice(String color) {
         this.color = color;
     }
     //TODO add all for product , then specify
