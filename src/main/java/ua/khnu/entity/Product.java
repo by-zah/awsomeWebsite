@@ -1,15 +1,27 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
 import java.math.BigDecimal;
 
+//@DBName("")
 public class Product {
     private int id;
+    private String category;
     private String title;
     private String description;
     private String color;
     private String size;
     private BigDecimal price;
     private String photo;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public int getId() {
         return id;
