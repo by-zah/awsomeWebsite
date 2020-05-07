@@ -4,49 +4,20 @@ import java.io.Serializable;
 
 
 public class User implements Serializable {
-    public User(String email, String password, String number, boolean isMailEnable) {
-        this.email = email;
-        this.password = password;
-        this.number = number;
-        this.isMailEnable = isMailEnable;
-    }
-
     private int id;
     private String email;
     private String password;
     private String number;
     private boolean isMailEnable;
 
-    public int getId() {
-        return id;
+    public User() {
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public User(String email, String password, String number, boolean isMailEnable) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
         this.number = number;
+        this.isMailEnable = isMailEnable;
     }
 
     public boolean isMailEnable() {
@@ -57,14 +28,37 @@ public class User implements Serializable {
         isMailEnable = mailEnable;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", number='" + number + '\'' +
-                ", isMailEnable=" + isMailEnable +
-                '}';
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+
 }

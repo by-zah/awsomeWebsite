@@ -31,7 +31,7 @@ public class MainPageProductController extends HttpServlet {
 
         JsonObjectBuilder rootBuilder=Json.createObjectBuilder();
 
-        List<List<Product>> products=productService.getRandomForMain();
+        List<List<Product>> products=productService.getRandomProductsFromEachCategories(4);
         for(List<Product> prod:products){
             JsonArrayBuilder arrayBuilder=Json.createArrayBuilder();
             for(Product product:prod){
