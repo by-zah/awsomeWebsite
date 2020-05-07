@@ -12,9 +12,9 @@ MySQL - 10.4.11-MariaDB : Database - merchshopdb
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`merchshopdb` /*!40100 DEFAULT CHARACTER SET cp1251 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`merchshop` /*!40100 DEFAULT CHARACTER SET cp1251 */;
 
-USE `merchshopdb`;
+USE `merchshop`;
 
 /*Table structure for table `active_orders` */
 
@@ -40,7 +40,6 @@ CREATE TABLE `active_orders` (
   CONSTRAINT `active_orders_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `active_orders_ibfk_2` FOREIGN KEY (`shippingMethodID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `active_orders_ibfk_3` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_addresses` (`id`) ON UPDATE CASCADE
-
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
 
 /*Data for the table `active_orders` */
