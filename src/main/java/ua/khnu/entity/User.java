@@ -4,18 +4,21 @@ import java.io.Serializable;
 
 
 public class User implements Serializable {
+    private int id;
+    private String email;
+    private String password;
+    private String number;
+    private boolean isMailEnable;
+
+    public User() {
+    }
+
     public User(String email, String password, String number, boolean isMailEnable) {
         this.email = email;
         this.password = password;
         this.number = number;
         this.isMailEnable = isMailEnable;
     }
-
-    private int id;
-    private String email;
-    private String password;
-    private String number;
-    private boolean isMailEnable;
 
     public int getId() {
         return id;
@@ -25,12 +28,12 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -41,6 +44,22 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -49,22 +68,15 @@ public class User implements Serializable {
         this.number = number;
     }
 
-    public boolean isMailEnable() {
-        return isMailEnable;
-    }
-
-    public void setMailEnable(boolean mailEnable) {
-        isMailEnable = mailEnable;
-    }
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", email='" + email + '\'' +
+                ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
                 ", number='" + number + '\'' +
-                ", isMailEnable=" + isMailEnable +
                 '}';
     }
 }
