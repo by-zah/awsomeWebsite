@@ -43,7 +43,7 @@ public class MainPageProductController extends HttpServlet {
                         .build();
                 arrayBuilder.add(jsonProd);
             }
-          rootBuilder.add(prod.get(0).getClass().getSimpleName(),arrayBuilder);
+          rootBuilder.add(prod.get(0).getCategory(),arrayBuilder);
         }
         JsonObject rootJson=rootBuilder.build();
         resp.setContentType("application/json");
