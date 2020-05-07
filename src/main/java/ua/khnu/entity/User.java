@@ -4,6 +4,13 @@ import java.io.Serializable;
 
 
 public class User implements Serializable {
+    public User(String email, String password, String number, boolean isMailEnable) {
+        this.email = email;
+        this.password = password;
+        this.number = number;
+        this.isMailEnable = isMailEnable;
+    }
+
     private int id;
     private String email;
     private String password;
