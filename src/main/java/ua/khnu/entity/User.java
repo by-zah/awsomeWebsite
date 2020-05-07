@@ -20,20 +20,20 @@ public class User implements Serializable {
         this.isMailEnable = isMailEnable;
     }
 
+    public boolean isMailEnable() {
+        return isMailEnable;
+    }
+
+    public void setMailEnable(boolean mailEnable) {
+        isMailEnable = mailEnable;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -52,14 +52,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
     public String getNumber() {
         return number;
     }
@@ -68,15 +60,5 @@ public class User implements Serializable {
         this.number = number;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", paymentMethod='" + paymentMethod + '\'' +
-                ", number='" + number + '\'' +
-                '}';
-    }
+
 }
