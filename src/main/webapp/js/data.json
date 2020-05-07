@@ -1,0 +1,28 @@
+{
+  "Comics" : 
+    [
+      {
+        "id":0,
+        "image":"0Img",
+        "title":"0comi",
+        "price":0.0
+      },
+      {
+        "id":1,
+        "image":"1Img",
+        "title":"1comi",
+        "price":1.0
+      },
+      {
+        "id":2,
+        "image":"2Img",
+        "title":"2comi",
+        "price":2.0},
+      {
+        "id":3,
+        "image":"3Img",
+        "title":"3comi",
+        "price":3.0
+      }
+    ],
+  "Statuette":[{"id":0,"image":"0Img","title":"0statuets","price":0.0},{"id":1,"image":"1Img","title":"1statuets","price":1.0},{"id":2,"image":"2Img","title":"2statuets","price":2.0},{"id":3,"image":"3Img","title":"3statuets","price":3.0}],"Tshirt":[{"id":0,"image":"0tshirtImg","title":"0tshirt","price":0.0},{"id":1,"image":"1tshirtImg","title":"1tshirt","price":1.0},{"id":2,"image":"2tshirtImg","title":"2tshirt","price":2.0},{"id":3,"image":"3tshirtImg","title":"3tshirt","price":3.0}],"Toy":[{"id":0,"image":"0toyImg","title":"0toy","price":0.0},{"id":1,"image":"1toyImg","title":"1toy","price":1.0},{"id":2,"image":"2toyImg","title":"2toy","price":2.0},{"id":3,"image":"3toyImg","title":"3toy","price":3.0}]}
