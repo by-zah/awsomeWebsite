@@ -29,6 +29,7 @@ public class ProductService {
             "         INNER JOIN categories\n" +
             "                    ON products.categoryID = categories.id\n" +
             "WHERE categories.title = ?\n" +
+            "GROUP BY products.title\n" +
             "ORDER BY RAND()\n" +
             "LIMIT ?";
 
@@ -36,6 +37,7 @@ public class ProductService {
         List<List<Product>> res = new ArrayList<>();
         res.add(repository.query(GET_4_RANDOM_PRODUCTS_FROM_CATEGORY,"Одежда",num));
         res.add(repository.query(GET_4_RANDOM_PRODUCTS_FROM_CATEGORY,"Игрушки",num));
+        res.add(repository.query(GET_4_RANDOM_PRODUCTS_FROM_CATEGORY,"Фигурки",num));
         res.add(repository.query(GET_4_RANDOM_PRODUCTS_FROM_CATEGORY,"Аксессуары",num));
         return res;
     }
