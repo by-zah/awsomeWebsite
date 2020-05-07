@@ -1,6 +1,8 @@
 package ua.khnu.servlet;
 
+import org.springframework.context.ApplicationContext;
 import ua.khnu.entity.Product;
+import ua.khnu.listener.ConfigListener;
 import ua.khnu.service.ProductService;
 
 import javax.json.Json;
@@ -20,9 +22,8 @@ public class MainPageProductController extends HttpServlet {
     private static ProductService productService;
     @Override
     public void init() {
-        productService=new ProductService();
-        // productService = (ProductService) this.getServletContext().getAttribute("productService");
-        //TODO put product service in Context
+        ApplicationContext ctx = (ApplicationContext) getServletContext().getAttribute(ConfigListener.CTX);
+        productService= ctx.getBean(ProductService.class);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class MainPageProductController extends HttpServlet {
             for(Product product:prod){
                 JsonObjectBuilder prodBuilder=Json.createObjectBuilder();
                 JsonObject jsonProd=prodBuilder.add("id",product.getId())
-                        .add("image",product.getImage())
+                        .add("image",product.getPhoto())
                         .add("title",product.getTitle())
                         .add("price",product.getPrice())
                         .build();
