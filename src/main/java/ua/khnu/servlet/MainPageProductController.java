@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/getRandomProductOnMain")
@@ -29,8 +30,7 @@ public class MainPageProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        JsonObjectBuilder rootBuilder=Json.createObjectBuilder();
-
+        JsonObjectBuilder rootBuilder = Json.createObjectBuilder();
         List<List<Product>> products=productService.getRandomProductsFromEachCategories(4);
         for(List<Product> prod:products){
             JsonArrayBuilder arrayBuilder=Json.createArrayBuilder();
@@ -43,10 +43,11 @@ public class MainPageProductController extends HttpServlet {
                         .build();
                 arrayBuilder.add(jsonProd);
             }
-          rootBuilder.add(prod.get(0).getCategory(),arrayBuilder);
+            rootBuilder.add(prod.get(0).getCategory(),arrayBuilder);
         }
         JsonObject rootJson=rootBuilder.build();
         resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8"); // Вы думали я вас не переиграю ? Я вас уничтожу
         System.out.println(rootJson);
         resp.getWriter().print(rootJson);
         resp.getWriter().flush();
