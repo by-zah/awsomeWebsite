@@ -52,8 +52,4 @@ public class MainPageProductController extends HttpServlet {
         resp.getWriter().flush();
         resp.getWriter().close();
     }
-
-    public static void main(String[] args) {
-
-    }
 }
