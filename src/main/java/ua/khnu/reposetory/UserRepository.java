@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import ua.khnu.entity.User;
+import ua.khnu.util.DBConstant;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -21,7 +22,6 @@ public class UserRepository {
     private static final String UPDATE = "UPDATE users " +
             "SET email=?,password=?,contactNumber=?,mailingEnabled=?" +
             " WHERE id=?";
-    public static final String ID = "id";
     public static final String PASSWORD = "password";
     public static final String EMAIL = "email";
     public static final String CONTACT_NUMBER = "contactNumber";
@@ -36,7 +36,7 @@ public class UserRepository {
         this.jdbcAccessor = jdbcAccessor;
         initColumnNames();
         simpleJdbcInsert = new SimpleJdbcInsert(ds)
-                .withTableName("users").usingGeneratedKeyColumns(ID)
+                .withTableName("users").usingGeneratedKeyColumns(DBConstant.ID)
                 .usingColumns(columnNames);
     }
 
@@ -97,7 +97,7 @@ public class UserRepository {
     private List<User> getUserListFromResultList(List<Map<String, Object>> resList) {
         return resList.stream().map(m -> {
             User user = new User();
-            user.setId((Integer) m.get(ID));
+            user.setId((Integer) m.get(DBConstant.ID));
             user.setPassword((String) m.get(PASSWORD));
             user.setEmail((String) m.get(EMAIL));
             user.setNumber((String) m.get(CONTACT_NUMBER));
