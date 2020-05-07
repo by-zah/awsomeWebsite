@@ -1,6 +1,6 @@
 /*
 SQLyog Community v12.4.3 (64 bit)
-MySQL - 10.4.11-MariaDB : Database - merchshopdb
+MySQL - 10.4.11-MariaDB : Database - merchshop
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 10.4.11-MariaDB : Database - merchshopdb
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`merchshop` /*!40100 DEFAULT CHARACTER SET cp1251 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`merchshop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `merchshop`;
 
@@ -53,14 +53,15 @@ CREATE TABLE `categories` (
   `title` varchar(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `categories` */
 
 insert  into `categories`(`id`,`title`,`description`) values 
 (1,'Одежда','Футболки,худи,куртки'),
-(2,'Игрушки','фигурки,статуэтки,конструктор'),
-(3,'Аксессуары','сумки,рюкзаки');
+(2,'Игрушки','конструктор,мягкие игрушки,обычные игрушки'),
+(3,'Фигурки','статуэтки,коллекционные фигурки'),
+(4,'Аксессуары',NULL);
 
 /*Table structure for table `products` */
 
@@ -86,8 +87,8 @@ insert  into `products`(`id`,`title`,`categoryID`,`description`) values
 (5,'THOR SOUND EFFECTS HAMMER',2,'Make their super hero action come alive with this Thor Hammer! Press the button for phrases, sounds, and vibration effects. Spin Thor\'s mighty Mjolnir by the loop at the bottom of the handle to hear spinning sound effects'),
 (6,'LIQUID X MARVEL LOGO TEE',1,'Rep the LIQUID x MARVEL collaboration with this clean logo tee featuring the official horse head red brick lock-up: the insignia of LIQUID x MARVEL. Crisp fusion printed design keeps the design clean, crack-free and durable all on a weighted comfortable c'),
 (7,'TEAM LIQUID GEOS TEE',1,'Our 2020 take on a classic Liquid look. Add this quality tee to your collection today.'),
-(8,'Funko Pop Чубакка серии \"Звёздные войны\"',2,''),
-(9,'MARVEL COMICS DUFFLE BAG',3,'Our mighty Marvel Comics duffle bag packs a punch at the gym or anywhere your adventures lead you. Reinforced straps and colorful comic book cover lining make it a super carry-all for roving avengers');
+(8,'Funko Pop Чубакка серии \"Звёздные войны\"',3,''),
+(9,'MARVEL COMICS DUFFLE BAG',4,'Our mighty Marvel Comics duffle bag packs a punch at the gym or anywhere your adventures lead you. Reinforced straps and colorful comic book cover lining make it a super carry-all for roving avengers');
 
 /*Table structure for table `products_attributes` */
 
