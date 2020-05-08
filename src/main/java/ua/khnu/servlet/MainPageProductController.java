@@ -1,5 +1,6 @@
 package ua.khnu.servlet;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import ua.khnu.entity.Product;
 import ua.khnu.listener.ConfigListener;
@@ -20,6 +21,7 @@ import java.util.List;
 @WebServlet("/getRandomProductOnMain")
 public class MainPageProductController extends HttpServlet {
     private static ProductService productService;
+    private static final Logger logger = Logger.getLogger(MainPageProductController.class);
 
     @Override
     public void init() {
@@ -47,8 +49,7 @@ public class MainPageProductController extends HttpServlet {
         }
         JsonObject rootJson = rootBuilder.build();
         resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8"); // Вы думали я вас не переиграю ? Я вас уничтожу
-        System.out.println(rootJson);
+        logger.info(rootJson);
         resp.getWriter().print(rootJson);
         resp.getWriter().flush();
         resp.getWriter().close();

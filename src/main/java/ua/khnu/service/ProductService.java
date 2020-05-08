@@ -29,7 +29,7 @@ public class ProductService {
             "         INNER JOIN categories\n" +
             "                    ON products.categoryID = categories.id\n" +
             "WHERE categories.title = ?\n" +
-            "GROUP BY products.title\n" +
+          //  "GROUP BY products.title\n" +
             "ORDER BY RAND()\n" +
             "LIMIT ?";
 
