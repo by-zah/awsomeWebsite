@@ -24,18 +24,18 @@
 				<label type="tel">контактный номер:</label>
 				<input type="tel" name="phone" value="+38" required>
 				<label for="password">введите пароль:</label>
-						<input type="password" name="password" required>
-						<label for="password">подтверждение пароля:</label>
-						<input type="password" name="passwordRep" required>
-						<div class="checkbox-container">
-							<label class="checkbox-label">
-								<input type="checkbox" name="isMailingEnabled" value="isMailingEnabled">
-							</label>
-							<div class="checkbox-description">я хочу получать уведомления <br> о скидках и новых товарах!</div>
-						</div>
-						<button type="submit" name="submit">зарегистрироваться</button>
-						<h5>
-                       		${alert}
+				<input type="password" name="password" required>
+				<label for="password">подтверждение пароля:</label>
+				<input type="password" name="passwordRep" required>
+				<div class="checkbox-container">
+					<label class="checkbox-label">
+						<input type="checkbox" name="isMailingEnabled" value="true">
+					</label>
+					<div class="checkbox-description">я хочу получать уведомления <br> о скидках и новых товарах!</div>
+				</div>
+				<button type="submit" name="submit">зарегистрироваться</button>
+				<h5>
+					${alert}
              			</h5>
 					</form>
 				</div>

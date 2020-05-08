@@ -7,6 +7,7 @@ import ua.khnu.exception.ValidationException;
 import ua.khnu.listener.ConfigListener;
 import ua.khnu.service.UserService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +31,9 @@ public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-        request.getSession().removeAttribute("user");
-        request.getSession().removeAttribute("alert");
+//        request.getSession().removeAttribute("user");
+//        request.getSession().removeAttribute("alert");
+//        resp.sendRedirect("registration.jsp");
     }
 
     @Override
@@ -46,9 +48,10 @@ public class RegistrationController extends HttpServlet {
         try {
             isValid = userService.valid(request.getParameter("passwordRep"), user);
         } catch (ValidationException e) {
-            request.getSession().setAttribute("alert", System.lineSeparator() + e.getMessage());
+            request.setAttribute("alert", System.lineSeparator() + e.getMessage());
             request.getSession().setAttribute("userFromReg", user);
-            response.sendRedirect("registration.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/registration.jsp");
+            requestDispatcher.forward(request, response);
         }
         if (isValid) {
             userService.createNewUser(user);

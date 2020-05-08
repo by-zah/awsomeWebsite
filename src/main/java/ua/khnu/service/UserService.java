@@ -61,9 +61,9 @@ public class UserService {
     }
 
     public User getValidUserByEmailAndPassword(String email, String psw) {
-        User user = getUserByEmail(email).orElseThrow(()->new LoginException("This email dosen't exists"));
+        User user = getUserByEmail(email).orElseThrow(() -> new LoginException("Email or password not valid"));
         if (!user.getPassword().equals(getHash(psw))) {
-            throw new LoginException("Password not matches");
+            throw new LoginException("Email or password not valid");
         }
         return user;
     }
@@ -71,10 +71,11 @@ public class UserService {
     public boolean valid(String psw2, User user) throws ValidationException {
         String regex = "^([a-zA-Z0-9_\\-.]+)@([a-zA-Z0-9_\\-.]+)\\.([a-zA-Z]{2,5})$";
         if (!(psw2.equals(user.getPassword()) && psw2.length() > 0)) {
-            throw new ValidationException("The password you have entered is not valid!" +
-                    " Password must contain at least 1 lowercase " +
-                    "1 uppercase alphabetical character, 1 numeric character and have length more than 6 characters"
-            );
+            throw new ValidationException("The password you have entered is not valid!" + System.lineSeparator() +
+                    " Password must contain at least 1 lowercase " + System.lineSeparator() +
+                    "1 uppercase alphabetical character," + System.lineSeparator() +
+                    " 1 numeric character and " + System.lineSeparator() +
+                    "have length more than 6 characters");
         }
         if (!user.getEmail().matches(regex)) {
             throw new ValidationException("Email not valid");
