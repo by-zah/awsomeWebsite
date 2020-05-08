@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class UserRepository extends AbstractRepository<User>{
+public class UserRepository extends AbstractRepository<User> {
+    public static final String PASSWORD = "password";
+    public static final String EMAIL = "email";
+    public static final String CONTACT_NUMBER = "contactNumber";
+    public static final String MAILING_ENABLED = "mailingEnabled";
     private static final Logger LOG = Logger.getLogger(UserRepository.class);
     private static final String DELETE = "DELETE FROM users WHERE id=?";
     private static final String UPDATE = "UPDATE users " +
             "SET email=?,password=?,contactNumber=?,mailingEnabled=?" +
             " WHERE id=?";
-    public static final String PASSWORD = "password";
-    public static final String EMAIL = "email";
-    public static final String CONTACT_NUMBER = "contactNumber";
-    public static final String MAILING_ENABLED = "mailingEnabled";
     private String[] columnNames;
     private SimpleJdbcInsert simpleJdbcInsert;
 
@@ -67,7 +67,7 @@ public class UserRepository extends AbstractRepository<User>{
     }
 
     private Map<String, Object> extractParameters(User user) {
-        Map<String, Object> params = new HashMap<>(columnNames.length-1);
+        Map<String, Object> params = new HashMap<>(columnNames.length - 1);
         Object[] values = extractValues(user);
         for (int i = 0; i < columnNames.length; i++) {
             params.put(columnNames[i], values[i]);

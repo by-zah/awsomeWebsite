@@ -1,8 +1,9 @@
 package ua.khnu.util;
 
 public final class DBConstant {
-    private DBConstant(){
+    public static final String ID = "id";
+
+    private DBConstant() {
         throw new UnsupportedOperationException();
     }
-    public static final String ID = "id";
 }

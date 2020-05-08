@@ -41,7 +41,7 @@ public abstract class AbstractRepository<T> {
                     }
                 });
                 return obj;
-            } catch (IllegalAccessException |InvocationTargetException | InstantiationException e) {
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
             }
         }).collect(Collectors.toList());

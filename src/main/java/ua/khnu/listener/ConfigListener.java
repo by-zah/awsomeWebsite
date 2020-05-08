@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class ConfigListener implements ServletContextListener {
-    private static final Logger LOG = Logger.getLogger(ConfigListener.class);
     public static final String CTX = "ctx";
+    private static final Logger LOG = Logger.getLogger(ConfigListener.class);
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
@@ -23,7 +23,7 @@ public class ConfigListener implements ServletContextListener {
         ctx.refresh();
         ServletContext servletContext = sce.getServletContext();
         initLog4J(servletContext);
-        servletContext.setAttribute(CTX,ctx);
+        servletContext.setAttribute(CTX, ctx);
     }
 
     private void initLog4J(ServletContext servletContext) {

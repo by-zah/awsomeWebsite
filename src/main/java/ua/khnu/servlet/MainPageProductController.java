@@ -15,37 +15,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/getRandomProductOnMain")
 public class MainPageProductController extends HttpServlet {
     private static ProductService productService;
+
     @Override
     public void init() {
         ApplicationContext ctx = (ApplicationContext) getServletContext().getAttribute(ConfigListener.CTX);
-        productService= ctx.getBean(ProductService.class);
+        productService = ctx.getBean(ProductService.class);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         JsonObjectBuilder rootBuilder = Json.createObjectBuilder();
-        List<List<Product>> products=productService.getRandomProductsFromEachCategories(4);
-        for(List<Product> prod:products){
-            JsonArrayBuilder arrayBuilder=Json.createArrayBuilder();
-            for(Product product:prod){
-                JsonObjectBuilder prodBuilder=Json.createObjectBuilder();
-                JsonObject jsonProd=prodBuilder.add("id",product.getId())
-                        .add("image",product.getPhoto())
-                        .add("title",product.getTitle())
-                        .add("price",product.getPrice())
+        List<List<Product>> products = productService.getRandomProductsFromEachCategories(4);
+        for (List<Product> prod : products) {
+            JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+            for (Product product : prod) {
+                JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
+                JsonObject jsonProd = prodBuilder.add("id", product.getId())
+                        .add("image", product.getPhoto())
+                        .add("title", product.getTitle())
+                        .add("price", product.getPrice())
                         .build();
                 arrayBuilder.add(jsonProd);
             }
-            rootBuilder.add(prod.get(0).getCategory(),arrayBuilder);
+            rootBuilder.add(prod.get(0).getCategory(), arrayBuilder);
         }
-        JsonObject rootJson=rootBuilder.build();
+        JsonObject rootJson = rootBuilder.build();
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8"); // Вы думали я вас не переиграю ? Я вас уничтожу
         System.out.println(rootJson);
