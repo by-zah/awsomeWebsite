@@ -24,31 +24,6 @@
 		<a class="sending-button" href="#">перейти в каталог</a>
 	</div>
 		</content>
-
-		<footer class="footer">
-			<div class="footer-container">
-				<div class="catalog-box">
-					<h5 class="footer-title">каталог</h5>
-					<ul class="nav-links">
-						<li class="nav-item"><a class="nav-link" href="#">главная</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">футболки</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">игрушки</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">фигурки</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">комиксы</a></li>
-					</ul>
-				</div>
-				<div class="social-box">
-					<h5 class="footer-title">социальные сети</h5>
-					<div class="social-icons">
-						<a class="footer-icon" href="#"><img class="footer-icon-img" src="img/facebook.png"></a>
-						<a class="footer-icon" href="#"><img class="footer-icon-img" src="img/instagram.png"></a>
-						<a class="footer-icon" href="#"><img class="footer-icon-img" src="img/telegram.png"></a>
-						<a class="footer-icon" href="#"><img class="footer-icon-img" src="img/youtube.png"></a>
-					</div>
-				</div>
-			</div>
-			<div class="footer-separator"></div>
-			<h5 class="footer-copyright">awsome website © 2020-2020</h5>
-		</footer>
+<%@ include file="jspf/footer.jspf" %>
 	</body>
 </html>

@@ -19,7 +19,7 @@
                     <a class="phone-number" href="tel:+380xxxxxxxxx">+380xxxxxxxxx</a>
                 </div>
             </div>
-            <a href="login.jsp"><img class="icon-img" src="img/user.png"></a>
+            <a class="login-button" href="login.jsp">войти</a>
             <a href="cart.jsp"><img class="icon-img" src="img/cart.png"></a>
         </div>
     </div>
