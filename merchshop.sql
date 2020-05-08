@@ -142,7 +142,7 @@ CREATE TABLE `products_in` (
   PRIMARY KEY (`id`),
   KEY `productAttributeID` (`productAttributeID`),
   CONSTRAINT `products_in_ibfk_1` FOREIGN KEY (`productAttributeID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_in` */
 
@@ -166,7 +166,8 @@ insert  into `products_in`(`id`,`productAttributeID`,`amountIN`,`dateIN`) values
 (17,16,1,'2020-05-05 17:13:24'),
 (18,17,2,'2020-05-05 17:13:24'),
 (19,18,4,'2020-05-05 17:13:24'),
-(20,20,8,'2020-05-05 17:13:24');
+(20,20,8,'2020-05-05 17:13:24'),
+(21,20,2,'2020-05-08 15:18:30');
 
 /*Table structure for table `products_orders` */
 
@@ -195,9 +196,13 @@ CREATE TABLE `products_out` (
   PRIMARY KEY (`id`),
   KEY `productAttributeID` (`productAttributeID`),
   CONSTRAINT `products_out_ibfk_1` FOREIGN KEY (`productAttributeID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_out` */
+
+insert  into `products_out`(`id`,`productAttributeID`,`amountOUT`,`dateOUT`) values 
+(1,20,2,'2020-05-08 15:21:16'),
+(2,20,1,'2020-05-08 15:31:14');
 
 /*Table structure for table `shipping_addresses` */
 
@@ -275,6 +280,25 @@ insert  into `users`(`id`,`email`,`password`,`mailingEnabled`,`contactNumber`) v
 (2,'tvoibatya@gmail.com','654321',0,'+380109455546'),
 (3,'liciy_ne_prigovor@yahoo.com','pythonlove',0,'+380395556410'),
 (4,'nokoronaviruspls@gmail.com','sqltop',0,'+380400655592');
+
+/*Table structure for table `products_in_stock` */
+
+DROP TABLE IF EXISTS `products_in_stock`;
+
+/*!50001 DROP VIEW IF EXISTS `products_in_stock` */;
+/*!50001 DROP TABLE IF EXISTS `products_in_stock` */;
+
+/*!50001 CREATE TABLE  `products_in_stock`(
+ `id` int(11) ,
+ `in_stock` decimal(32,0) 
+)*/;
+
+/*View structure for view products_in_stock */
+
+/*!50001 DROP TABLE IF EXISTS `products_in_stock` */;
+/*!50001 DROP VIEW IF EXISTS `products_in_stock` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_in_stock` AS (select `products_attributes`.`id` AS `id`,sum(`products_in`.`amountIN`) AS `in_stock` from (`products_attributes` join `products_in` on(`products_attributes`.`id` = `products_in`.`productAttributeID`)) group by `products_attributes`.`id`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
