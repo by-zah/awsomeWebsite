@@ -26,18 +26,19 @@
 				<button type="submit" name="submit">войти</button>
 				<h5>
 					${alert}
-             			</h5>
-						<div class="no-account">все еще нет аккаунта? <a class="link-to-register" href="registration.html">зарегистрироваться</a></div>
-					</form>
+				</h5>
+				<div class="no-account">все еще нет аккаунта? <a class="link-to-register" href="registration.jsp">зарегистрироваться</a>
 				</div>
-			</div>
+			</form>
+		</div>
+	</div>
 
-		</content>
+</content>
 
-		<footer class="footer">
-			<div class="footer-container">
-				<div class="catalog-box">
-					<h5 class="footer-title">каталог</h5>
+<footer class="footer">
+	<div class="footer-container">
+		<div class="catalog-box">
+			<h5 class="footer-title">каталог</h5>
 					<ul class="nav-links">
 						<li class="nav-item"><a class="nav-link" href="index.html">главная</a></li>
 						<li class="nav-item"><a class="nav-link" href="products-tshirts.html">футболки</a></li>
