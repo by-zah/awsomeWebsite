@@ -11,6 +11,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -24,6 +25,10 @@ public abstract class AbstractRepository<T> {
         this.jdbcAccessor = jdbcAccessor;
         genClass = (Class<T>) ((ParameterizedType) getClass()
                 .getGenericSuperclass()).getActualTypeArguments()[0];
+    }
+
+    public Optional<Integer> queryForInt(String query, Object... args) {
+        return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
     }
 
     protected List<T> getObjectListFromResultList(List<Map<String, Object>> resList) {
