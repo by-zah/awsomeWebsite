@@ -40,7 +40,7 @@ CREATE TABLE `active_orders` (
   CONSTRAINT `active_orders_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `active_orders_ibfk_2` FOREIGN KEY (`shippingMethodID`) REFERENCES `shipping_methods` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `active_orders_ibfk_3` FOREIGN KEY (`shippingAddressID`) REFERENCES `shipping_addresses` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `active_orders` */
 
@@ -53,7 +53,7 @@ CREATE TABLE `categories` (
   `title` varchar(30) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `categories` */
 
@@ -75,7 +75,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `categoryID` (`categoryID`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products` */
 
@@ -104,7 +104,7 @@ CREATE TABLE `products_attributes` (
   PRIMARY KEY (`id`),
   KEY `productID` (`productID`),
   CONSTRAINT `products_attributes_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_attributes` */
 
@@ -142,7 +142,7 @@ CREATE TABLE `products_in` (
   PRIMARY KEY (`id`),
   KEY `productAttributeID` (`productAttributeID`),
   CONSTRAINT `products_in_ibfk_1` FOREIGN KEY (`productAttributeID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_in` */
 
@@ -179,7 +179,7 @@ CREATE TABLE `products_orders` (
   `currentPrice` double DEFAULT NULL,
   KEY `productAttributesID` (`productsAttributesID`),
   CONSTRAINT `products_orders_ibfk_1` FOREIGN KEY (`productsAttributesID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_orders` */
 
@@ -195,7 +195,7 @@ CREATE TABLE `products_out` (
   PRIMARY KEY (`id`),
   KEY `productAttributeID` (`productAttributeID`),
   CONSTRAINT `products_out_ibfk_1` FOREIGN KEY (`productAttributeID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_out` */
 
@@ -211,7 +211,7 @@ CREATE TABLE `shipping_addresses` (
   `building` varchar(10) DEFAULT NULL,
   `index` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_addresses` */
 
@@ -230,7 +230,7 @@ CREATE TABLE `shipping_methods` (
   `title` varchar(30) DEFAULT NULL,
   `phone` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `shipping_methods` */
 
@@ -251,7 +251,7 @@ CREATE TABLE `track_orders` (
   `dateDelivered` datetime DEFAULT NULL,
   PRIMARY KEY (`activeOrderID`),
   CONSTRAINT `track_orders_ibfk_1` FOREIGN KEY (`activeOrderID`) REFERENCES `active_orders` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=cp1251;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `track_orders` */
 
@@ -259,14 +259,14 @@ CREATE TABLE `track_orders` (
 
 DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE `users`(
-                        `id`             int(11) NOT NULL AUTO_INCREMENT,
-                        `email`          varchar(100) DEFAULT NULL,
-                        `password`       varchar(100) DEFAULT NULL,
-                        `mailingEnabled` tinyint(1)   DEFAULT 0,
-                        `contactNumber`  varchar(30)  DEFAULT NULL,
-                        PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(40) DEFAULT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  `mailingEnabled` tinyint(1) DEFAULT 0,
+  `contactNumber` varchar(14) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
