@@ -6,10 +6,11 @@ import ua.khnu.entity.User;
 import ua.khnu.exception.LoginException;
 import ua.khnu.exception.ValidationException;
 import ua.khnu.reposetory.UserRepository;
-import ua.khnu.util.MD5Hash;
 
 import java.util.List;
 import java.util.Optional;
+
+import static ua.khnu.util.MD5Hash.getHash;
 
 @Component
 public class UserService {
@@ -27,7 +28,7 @@ public class UserService {
      * @return User object with generated id field
      */
     public User createNewUser(User user) {
-        user.setPassword(MD5Hash.getHash(user.getPassword()));
+        user.setPassword(getHash(user.getPassword()));
         return repository.add(user);
     }
 
@@ -61,7 +62,7 @@ public class UserService {
 
     public User getValidUserByEmailAndPassword(String email, String psw) {
         User user = getUserByEmail(email).orElseThrow(()->new LoginException("This email dosen't exists"));
-        if (!user.getPassword().equals(psw)) {
+        if (!user.getPassword().equals(getHash(psw))) {
             throw new LoginException("Password not matches");
         }
         return user;

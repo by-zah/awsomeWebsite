@@ -259,13 +259,13 @@ CREATE TABLE `track_orders` (
 
 DROP TABLE IF EXISTS `users`;
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(40) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
-  `mailingEnabled` tinyint(1) DEFAULT 0,
-  `contactNumber` varchar(14) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE `users`(
+                        `id`             int(11) NOT NULL AUTO_INCREMENT,
+                        `email`          varchar(100) DEFAULT NULL,
+                        `password`       varchar(100) DEFAULT NULL,
+                        `mailingEnabled` tinyint(1)   DEFAULT 0,
+                        `contactNumber`  varchar(30)  DEFAULT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=cp1251;
 
 /*Data for the table `users` */

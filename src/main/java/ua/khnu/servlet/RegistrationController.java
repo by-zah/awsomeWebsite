@@ -39,7 +39,7 @@ public class RegistrationController extends HttpServlet {
         User user = new User(
                 request.getParameter("email"),
                 request.getParameter("password"),
-                request.getParameter("phoneUser"),
+                request.getParameter("phone"),
                 Boolean.parseBoolean(request.getParameter("isMailingEnabled")));
         boolean isValid = false;
         logger.debug(user);

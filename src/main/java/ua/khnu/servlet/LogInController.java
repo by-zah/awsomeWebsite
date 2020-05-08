@@ -9,11 +9,13 @@ import ua.khnu.service.UserService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebServlet("/logIn")
 public class LogInController extends HttpServlet {
     private static final Logger logger = Logger.getLogger(LogInController.class);
     private UserService userService;
@@ -39,6 +41,7 @@ public class LogInController extends HttpServlet {
             logger.info(request.getSession().getAttribute("currentUser"));
             response.sendRedirect("/index.jsp");
         } catch (LoginException e) {
+            logger.debug(e);
             request.setAttribute("alert", e.getMessage());
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LogIn.jsp");
             requestDispatcher.forward(request, response);
