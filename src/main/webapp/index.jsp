@@ -37,7 +37,7 @@
 						<a class="showcase-card-button" href="#">перейти</a>
 					</div>
 					<div class="showcase-card-viewer" style="background-image: url('img/image-showcase-3.png');">
-						<h3 class="showcase-card-title">комиксы</h3>
+						<h3 class="showcase-card-title">аксессуары</h3>
 						<a class="showcase-card-button" href="#">перейти</a>
 					</div>
 
@@ -59,7 +59,7 @@
 				</div>
 				<div class="content-divider"></div>
 				<div class="content-card-holder">
-					<h4 class="content-card-title">комиксы</h4>
+					<h4 class="content-card-title">аксессуары</h4>
 					<div class="content-card-holder-box" id="content-card-holder-box3"></div>
 				</div>
 			</div>
