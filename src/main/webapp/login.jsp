@@ -13,7 +13,7 @@
 </head>
 <body>
 <a class="back-to-top-button" id="back-to-top-button" href="#">↑</a>
-<%@ include file="jspf/heder.jspf" %>
+<%@ include file="jspf/header.jspf" %>
 <content class="content">
 	<div class="content-container">
 		<div class="form-holder">

@@ -31,9 +31,6 @@ public class RegistrationController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-//        request.getSession().removeAttribute("user");
-//        request.getSession().removeAttribute("alert");
-//        resp.sendRedirect("registration.jsp");
     }
 
     @Override

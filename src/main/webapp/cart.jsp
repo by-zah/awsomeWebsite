@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<%@ include file="jspf/heder.jspf" %>
+<%@ include file="jspf/header.jspf" %>
 
 <content class="content">
 	<div class="empty-cart">
