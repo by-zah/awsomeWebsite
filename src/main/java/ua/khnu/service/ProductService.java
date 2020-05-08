@@ -18,7 +18,7 @@ public class ProductService {
     }
 
 
-    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY ="SELECT products_attributes.id AS id,\n" +
+    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = "SELECT products_attributes.id AS id,\n" +
             "       products.title AS title,\n" +
             "       categories.title AS category,\n" +
             "       products_attributes.photo AS photo,\n" +
@@ -35,10 +35,21 @@ public class ProductService {
 
     public List<List<Product>> getRandomProductsFromEachCategories(int num) {
         List<List<Product>> res = new ArrayList<>();
-        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY,"Одежда",num));
-        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY,"Игрушки",num));
-        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY,"Фигурки",num));
-        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY,"Аксессуары",num));
+        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY, "Одежда", num));
+        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY, "Игрушки", num));
+        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY, "Фигурки", num));
+        res.add(repository.query(GET_RANDOM_PRODUCTS_FROM_CATEGORY, "Аксессуары", num));
         return res;
+    }
+
+    private static final String GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID = "select (products_in_stock.in_stock - IFNULL(SUM(products_out.amountOUT), 0)) as current_in_stock\n" +
+            "from products_in_stock\n" +
+            "         left join products_out\n" +
+            "                   on products_in_stock.id = products_out.productAttributeID\n" +
+            "WHERE products_in_stock.id = ?\n" +
+            "group by products_in_stock.id";
+
+    public int getCountOfAvailableProductsById(int id) {
+        return repository.queryForInt(GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID, id).orElse(0);
     }
 }
