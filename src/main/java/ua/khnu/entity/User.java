@@ -1,5 +1,7 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
 import java.io.Serializable;
 
 
@@ -7,7 +9,9 @@ public class User implements Serializable {
     private int id;
     private String email;
     private String password;
+    @DBName(name = "contactNumber")
     private String number;
+    @DBName(name = "mailingEnabled")
     private boolean isMailEnable;
 
     public User() {
@@ -60,5 +64,14 @@ public class User implements Serializable {
         this.number = number;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", number='" + number + '\'' +
+                ", isMailEnable=" + isMailEnable +
+                '}';
+    }
 }
