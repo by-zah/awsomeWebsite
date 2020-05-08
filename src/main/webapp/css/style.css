@@ -1,3 +1,6 @@
+/* THIS BLOCK OF CODE APPLIES TO ANYTHING */
+
+
 @font-face {
 	font-family: 'Proxima Nova Rg';
 	src: url('../font/ProximaNova-Regular.eot');
@@ -51,6 +54,12 @@ a{
 		top: 538px;
 	}
 }
+
+
+/* HEADER */
+
+
+
 .header{
 	height: 90px;
 	width: 100%;
@@ -121,7 +130,7 @@ a{
 
 
 
-
+/* FOOTER */
 
 
 
@@ -185,7 +194,7 @@ a{
 
 
 
-
+/* CART IF EMPTY */
 
 
 .empty-cart{
@@ -224,7 +233,7 @@ a{
 }
 
 
-
+/* INDEX.HTML BANNER AND FILLUP */
 
 
 .content-container{
@@ -325,7 +334,7 @@ a{
 
 
 
-
+/* ANY TYPE OF CARDS */
 
 
 
@@ -381,4 +390,82 @@ a{
 }
 .content-card-link-price{
 	text-align: right;
+}
+
+
+
+/* REGISTRATION.HTML */
+
+
+
+.form-holder{
+	margin: 100px 0;
+}
+.form-title{
+	margin: 50px 0;
+	font-size: 26px;
+	text-transform: uppercase;
+	letter-spacing: 10px;
+	font-weight: normal;
+	text-align: center;
+}
+.register-form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.register-form label{
+	margin: 15px;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+.register-form input{
+	margin-bottom: 10px;
+	width: 300px;
+	font-size: 20px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 5px;
+}
+.register-form button{
+	width: 275px;
+	margin: 10px;
+	font-size: 20px;
+	padding: 20px 25px;
+	background-color: rgba(0,0,0,0.03);
+	text-transform: uppercase;
+	border: 1px solid #000;
+	border-radius: 3px;
+	cursor: pointer;
+	-webkit-transition: background-color 0.3s;
+}
+.register-form button:hover{
+	background-color: rgba(0,0,0,0.06);
+	transition: 0.3s;
+}
+.checkbox-label input{
+	width: 25px;
+	height: 25px;
+	margin: 5px 0;
+}
+.checkbox-container{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.checkbox-description{
+	text-transform: uppercase;
+	font-size: 12px;
+}
+.no-account{
+	text-transform: uppercase;
+	margin: 10px;
+}
+.link-to-register{
+	color: #D491F4;
+	-webkit-transition: color 0.2s;
+}
+.link-to-register:hover{
+	color: #D453F4;
+	transition: 0.2s;
 }
