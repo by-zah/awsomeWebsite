@@ -43,7 +43,7 @@ public class LogInController extends HttpServlet {
         } catch (LoginException e) {
             logger.debug(e);
             request.setAttribute("alert", e.getMessage());
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/LogIn.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
             requestDispatcher.forward(request, response);
         }
     }
