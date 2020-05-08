@@ -1,1 +1,30 @@
 /example -> {name:example}
+
+#MAIN PAGE PRODUCTS
+/*SELECT products_attributes.id as id,
+products.title as title,
+categories.title as category,
+products_attributes.photo as photo,
+products_attributes.price as price
+FROM products
+inner join products_attributes
+on products_attributes.productID = products.id
+inner join categories 
+on products.categoryID = categories.id
+where categories.title = "Одежда"
+#WHERE categories.title = "название категории"
+GROUP BY products.title
+ORDER BY RAND()
+LIMIT 4*/
+
+
+#IN STOCK
+/*select products_in_stock.id,
+products_in_stock.in_stock,
+ifnull(sum(products_out.amountOUT),0) as sold,
+(products_in_stock.in_stock-IFNULL(SUM(products_out.amountOUT),0)) as current_in_stock
+from products_in_stock
+left join products_out
+on products_in_stock.id = products_out.productAttributeID
+WHERE products_in_stock.id = "YOUR ID"
+group by products_in_stock.id*/
