@@ -16,39 +16,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class ProductRepository {
+public class ProductRepository extends AbstractRepository<Product> {
     private static final Logger LOG = Logger.getLogger(ProductRepository.class);
-    private String[] columnNames;
-    private JdbcTemplate jdbcAccessor;
-
 
     @Autowired
     public ProductRepository(JdbcTemplate jdbcAccessor) {
-        this.jdbcAccessor = jdbcAccessor;
+        super(jdbcAccessor);
     }
 
     public List<Product> query(String query) {
-        return query(query, (Object) null);
+        return query(query, new Object[0]);
     }
 
     public List<Product> query(String query, Object... args) {
         LOG.debug("query --> " + query);
         LOG.debug("args --> " + Arrays.toString(args));
-        return getProductListFromResultList(jdbcAccessor.queryForList(query, args));
-    }
-
-    private List<Product> getProductListFromResultList(List<Map<String, Object>> resList){
-        return resList.stream().map(m -> {
-            Product product = new Product();
-            product.setId((Integer) m.get(DBConstant.ID));
-            product.setTitle((String) m.get("title"));
-            product.setCategory((String) m.get("category"));
-            product.setPhoto((String) m.get("photo"));
-            product.setColor((String) m.get("color"));
-            product.setDescription((String) m.get("description"));
-            product.setSize((String) m.get("size"));
-            product.setPrice(BigDecimal.valueOf((Double) m.get("price")));
-            return product;
-        }).collect(Collectors.toList());
+        return getObjectListFromResultList(jdbcAccessor.queryForList(query, args));
     }
 }

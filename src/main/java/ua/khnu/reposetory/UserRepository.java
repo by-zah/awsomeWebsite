@@ -13,10 +13,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Component
-public class UserRepository {
+public class UserRepository extends AbstractRepository<User>{
     private static final Logger LOG = Logger.getLogger(UserRepository.class);
     private static final String DELETE = "DELETE FROM users WHERE id=?";
     private static final String UPDATE = "UPDATE users " +
@@ -27,13 +26,12 @@ public class UserRepository {
     public static final String CONTACT_NUMBER = "contactNumber";
     public static final String MAILING_ENABLED = "mailingEnabled";
     private String[] columnNames;
-    private JdbcTemplate jdbcAccessor;
     private SimpleJdbcInsert simpleJdbcInsert;
 
 
     @Autowired
     public UserRepository(JdbcTemplate jdbcAccessor, DataSource ds) {
-        this.jdbcAccessor = jdbcAccessor;
+        super(jdbcAccessor);
         initColumnNames();
         simpleJdbcInsert = new SimpleJdbcInsert(ds)
                 .withTableName("users").usingGeneratedKeyColumns(DBConstant.ID)
@@ -47,13 +45,13 @@ public class UserRepository {
     }
 
     public List<User> query(String query) {
-        return query(query, (Object) null);
+        return query(query, new Object[0]);
     }
 
     public List<User> query(String query, Object... args) {
         LOG.debug("query --> " + query);
         LOG.debug("args --> " + Arrays.toString(args));
-        return getUserListFromResultList(jdbcAccessor.queryForList(query, args));
+        return getObjectListFromResultList(jdbcAccessor.queryForList(query, args));
     }
 
     public boolean delete(int id) {
@@ -94,15 +92,4 @@ public class UserRepository {
         columnNames[3] = MAILING_ENABLED;
     }
 
-    private List<User> getUserListFromResultList(List<Map<String, Object>> resList) {
-        return resList.stream().map(m -> {
-            User user = new User();
-            user.setId((Integer) m.get(DBConstant.ID));
-            user.setPassword((String) m.get(PASSWORD));
-            user.setEmail((String) m.get(EMAIL));
-            user.setNumber((String) m.get(CONTACT_NUMBER));
-            user.setMailEnable((Boolean) m.get(MAILING_ENABLED));
-            return user;
-        }).collect(Collectors.toList());
-    }
 }
