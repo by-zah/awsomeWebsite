@@ -1,8 +1,6 @@
 package ua.khnu.entity;
 
 
-import java.math.BigDecimal;
-
 public class Product {
     private int id;
     private String category;
@@ -10,7 +8,7 @@ public class Product {
     private String description;
     private String color;
     private String size;
-    private BigDecimal price;
+    private Double price;
     private String photo;
 
     public String getCategory() {
@@ -61,11 +59,11 @@ public class Product {
         this.size = size;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
