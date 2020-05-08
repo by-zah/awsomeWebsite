@@ -60,18 +60,15 @@ public class UserService {
     }
 
     public User getValidUserByEmailAndPassword(String email, String psw) {
-        Optional<User> optional = getUserByEmail(email);
-        if (optional.isEmpty()) {
-            throw new LoginException("This email dosen't exists");
-        }
-        if (!optional.map(User::getPassword).get().equals(psw)) {
+        User user = getUserByEmail(email).orElseThrow(()->new LoginException("This email dosen't exists"));
+        if (!user.getPassword().equals(psw)) {
             throw new LoginException("Password not matches");
         }
-        return optional.get();
+        return user;
     }
 
     public boolean valid(String psw2, User user) throws ValidationException {
-        String regex = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$";
+        String regex = "^([a-zA-Z0-9_\\-.]+)@([a-zA-Z0-9_\\-.]+)\\.([a-zA-Z]{2,5})$";
         if (!(psw2.equals(user.getPassword()) && psw2.length() > 0)) {
             throw new ValidationException("The password you have entered is not valid!" +
                     " Password must contain at least 1 lowercase " +
@@ -81,7 +78,7 @@ public class UserService {
         if (!user.getEmail().matches(regex)) {
             throw new ValidationException("Email not valid");
         }
-        if (!(user.getNumber().length() > 7)) {
+        if ((user.getNumber().length() <= 7)) {
             throw new ValidationException("Check you phone number");
         }
         if (isEmailContainsInRepo(user.getEmail())) {
