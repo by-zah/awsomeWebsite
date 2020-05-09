@@ -23,7 +23,6 @@ DROP TABLE IF EXISTS `active_orders`;
 CREATE TABLE `active_orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) DEFAULT NULL,
-  `productsOrderID` int(11) DEFAULT NULL,
   `paymentMethod` varchar(40) DEFAULT NULL,
   `shippingMethodID` int(11) DEFAULT NULL,
   `shippingAddressID` int(11) DEFAULT NULL,
@@ -75,7 +74,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `categoryID` (`categoryID`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products` */
 
@@ -88,7 +87,16 @@ insert  into `products`(`id`,`title`,`categoryID`,`description`) values
 (6,'LIQUID X MARVEL LOGO TEE',1,'Rep the LIQUID x MARVEL collaboration with this clean logo tee featuring the official horse head red brick lock-up: the insignia of LIQUID x MARVEL. Crisp fusion printed design keeps the design clean, crack-free and durable all on a weighted comfortable c'),
 (7,'TEAM LIQUID GEOS TEE',1,'Our 2020 take on a classic Liquid look. Add this quality tee to your collection today.'),
 (8,'Funko Pop Чубакка серии \"Звёздные войны\"',3,''),
-(9,'MARVEL COMICS DUFFLE BAG',4,'Our mighty Marvel Comics duffle bag packs a punch at the gym or anywhere your adventures lead you. Reinforced straps and colorful comic book cover lining make it a super carry-all for roving avengers');
+(9,'MARVEL COMICS DUFFLE BAG',4,'Our mighty Marvel Comics duffle bag packs a punch at the gym or anywhere your adventures lead you. Reinforced straps and colorful comic book cover lining make it a super carry-all for roving avengers'),
+(10,'ФИГУРКА FUNKO POP! GERALT - THE WITCHER',3,''),
+(11,'ФИГУРКА FUNKO POP! GROOT - GUARDIANS OF THE GALAXY 2',3,''),
+(12,'ФИГУРКА FUNKO POP! HANZO - OVERWATCH SERIES 4',3,''),
+(13,'ФИГУРКА FUNKO POP! HARLEY QUINN - DC',3,''),
+(14,'КЕПКА ЭЛИТНАЯ СТРАЖА',4,''),
+(15,'РЮКЗАК ДОТА 2',4,''),
+(16,'РЮКЗАК OVERWATCH',4,''),
+(17,'PIDERJET VS. VENOM MECH PLAYSET BY LEGO',2,'With this Spiderjet vs. Venom Mech Playset by LEGO, Spider-Man is in danger! Venom, the evil alien, is at the controls of a deadly, gigantic, four-armed mech – and he\'s caught Spider-Man in its mechanical claws!'),
+(18,'PIDER-MAN 6V TODDLER QUAD RIDE-ON TOY',2,'Your little webhead will enjoy hours of heroic fun on this 6-Volt Spider-Man Toddler Quad toy. Molded plastic webbing adds powerful style to the front of this rechargeable ride with easy push-button drive system and a maximum speed of 2 MPH');
 
 /*Table structure for table `products_attributes` */
 
@@ -104,7 +112,7 @@ CREATE TABLE `products_attributes` (
   PRIMARY KEY (`id`),
   KEY `productID` (`productID`),
   CONSTRAINT `products_attributes_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_attributes` */
 
@@ -128,7 +136,16 @@ insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`phot
 (17,7,'Blue','L',1400,'images/7_tlblue.jpg'),
 (18,7,'Blue','M',1400,'images/7_tlblue.jpg'),
 (19,8,'-','-',400,'images/8_chubaka.jpg'),
-(20,9,'-','-',2000,'images/9_marvelbag.jpg');
+(20,9,'-','-',2000,'images/9_marvelbag.jpg'),
+(21,10,'-','-',450,'images/10_witcher.jpg'),
+(22,11,'-','-',425,'images/11_groot.jpg'),
+(23,12,'-','-',450,'images/12_hanzo.jpg'),
+(24,13,'-','-',430,'images/13_harleyquinn.jpg'),
+(25,14,'-','-',650,'images/14_eliteguard.jpg'),
+(26,15,'-','-',499,'images/15_dota2bag.jpg'),
+(27,16,'-','-',1000,'images/16_owbag.jpg'),
+(28,17,'-','-',1000,'images/17_spidermanlego.jpg'),
+(29,18,'-','-',5000,'images/18_spiderbike.jpg');
 
 /*Table structure for table `products_in` */
 
@@ -174,12 +191,14 @@ insert  into `products_in`(`id`,`productAttributeID`,`amountIN`,`dateIN`) values
 DROP TABLE IF EXISTS `products_orders`;
 
 CREATE TABLE `products_orders` (
-  `id` int(11) DEFAULT NULL,
+  `activeOrderID` int(11) DEFAULT NULL,
   `productsAttributesID` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `currentPrice` double DEFAULT NULL,
   KEY `productAttributesID` (`productsAttributesID`),
-  CONSTRAINT `products_orders_ibfk_1` FOREIGN KEY (`productsAttributesID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE
+  KEY `activeOrderID` (`activeOrderID`),
+  CONSTRAINT `products_orders_ibfk_1` FOREIGN KEY (`productsAttributesID`) REFERENCES `products_attributes` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `products_orders_ibfk_2` FOREIGN KEY (`activeOrderID`) REFERENCES `active_orders` (`id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_orders` */
@@ -271,7 +290,7 @@ CREATE TABLE `users` (
   `mailingEnabled` tinyint(1) DEFAULT 0,
   `contactNumber` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
@@ -279,7 +298,9 @@ insert  into `users`(`id`,`email`,`password`,`mailingEnabled`,`contactNumber`) v
 (1,'tvoyamamka@gmail.com','123456',0,'+380395556741'),
 (2,'tvoibatya@gmail.com','654321',0,'+380109455546'),
 (3,'liciy_ne_prigovor@yahoo.com','pythonlove',0,'+380395556410'),
-(4,'nokoronaviruspls@gmail.com','sqltop',0,'+380400655592');
+(4,'nokoronaviruspls@gmail.com','sqltop',0,'+380400655592'),
+(6,'takemylove314@gmail.com','test',0,'+380400655592'),
+(7,'yvaweniep4elkam@gmail.com','test',0,'+380400655592');
 
 /*Table structure for table `products_in_stock` */
 
