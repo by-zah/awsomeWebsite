@@ -3,7 +3,7 @@ package ua.khnu.entity;
 import java.util.List;
 
 public class CatalogRequestParams {
-    private String sortType;
+    private SortType sortType;
     private List<String> category;
     private Double priceFrom;
     private Double priceTo;
@@ -44,11 +44,11 @@ public class CatalogRequestParams {
         this.size = size;
     }
 
-    public String getSortType() {
+    public SortType getSortType() {
         return sortType;
     }
 
-    public void setSortType(String sortType) {
+    public void setSortType(SortType sortType) {
         this.sortType = sortType;
     }
 
