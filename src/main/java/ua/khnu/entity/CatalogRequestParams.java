@@ -5,12 +5,12 @@ import java.util.List;
 public class CatalogRequestParams {
     private String sortType;
     private List<String> category;
-    private double priceFrom;
-    private double priceTo;
+    private Double priceFrom;
+    private Double priceTo;
     private List<String> color;
     private List<String> size;
-    private int itemFrom;
-    private int itemTo;
+    private Integer itemFrom;
+    private Integer itemTo;
 
     public int getItemFrom() {
         return itemFrom;
