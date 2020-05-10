@@ -36,3 +36,17 @@ left join products_out
 on products_in_stock.id = products_out.productAttributeID
 WHERE products_in_stock.id = "YOUR ID"
 group by products_in_stock.id*/
+
+
+#GET PRODUCTS BY CATEGORY
+SELECT products_attributes.id as id,
+       c.title as category,
+       p.title as title,
+       c.description,
+       color,
+       size,
+       price,
+       photo
+FROM products_attributes
+         JOIN products p on products_attributes.productID = p.id
+         JOIN categories c on p.categoryID = c.id

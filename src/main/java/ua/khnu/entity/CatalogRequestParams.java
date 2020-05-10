@@ -12,19 +12,19 @@ public class CatalogRequestParams {
     private Integer itemFrom;
     private Integer itemTo;
 
-    public int getItemFrom() {
+    public Integer getItemFrom() {
         return itemFrom;
     }
 
-    public void setItemFrom(int itemFrom) {
+    public void setItemFrom(Integer itemFrom) {
         this.itemFrom = itemFrom;
     }
 
-    public int getItemTo() {
+    public Integer getItemTo() {
         return itemTo;
     }
 
-    public void setItemTo(int itemTo) {
+    public void setItemTo(Integer itemTo) {
         this.itemTo = itemTo;
     }
 
@@ -60,19 +60,19 @@ public class CatalogRequestParams {
         this.category = category;
     }
 
-    public double getPriceFrom() {
+    public Double getPriceFrom() {
         return priceFrom;
     }
 
-    public void setPriceFrom(double priceFrom) {
+    public void setPriceFrom(Double priceFrom) {
         this.priceFrom = priceFrom;
     }
 
-    public double getPriceTo() {
+    public Double getPriceTo() {
         return priceTo;
     }
 
-    public void setPriceTo(double priceTo) {
+    public void setPriceTo(Double priceTo) {
         this.priceTo = priceTo;
     }
 }
