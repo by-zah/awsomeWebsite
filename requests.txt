@@ -17,6 +17,14 @@ GROUP BY products.title
 ORDER BY RAND()
 LIMIT 4*/
 
+#VIEW_producuts_in_stock
+SELECT
+  `products_attributes`.`id` AS `id`,
+  SUM(`products_in`.`amountIN`) AS `in_stock`
+FROM (`products_attributes`
+   JOIN `products_in`
+     ON (`products_attributes`.`id` = `products_in`.`productAttributeID`))
+GROUP BY `products_attributes`.`id`)$$
 
 #IN STOCK
 /*select products_in_stock.id,
