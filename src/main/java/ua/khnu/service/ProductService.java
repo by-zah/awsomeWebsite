@@ -2,6 +2,7 @@ package ua.khnu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.Product;
 import ua.khnu.reposetory.ProductRepository;
 
@@ -51,5 +52,9 @@ public class ProductService {
 
     public int getCountOfAvailableProductsById(int id) {
         return repository.queryForInt(GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID, id).orElse(0);
+    }
+
+    public List<Product> getProductsByParams(CatalogRequestParams crp){
+        return null;
     }
 }
