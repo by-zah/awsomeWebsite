@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 public class CartController extends HttpServlet {
 
@@ -42,7 +43,12 @@ public class CartController extends HttpServlet {
     }
 
     private void setNewAmountToProduct(HttpServletRequest req, HttpServletResponse resp, Cart cart, int id) throws IOException {
-        Product product = productService.getProductById(id);
+        Product product = null;
+        Optional<Product> opt = productService.getProductById(id);
+        if (opt.isPresent()) {
+            product = opt.get();
+        }
+        logger.info("Product:" + product);
         Integer amount = Integer.parseInt(req.getParameter("amount"));
         cart.add(product, amount);
         req.getSession().setAttribute("cart", cart);
