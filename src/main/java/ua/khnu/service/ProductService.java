@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static ua.khnu.util.Util.getFirstOptionalFromList;
+
 @Component
 public class ProductService {
     private final ProductRepository repository;
@@ -69,12 +71,5 @@ public class ProductService {
 
     public Optional<Product> getProductById(int id) {
         return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ID, id));
-    }
-
-    private Optional<Product> getFirstOptionalFromList(List<Product> products) {
-        if (products.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(products.get(0));
     }
 }

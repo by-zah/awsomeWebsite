@@ -7,10 +7,10 @@ import ua.khnu.exception.LoginException;
 import ua.khnu.exception.ValidationException;
 import ua.khnu.reposetory.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 import static ua.khnu.util.MD5Hash.getHash;
+import static ua.khnu.util.Util.getFirstOptionalFromList;
 
 @Component
 public class UserService {
@@ -46,13 +46,6 @@ public class UserService {
 
     public Optional<User> getUserByEmail(String email) {
         return getFirstOptionalFromList(repository.query(GET_USER_BY_EMAIL, email));
-    }
-
-    private Optional<User> getFirstOptionalFromList(List<User> users) {
-        if (users.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(users.get(0));
     }
 
     public boolean isEmailContainsInRepo(String email) {
