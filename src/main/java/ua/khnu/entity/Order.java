@@ -3,18 +3,45 @@ package ua.khnu.entity;
 import java.util.Map;
 
 public class Order {
+    private Integer userId;
+    private String paymentMethod;
+    private ShippingMethod shippingMethod;
+    private ShippingAddress shippingAddress;
+    private Double totalProductPrice;
+    private Double deliveryPrice;
+    private Double discount;
+    private Double totalPrice;
+    private Long datePlaced;
+    private String comment;
     /**
      * key - Product with at least id and price
      * value - amount
      */
     private Map<Product, Integer> productAndAmount;
-    private ShippingAddress shippingAddress;
-    private ShippingMethod shippingMethod;
-    private int userId;
-    private String paymentMethod;
-    private double deliveryPrice;
-    private double discount;
-    private String comment;
+
+    public Double getTotalProductPrice() {
+        return totalProductPrice;
+    }
+
+    public void setTotalProductPrice(Double totalProductPrice) {
+        this.totalProductPrice = totalProductPrice;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Long getDatePlaced() {
+        return datePlaced;
+    }
+
+    public void setDatePlaced(Long datePlaced) {
+        this.datePlaced = datePlaced;
+    }
 
     public Map<Product, Integer> getProductAndAmount() {
         return productAndAmount;
@@ -40,11 +67,11 @@ public class Order {
         this.shippingMethod = shippingMethod;
     }
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -56,19 +83,19 @@ public class Order {
         this.paymentMethod = paymentMethod;
     }
 
-    public double getDeliveryPrice() {
+    public Double getDeliveryPrice() {
         return deliveryPrice;
     }
 
-    public void setDeliveryPrice(double deliveryPrice) {
+    public void setDeliveryPrice(Double deliveryPrice) {
         this.deliveryPrice = deliveryPrice;
     }
 
-    public double getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
