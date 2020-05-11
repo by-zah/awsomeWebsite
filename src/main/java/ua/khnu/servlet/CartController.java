@@ -2,6 +2,8 @@ package ua.khnu.servlet;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+import ua.khnu.entity.Cart;
+import ua.khnu.entity.Product;
 import ua.khnu.listener.ConfigListener;
 import ua.khnu.service.ProductService;
 
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 public class CartController extends HttpServlet {
 
@@ -24,11 +27,50 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        logger.debug(req.getParameter("productId"));
+        logger.debug(req.getParameter("amount"));
+        Cart cart = (Cart) req.getSession().getAttribute("cart");
+        if (Objects.isNull(cart)) {
+            cart = new Cart();
+        }
+        int id = Integer.parseInt(req.getParameter("productId"));
+        if (id < 0) {
+            clearCart(req, resp, cart);
+        } else {
+            setNewAmountToProduct(req, resp, cart, id);
+        }
+    }
+
+    private void setNewAmountToProduct(HttpServletRequest req, HttpServletResponse resp, Cart cart, int id) throws IOException {
+        Product product = productService.getProductById(id);
+        Integer amount = Integer.parseInt(req.getParameter("amount"));
+        cart.add(product, amount);
+        req.getSession().setAttribute("cart", cart);
+        resp.setContentType("application/json");
+        resp.getWriter().write("{\n" +
+                "\"dataCount\":" + cart.getAmount() + "," +
+                "\"sum\":" + ((amount - 1) * product.getPrice()) + "," +
+                "\"total\":" + cart.getSum() + "," +
+                "\"id\":" + product.getId() + "," +
+                "}");
+
+    }
+
+    private void clearCart(HttpServletRequest req, HttpServletResponse resp, Cart cart) throws IOException {
+        cart.clear();
+        req.getSession().setAttribute("cart", cart);
+        resp.setContentType("application/json");
+        resp.getWriter().write("{\n" +
+                "\"dataCount\":" + 0 + "," +
+                "\"sum\":" + 0 + "," +
+                "\"total\":" + cart.getSum() + "," +
+                "\"id\":" + 0 + "," +
+                "}");
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 
 }
