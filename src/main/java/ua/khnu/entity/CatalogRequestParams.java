@@ -1,6 +1,7 @@
 package ua.khnu.entity;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CatalogRequestParams {
     private SortType sortType;
@@ -88,5 +89,23 @@ public class CatalogRequestParams {
                 ", itemFrom=" + itemFrom +
                 ", itemTo=" + itemTo +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CatalogRequestParams that = (CatalogRequestParams) o;
+        return sortType == that.sortType &&
+                Objects.equals(category, that.category) &&
+                Objects.equals(priceFrom, that.priceFrom) &&
+                Objects.equals(priceTo, that.priceTo) &&
+                Objects.equals(color, that.color) &&
+                Objects.equals(size, that.size);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sortType, category, priceFrom, priceTo, color, size);
     }
 }

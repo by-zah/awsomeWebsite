@@ -15,11 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class QueryBuilderTest {
     private static final String QUERY_BODY = "SELECT products_attributes.id as id,\n" +
-            "       c.title as category,\n" +
             "       p.title as title,\n" +
-            "       c.description,\n" +
-            "       color,\n" +
-            "       size,\n" +
             "       price,\n" +
             "       photo\n" +
             "FROM products_attributes\n" +
