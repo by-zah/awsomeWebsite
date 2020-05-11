@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.Product;
 import ua.khnu.reposetory.ProductRepository;
+import ua.khnu.util.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 @Component
 public class ProductService {
     private final ProductRepository repository;
+    private final QueryBuilder queryBuilder;
 
     @Autowired
-    public ProductService(ProductRepository repository) {
+    public ProductService(ProductRepository repository, QueryBuilder queryBuilder) {
         this.repository = repository;
+        this.queryBuilder = queryBuilder;
     }
 
 
@@ -54,7 +57,9 @@ public class ProductService {
         return repository.queryForInt(GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID, id).orElse(0);
     }
 
-    public List<Product> getProductsByParams(CatalogRequestParams crp){
-        return null;
+    public List<Product> getProductsByParams(CatalogRequestParams crp) {
+        String query = queryBuilder.getQueryFromCategoryRequestParams(crp);
+        Object[] params = queryBuilder.getParams(crp);
+        return repository.query(query, params);
     }
 }
