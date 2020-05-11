@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.Product;
+import ua.khnu.entity.User;
 import ua.khnu.reposetory.ProductRepository;
 import ua.khnu.util.QueryBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductService {
@@ -61,5 +63,18 @@ public class ProductService {
         String query = queryBuilder.getQueryFromCategoryRequestParams(crp);
         Object[] params = queryBuilder.getParams(crp);
         return repository.query(query, params);
+    }
+
+    private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id=?";
+
+    public Optional<Product> getProductById(int id) {
+        return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ID, id));
+    }
+
+    private Optional<Product> getFirstOptionalFromList(List<Product> products) {
+        if (products.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(products.get(0));
     }
 }
