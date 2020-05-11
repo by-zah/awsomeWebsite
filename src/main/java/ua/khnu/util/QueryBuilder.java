@@ -18,11 +18,7 @@ public class QueryBuilder {
     private static final String WHERE = "WHERE";
     private static final String SPACE = " ";
     private static final String GET_PRODUCTS_BY_PARAMS_BODY = "SELECT products_attributes.id as id,\n" +
-            "       c.title as category,\n" +
             "       p.title as title,\n" +
-            "       c.description,\n" +
-            "       color,\n" +
-            "       size,\n" +
             "       price,\n" +
             "       photo\n" +
             "FROM products_attributes\n" +
