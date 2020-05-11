@@ -40,8 +40,8 @@ group by products_in_stock.id*/
 
 #GET PRODUCTS BY CATEGORY
 SELECT products_attributes.id as id,
-       c.title as category,
-       p.title as title,
+       c.title                as category,
+       p.title                as title,
        c.description,
        color,
        size,
@@ -50,3 +50,10 @@ SELECT products_attributes.id as id,
 FROM products_attributes
          JOIN products p on products_attributes.productID = p.id
          JOIN categories c on p.categoryID = c.id
+WHERE price >= ?
+  AND price <= ?
+  AND (color = ? OR color = ?)
+  AND (c.title = ? OR c.title = ?)
+  AND (size = ? OR size = ?)
+ORDER BY title DESC
+LIMIT ?,?
