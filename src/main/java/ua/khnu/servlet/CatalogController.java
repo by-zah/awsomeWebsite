@@ -10,6 +10,7 @@ import ua.khnu.service.ProductService;
 
 import javax.json.*;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@WebServlet("/catalog")
 public class CatalogController extends HttpServlet {
     private static final int NUM_ON_PAGE = 8;
     private static final Logger logger = Logger.getLogger(CatalogController.class);
