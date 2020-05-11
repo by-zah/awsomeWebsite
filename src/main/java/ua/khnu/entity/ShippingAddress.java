@@ -1,10 +1,5 @@
 package ua.khnu.entity;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-@Component
-@Scope("prototype")
 public class ShippingAddress {
     private int id;
     private String city;
