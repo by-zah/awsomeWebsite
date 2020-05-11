@@ -60,10 +60,10 @@ public class CatalogController extends HttpServlet {
             crp.setCategory(Collections.singletonList(request.getParameter("category")));
         }
         if (Objects.nonNull(request.getParameter("size"))) {
-            crp.setCategory(Collections.singletonList(request.getParameter("size")));
+            crp.setSize(Collections.singletonList(request.getParameter("size")));
         }
         if (Objects.nonNull(request.getParameter("color"))) {
-            crp.setCategory(Collections.singletonList(request.getParameter("color")));
+            crp.setColor(Collections.singletonList(request.getParameter("color")));
         }
         try {
             Double d = Double.valueOf(request.getParameter("priceFrom"));
