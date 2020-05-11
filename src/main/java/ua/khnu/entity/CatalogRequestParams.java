@@ -75,4 +75,18 @@ public class CatalogRequestParams {
     public void setPriceTo(Double priceTo) {
         this.priceTo = priceTo;
     }
+
+    @Override
+    public String toString() {
+        return "CatalogRequestParams{" +
+                "sortType=" + sortType +
+                ", category=" + category +
+                ", priceFrom=" + priceFrom +
+                ", priceTo=" + priceTo +
+                ", color=" + color +
+                ", size=" + size +
+                ", itemFrom=" + itemFrom +
+                ", itemTo=" + itemTo +
+                '}';
+    }
 }

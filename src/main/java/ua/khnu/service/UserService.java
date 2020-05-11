@@ -61,9 +61,9 @@ public class UserService {
     }
 
     public User getValidUserByEmailAndPassword(String email, String psw) {
-        User user = getUserByEmail(email).orElseThrow(() -> new LoginException("Email or password not valid"));
+        User user = getUserByEmail(email).orElseThrow(() -> new LoginException("Повторите ввод, эмаил или пароль введены неверно"));
         if (!user.getPassword().equals(getHash(psw))) {
-            throw new LoginException("Email or password not valid");
+            throw new LoginException("Повторите ввод, эмаил или пароль введены неверно");
         }
         return user;
     }
@@ -71,20 +71,19 @@ public class UserService {
     public boolean valid(String psw2, User user) throws ValidationException {
         String regex = "^([a-zA-Z0-9_\\-.]+)@([a-zA-Z0-9_\\-.]+)\\.([a-zA-Z]{2,5})$";
         if (!(psw2.equals(user.getPassword()) && psw2.length() > 0)) {
-            throw new ValidationException("The password you have entered is not valid!" + System.lineSeparator() +
-                    " Password must contain at least 1 lowercase " + System.lineSeparator() +
-                    "1 uppercase alphabetical character," + System.lineSeparator() +
-                    " 1 numeric character and " + System.lineSeparator() +
-                    "have length more than 6 characters");
+            throw new ValidationException(
+                    "Пароль должен содержать как минимум 1 большую и 1 маленькую буквы" + System.lineSeparator() +
+                            " 1 цифру" + System.lineSeparator() +
+                            " и иметь длину больше 6 знаков");
         }
         if (!user.getEmail().matches(regex)) {
-            throw new ValidationException("Email not valid");
+            throw new ValidationException("Емаил введен неверно");
         }
         if ((user.getNumber().length() <= 7)) {
-            throw new ValidationException("Check you phone number");
+            throw new ValidationException("Проверте телефонный номер");
         }
         if (isEmailContainsInRepo(user.getEmail())) {
-            throw new ValidationException("This email already exists");
+            throw new ValidationException("Такой эмаил уже существует");
         }
         return true;
     }
