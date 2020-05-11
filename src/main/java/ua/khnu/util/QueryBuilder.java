@@ -5,10 +5,7 @@ import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.SortType;
 import ua.khnu.exception.QueryBuildException;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static ua.khnu.entity.SortType.*;
 
@@ -32,11 +29,11 @@ public class QueryBuilder {
 
     public Object[] getParams(CatalogRequestParams crp) {
         List<Object> params = new ArrayList<>();
-        params.add(crp.getPriceFrom());
-        params.add(crp.getPriceTo());
-        params.addAll(crp.getColor());
-        params.addAll(crp.getCategory());
-        params.addAll(crp.getSize());
+        Optional.ofNullable(crp.getPriceFrom()).ifPresent(params::add);
+        Optional.ofNullable(crp.getPriceTo()).ifPresent(params::add);
+        Optional.ofNullable(crp.getColor()).ifPresent(params::addAll);
+        Optional.ofNullable(crp.getCategory()).ifPresent(params::addAll);
+        Optional.ofNullable(crp.getSize()).ifPresent(params::addAll);
         params.add(crp.getItemFrom() - 1);
         params.add(crp.getItemTo() - crp.getItemFrom());
         return params.toArray();
