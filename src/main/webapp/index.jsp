@@ -19,26 +19,26 @@
 	<div class="content-container">
 		<div class="content-banner" style="background-image: url('img/banner.jpg');" name="slide_show">
 			<h1 class="content-title">awsome website merch store</h1>
-			<a class="content-button" href="#">перейти к ассортименту</a>
+			<a class="content-button" href="catalog.jsp">перейти к ассортименту</a>
 		</div>
 		<div class="content-divider"></div>
 		<div class="content-showcase">
 
 			<div class="showcase-card-viewer" style="background-image: url('img/image-showcase-0.png');">
 						<h3 class="showcase-card-title">футболки</h3>
-						<a class="showcase-card-button" href="#">перейти</a>
+						<a class="showcase-card-button" href="catalog.jsp?sortType=PRICE_UP&category=Tshirt">перейти</a>
 					</div>
 					<div class="showcase-card-viewer" style="background-image: url('img/image-showcase-1.png');">
 						<h3 class="showcase-card-title">фигурки</h3>
-						<a class="showcase-card-button" href="#">перейти</a>
+						<a class="showcase-card-button" href="catalog.jsp?sortType=PRICE_UP&category=Figure">перейти</a>
 					</div>
 					<div class="showcase-card-viewer" style="background-image: url('img/image-showcase-2.png');">
 						<h3 class="showcase-card-title">игрушки</h3>
-						<a class="showcase-card-button" href="#">перейти</a>
+						<a class="showcase-card-button" href="catalog.jsp?sortType=PRICE_UP&category=Toy">перейти</a>
 					</div>
 					<div class="showcase-card-viewer" style="background-image: url('img/image-showcase-3.png');">
 						<h3 class="showcase-card-title">аксессуары</h3>
-						<a class="showcase-card-button" href="#">перейти</a>
+						<a class="showcase-card-button" href="catalog.jsp?sortType=PRICE_UP&category=Accessory">перейти</a>
 					</div>
 
 				</div>

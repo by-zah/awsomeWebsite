@@ -359,7 +359,6 @@ a{
 	flex-direction: column;
 	align-items: center;
 	margin: 0 0 40px 0;
-	height: 400px;
 }
 .content-card-title{
 	text-transform: uppercase;
@@ -373,12 +372,11 @@ a{
     justify-content: flex-start;
 	padding: 10px 0;
 	width: 100%;
-	height: 400px;
 }
 .card{
 	margin: 0.83%;
 	width: 23.7%;
-	height: auto;
+	min-height: 300px;
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
     -webkit-transition: background-color 0.3s;
@@ -397,23 +395,19 @@ a{
 .card-image-preview{
 	width: 100%;
 	height: 230px;
-	background-size: 100%;
+	background-size: 50%;
 	background-position: center;
 	background-repeat: no-repeat;
 }
 .card-description{
 	padding: 10px;
 	background-color: #fff;
-	height: 30%;
-	display: flex;
-	flex-direction: column;
+	height: 70px;
 }
 .content-card-link-title{
-	margin-bottom: auto;
 	font-size: 14px;
 }
 .content-card-link-price{
-	align-self: flex-end;
 	text-align: right;
 }
 
@@ -493,4 +487,325 @@ a{
 .link-to-register:hover{
 	color: #D453F4;
 	transition: 0.2s;
+}
+
+
+
+
+/* CATALOG.HTML */
+
+
+
+#content-title{
+	font-size: 25px;
+	letter-spacing: 10px;
+	text-transform: uppercase;
+	text-align: center;
+	margin: 100px 0 0 0;
+	font-weight: normal;
+}
+.sort-buttons-container{
+	display: flex;
+	justify-content: space-between;
+}
+.sort-label{
+	text-transform: uppercase;
+}
+.sort-buttons{
+	display: flex;
+	align-items: center;
+	margin: 120px 0 10px 40px;
+}
+.custom-select{
+	text-transform: uppercase;
+	margin: 0 0 0 10px;
+	border-radius: 3px;
+	font-size: 16px;
+}
+.pages-container{
+	margin: 20px 0 50px 0;
+}
+.pages-holder{
+	display: flex;
+	justify-content: space-around;
+	margin: 0 auto;
+	width: 100%;
+}
+.page{
+	border: 1px solid #000;
+	width: 150px;
+	height: 50px;
+	text-align: center;
+	-webkit-transition: border 0.2s;
+	text-transform: uppercase;
+	border-radius: 5px;
+}
+.page-link{
+	display: block;
+	height: 50px;
+	padding: 13px 0;
+}
+.page:hover{
+	border: 1px solid #EB001C;
+	transition: 0.2s;
+}
+
+.catalog-menu-panel{
+	display: flex;
+	justify-content: space-between;
+}
+.catalog-menu-panel-form{
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0 0 0;
+
+}
+.checkbox-container{
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+.checkbox-container input{
+	width: 25px;
+	height: 25px;
+}
+.checkbox-container p{
+	display: block;
+	width: 100%;
+	margin: 0 0 0 10px;
+}
+.form-checkbox-attributes{
+	text-transform: uppercase;
+	font-size: 14px;
+}
+.checkbox-attributes-button{
+	text-transform: uppercase;
+	font-size: 16px;
+	width: 80px;
+	height: 40px;
+	text-align: center;
+	padding: 6px;
+	margin: 25px 90px 0 90px;
+	border: none;
+	border-radius: 5px;
+	background-color: #DCD0FA;
+	-webkit-transition: background-color 0.3s;
+}
+.checkbox-attributes-button:hover{
+	background-color: #DCA3FA;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.attribute-label{
+	height: 30px;
+}
+
+
+
+
+
+/* PRODUCT PAGE */
+
+
+
+
+.main-product-container{
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0;
+}
+.main-image-container{
+	width: 49%;
+	margin: 0 1% 0 0;
+}
+.main-product-info-container{
+	width: 49%;
+	margin: 0 0 0 1%;
+	padding: 40px;
+}
+.product-main-title{
+	text-transform: uppercase;
+	font-size: 20px;
+	font-weight: normal;
+}
+.product-category{
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #aaa;
+	font-size: 12px;
+	margin: 10px 0;
+}
+.product-price{
+	font-size: 26px;
+	margin: 20px 0;
+}
+.small-divider{
+	width: 100%;
+	border-top: 1px solid #ccc;
+	margin: 0 0 20px 0;
+}
+.size-title{
+	font-size: 16px;
+	font-weight: normal;
+	text-transform: uppercase;
+}
+.size-container{
+	display: flex;
+	align-items: flex-start;
+	width: 50%;
+}
+.product-size{
+	width: 30px;
+	height: 30px;
+	border: 1px solid #000;
+	margin: 10px 5px 0 0;
+	text-align: center;
+	-webkit-transition: border 0.3s;
+}
+.product-size a{
+	display: block;
+	width: 30px;
+	height: 30px;
+	padding: 4px 0;
+}
+.product-size:hover{
+	border: 1px solid #EB001C;
+	transition: 0.3s;
+}
+.measure-link{
+	margin: 30px 0;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	width: 200px;
+	text-align: center;
+	text-transform: uppercase;
+	-webkit-transition: border 0.3s;
+}
+.measure-link a{
+	display: block;
+	width: 200px;
+	padding: 3px 0;
+}
+.measure-link:hover{
+	border-right: 1px solid #EB001C;
+	border-left: 1px solid #EB001C;
+	transition: 0.3s;
+}
+.buy-button{
+	width: 200px;
+	text-transform: uppercase;
+	background-color: #DCD0FA;
+	border-radius: 5px;
+	padding: 10px 0;
+	text-align: center;
+	border: none;
+	font-size: 16px;
+	margin: 20px 0;
+	-webkit-transition: background-color 0.3s;
+}
+.buy-button:hover{
+	background-color: #DCA3FA;
+	cursor: pointer;
+	transition: 0.3s;
+}
+.product-description-container{
+	padding: 30px;
+}
+.description-title{
+	text-transform: uppercase;
+	text-align: center;
+}
+.product-description{
+	margin: 30px 0;
+}
+
+
+/*
+.popup-wrapper-background{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.3);
+}
+*/
+.b-popup{
+    width:100%;
+    min-height:100%;
+    overflow:hidden;
+    position:fixed;
+    top: 20%;
+    left: 0;
+}
+.b-popup .b-popup-content{
+    margin: 0 auto;
+    width: 40%;
+    height: 450px;
+    padding:10px;
+    background-color: #fff;
+    font-size: 16px;
+    box-shadow: 0px 5px 10px #000;
+}
+.b-popup-content h2{
+	text-align: center;
+	padding: 0 0 0 15px;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.close-container{
+	width: 100%;
+	text-align: right;
+}
+.close{
+	margin: 20px 20px;
+}
+.popup-container{
+	display: flex;
+	justify-content: space-between;
+}
+.measurement-info{
+	margin: 20px;
+}
+.measurement-preview-image{
+	width: 300px;
+}
+
+.tg{
+	border-collapse: collapse;
+	border-spacing: 0;
+	text-transform: uppercase;
+	margin: 30px;
+}
+.tg td{
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-size: 14px;
+  	overflow: hidden;
+  	padding: 5px 10px;
+  	word-break: normal;
+}
+.tg th{
+	border-color: black;
+	border-style: solid;
+	border-width: 1px;
+	font-size: 14px;
+  	font-weight: normal;
+  	overflow: hidden;
+  	padding: 10px 5px;
+  	word-break: normal;
+}
+.tg th{
+	border: none;
+}
+.tg .tg-baqh{
+	text-align: center;
+	vertical-align: top;
+}
+
+.tg .tg-nrix{
+	text-align: center;
+	vertical-align: middle;
+	border: none;
 }

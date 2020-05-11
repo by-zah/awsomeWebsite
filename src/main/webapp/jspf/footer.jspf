@@ -6,10 +6,10 @@
             <h5 class="footer-title">каталог</h5>
             <ul class="nav-links">
                 <li class="nav-item"><a class="nav-link" href="index.jsp">главная</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">футболки</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">игрушки</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">фигурки</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">аксессуары</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalog.jsp?sortType=PRICE_UP&category=Tshirt">футболки</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalog.jsp?sortType=PRICE_UP&category=Toy">игрушки</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalog.jsp?sortType=PRICE_UP&category=Figure">фигурки</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalog.jsp?sortType=PRICE_UP&category=Accessory">аксессуары</a></li>
             </ul>
         </div>
         <div class="social-box">

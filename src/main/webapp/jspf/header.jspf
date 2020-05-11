@@ -5,10 +5,10 @@
         <a class="logo-link" href="index.jsp"><img class="logo" src="img/logo.png"></a>
         <ul class="menu">
             <li class="menu-item"><a href="index.jsp">главная</a></li>
-            <li class="menu-item"><a href="products-tshirts.html">футболки</a></li>
-            <li class="menu-item"><a href="#">фигурки</a></li>
-            <li class="menu-item"><a href="#">игрушки</a></li>
-            <li class="menu-item"><a href="#">аксессуары</a></li>
+            <li class="menu-item"><a href="catalog.jsp?sortType=PRICE_UP&category=Tshirt">футболки</a></li>
+            <li class="menu-item"><a href="catalog.jsp?sortType=PRICE_UP&category=Figure">фигурки</a></li>
+            <li class="menu-item"><a href="catalog.jsp?sortType=PRICE_UP&category=Toy">игрушки</a></li>
+            <li class="menu-item"><a href="catalog.jsp?sortType=PRICE_UP&category=Accessory">аксессуары</a></li>
         </ul>
         <div class="icons">
             <div class="phone-box">
