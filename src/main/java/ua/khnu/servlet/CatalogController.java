@@ -42,6 +42,7 @@ public class CatalogController extends HttpServlet {
                     .build();
             rootBuilder.add(jsonProd);
         }
+
         JsonArray rootJson = rootBuilder.build();
         resp.setContentType("application/json");
         logger.info(rootJson);
