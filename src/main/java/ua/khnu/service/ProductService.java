@@ -67,7 +67,18 @@ public class ProductService {
         return repository.query(query, params);
     }
 
-    private static final String GET_PRODUCT_BY_ID = "SELECT * FROM products WHERE id=?";
+    private static final String GET_PRODUCT_BY_ID = "SELECT products_attributes.id as id,\n" +
+            "       c.title                as category,\n" +
+            "       p.title                as title,\n" +
+            "       c.description,\n" +
+            "       color,\n" +
+            "       size,\n" +
+            "       price,\n" +
+            "       photo\n" +
+            "FROM products_attributes\n" +
+            "         JOIN products p on products_attributes.productID = p.id\n" +
+            "         JOIN categories c on p.categoryID = c.id" +
+            " WHERE products_attributes.id=?";
 
     public Optional<Product> getProductById(int id) {
         return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ID, id));
