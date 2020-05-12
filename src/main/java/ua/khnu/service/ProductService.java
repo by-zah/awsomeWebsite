@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.Product;
-import ua.khnu.entity.User;
 import ua.khnu.reposetory.ProductRepository;
 import ua.khnu.util.QueryBuilder;
 
@@ -25,19 +24,17 @@ public class ProductService {
         this.queryBuilder = queryBuilder;
     }
 
-
-    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = "SELECT products_attributes.id AS id,\n" +
-            "       products.title AS title,\n" +
-            "       categories.title AS category,\n" +
-            "       products_attributes.photo AS photo,\n" +
-            "       products_attributes.price AS price\n" +
-            "FROM products\n" +
-            "         INNER JOIN products_attributes\n" +
-            "                    ON products_attributes.productID = products.id\n" +
-            "         INNER JOIN categories\n" +
-            "                    ON products.categoryID = categories.id\n" +
-            "WHERE categories.title = ?\n" +
-            "GROUP BY products.title\n" +
+    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = "SELECT products_attributes.id,\n" +
+            "       p.title,\n" +
+            "       c.title as category,\n" +
+            "       photo,\n" +
+            "       size,\n" +
+            "       productID " +
+            "FROM products_attributes\n" +
+            "         JOIN products p on products_attributes.productID = p.id\n" +
+            "         JOIN categories c on p.categoryID = c.id\n" +
+            "WHERE c.title = ?\n" +
+            "GROUP BY (p.id)\n" +
             "ORDER BY RAND()\n" +
             "LIMIT ?";
 
@@ -68,18 +65,24 @@ public class ProductService {
     }
 
     private static final String GET_PRODUCT_BY_ID = "SELECT products_attributes.id as id,\n" +
-            "       c.title                as category,\n" +
-            "       p.title                as title,\n" +
-            "       c.description,\n" +
+            "       c.title as category,\n" +
+            "       p.title,\n" +
+            "       p.description,\n" +
             "       color,\n" +
             "       size,\n" +
             "       price,\n" +
             "       photo\n" +
+            "       productID " +
             "FROM products_attributes\n" +
             "         JOIN products p on products_attributes.productID = p.id\n" +
             "         JOIN categories c on p.categoryID = c.id" +
             " WHERE products_attributes.id=?";
 
+    /**
+     *
+     * @param id product_attribute id
+     * @return optional of Product
+     */
     public Optional<Product> getProductById(int id) {
         return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ID, id));
     }

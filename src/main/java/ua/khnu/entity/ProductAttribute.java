@@ -47,4 +47,15 @@ public class ProductAttribute {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
+    @Override
+    public String toString() {
+        return "ProductAttribute{" +
+                "id='" + id + '\'' +
+                ", color='" + color + '\'' +
+                ", size='" + size + '\'' +
+                ", price=" + price +
+                ", photo='" + photo + '\'' +
+                '}';
+    }
 }

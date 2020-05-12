@@ -1,6 +1,7 @@
 package ua.khnu.entity;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
@@ -9,6 +10,14 @@ public class Product {
     private String description;
     private String category;
     private List<ProductAttribute> productAttributes;
+
+    public Product() {
+        productAttributes = new ArrayList<>();
+    }
+
+    public void addProductAttribute(ProductAttribute productAttribute) {
+        productAttributes.add(productAttribute);
+    }
 
     public int getId() {
         return id;
@@ -48,5 +57,16 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                ", productAttributes=" + productAttributes +
+                '}';
     }
 }

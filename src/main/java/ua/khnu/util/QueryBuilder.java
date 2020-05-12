@@ -14,10 +14,11 @@ public class QueryBuilder {
     private static final String CAN_NOT_BUILD_QUERY = "can not build query";
     private static final String WHERE = "WHERE";
     private static final String SPACE = " ";
-    private static final String GET_PRODUCTS_BY_PARAMS_BODY = "SELECT products_attributes.id as id,\n" +
-            "       p.title as title,\n" +
+    private static final String GET_PRODUCTS_BY_PARAMS_BODY = "SELECT products_attributes.id,\n" +
+            "       p.title,\n" +
             "       price,\n" +
-            "       photo\n" +
+            "       photo,\n" +
+            "       productID " +
             "FROM products_attributes\n" +
             "         JOIN products p on products_attributes.productID = p.id\n" +
             "         JOIN categories c on p.categoryID = c.id";
@@ -59,7 +60,6 @@ public class QueryBuilder {
         if (!isWhereAdded) {
             query.append(SPACE);
         }
-        query.append("GROUP BY (p.id)").append(SPACE);
         query.append(sortTypes.get(crp.getSortType())).append(SPACE);
         query.append("LIMIT ?,?");
         return query.toString();
