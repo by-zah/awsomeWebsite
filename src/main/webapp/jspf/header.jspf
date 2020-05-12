@@ -19,7 +19,14 @@
                     <a class="phone-number" href="tel:+380xxxxxxxxx">+380xxxxxxxxx</a>
                 </div>
             </div>
-            <a class="login-button" href="login.jsp">войти</a>
+<c:choose>
+    <c:when test="${empty currentUser}">
+        <a class="login-button" href="login.jsp">войти</a>
+    </c:when>
+    <c:otherwise>
+        <a class="login-button" href="#">Моя страница</a>
+    </c:otherwise>
+</c:choose>
             <a href="cart.jsp"><img class="icon-img" src="img/cart.png"></a>
         </div>
     </div>

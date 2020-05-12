@@ -15,12 +15,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @WebServlet("/catalog")
 public class CatalogController extends HttpServlet {
+    private static final Map<String, String> category = new HashMap<>();
+
+    static {
+        category.put("Tshirt", "Одежда");
+        category.put("Figure", "Фигурки");
+        category.put("Toy", "Игрушки");
+        category.put("Accessory", "Аксессуары");
+    }
+
     private static final int NUM_ON_PAGE = 8;
     private static final Logger logger = Logger.getLogger(CatalogController.class);
     private ProductService productService;
@@ -35,6 +42,7 @@ public class CatalogController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products = productService.getProductsByParams(setCatalogRequestParams(req));
         JsonArrayBuilder rootBuilder = Json.createArrayBuilder();
+        logger.info("From bd" + products);
         for (Product product : products) {
             JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
             JsonObject jsonProd = prodBuilder.add("id", product.getId())
@@ -42,12 +50,14 @@ public class CatalogController extends HttpServlet {
                     .add("title", product.getTitle())
                     .add("price", product.getPrice())
                     .build();
+            logger.info("Prod" + jsonProd);
             rootBuilder.add(jsonProd);
         }
 
         JsonArray rootJson = rootBuilder.build();
         resp.setContentType("application/json");
         logger.info(rootJson);
+        req.setAttribute("userRequestParameter", setCatalogRequestParams(req));
         resp.getWriter().print(rootJson);
         resp.getWriter().flush();
         resp.getWriter().close();
@@ -55,9 +65,10 @@ public class CatalogController extends HttpServlet {
 
     private CatalogRequestParams setCatalogRequestParams(HttpServletRequest request) {
         CatalogRequestParams crp = new CatalogRequestParams();
+        logger.info("request: " + request.getParameterMap().toString());
         crp.setSortType(SortType.valueOf(request.getParameter("sortType")));
         if (Objects.nonNull(request.getParameter("category"))) {
-            crp.setCategory(Collections.singletonList(request.getParameter("category")));
+            crp.setCategory(Collections.singletonList(category.get(request.getParameter("category"))));
         }
         if (Objects.nonNull(request.getParameter("size"))) {
             crp.setSize(Collections.singletonList(request.getParameter("size")));
