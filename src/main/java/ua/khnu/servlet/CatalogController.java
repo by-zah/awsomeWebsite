@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.Product;
+import ua.khnu.entity.ProductAttribute;
 import ua.khnu.entity.SortType;
 import ua.khnu.listener.ConfigListener;
 import ua.khnu.service.ProductService;
@@ -45,10 +46,26 @@ public class CatalogController extends HttpServlet {
         logger.info("From bd" + products);
         for (Product product : products) {
             JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
+            JsonArrayBuilder arrayBuilderColor = Json.createArrayBuilder();
+            double min = -1;
+            double max = Double.MAX_VALUE;
+            for (ProductAttribute pr : product.getProductAttributes()) {
+                arrayBuilderColor.add(pr.getColor());
+                max = Double.max(max, pr.getPrice());
+                min = Double.min(min, pr.getPrice());
+            }
+            String price;
+            if (min == max) {
+                price = String.valueOf(max);
+            } else {
+                price = min + "-" + max;
+            }
+            JsonArray colors = arrayBuilderColor.build();
             JsonObject jsonProd = prodBuilder.add("id", product.getId())
-                    .add("image", product.getPhoto())
+                    .add("image", product.getProductAttributes().get(0).getPhoto())
                     .add("title", product.getTitle())
-                    .add("price", product.getPrice())
+                    .add("price", price)
+                    .add("colors", colors)
                     .build();
             logger.info("Prod" + jsonProd);
             rootBuilder.add(jsonProd);
