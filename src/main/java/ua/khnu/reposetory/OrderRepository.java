@@ -25,6 +25,7 @@ public class OrderRepository extends AbstractRepository<Order> {
     @Autowired
     public OrderRepository(JdbcTemplate jdbcAccessor, DataSource ds) {
         super(jdbcAccessor);
+        initColumnNames();
         simpleJdbcInsertShippingAddress = new SimpleJdbcInsert(ds)
                 .withTableName("shipping_addresses")
                 .usingGeneratedKeyColumns(DBConstant.ID)
@@ -33,7 +34,6 @@ public class OrderRepository extends AbstractRepository<Order> {
                 .withTableName("active_orders")
                 .usingGeneratedKeyColumns(DBConstant.ID)
                 .usingColumns(orderColumnNames);
-        initColumnNames();
     }
 
     @Transactional
