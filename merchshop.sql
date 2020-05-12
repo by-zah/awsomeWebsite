@@ -74,7 +74,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `categoryID` (`categoryID`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `categories` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products` */
 
@@ -86,17 +86,21 @@ insert  into `products`(`id`,`title`,`categoryID`,`description`) values
 (5,'THOR SOUND EFFECTS HAMMER',2,'Make their super hero action come alive with this Thor Hammer! Press the button for phrases, sounds, and vibration effects. Spin Thor\'s mighty Mjolnir by the loop at the bottom of the handle to hear spinning sound effects'),
 (6,'LIQUID X MARVEL LOGO TEE',1,'Rep the LIQUID x MARVEL collaboration with this clean logo tee featuring the official horse head red brick lock-up: the insignia of LIQUID x MARVEL. Crisp fusion printed design keeps the design clean, crack-free and durable all on a weighted comfortable c'),
 (7,'TEAM LIQUID GEOS TEE',1,'Our 2020 take on a classic Liquid look. Add this quality tee to your collection today.'),
-(8,'Funko Pop Чубакка серии \"Звёздные войны\"',3,''),
+(8,'ФИГУРКА FUNKO POP! EREDIN - THE WITCHER',3,'Виниловая игровая фигурка EREDIN станет замечательным подарком для любителей компьютерной игры The Witcher 3 Wild Hunt'),
 (9,'MARVEL COMICS DUFFLE BAG',4,'Our mighty Marvel Comics duffle bag packs a punch at the gym or anywhere your adventures lead you. Reinforced straps and colorful comic book cover lining make it a super carry-all for roving avengers'),
-(10,'ФИГУРКА FUNKO POP! GERALT - THE WITCHER',3,''),
-(11,'ФИГУРКА FUNKO POP! GROOT - GUARDIANS OF THE GALAXY 2',3,''),
-(12,'ФИГУРКА FUNKO POP! HANZO - OVERWATCH SERIES 4',3,''),
-(13,'ФИГУРКА FUNKO POP! HARLEY QUINN - DC',3,''),
-(14,'КЕПКА ЭЛИТНАЯ СТРАЖА',4,''),
-(15,'РЮКЗАК ДОТА 2',4,''),
-(16,'РЮКЗАК OVERWATCH',4,''),
+(10,'ФИГУРКА FUNKO POP! GERALT - THE WITCHER',3,'Виниловая игровая фигурка GERALT OF RIVIA станет замечательным подарком для любителей компьютерной игры The Witcher 3 Wild Hunt'),
+(11,'ФИГУРКА FUNKO POP! GROOT - GUARDIANS OF THE GALAXY 2',3,'Виниловая игровая фигурка GROOT станет замечательным подарком для любителей комиксов Marvel'),
+(12,'ФИГУРКА FUNKO POP! HANZO - OVERWATCH SERIES 4',3,'Виниловая игровая фигурка HANZO станет замечательным подарком для любителей игры Overwatch'),
+(13,'ФИГУРКА FUNKO POP! HARLEY QUINN - DC',3,'Виниловая игровая фигурка HARLEY QUINN станет замечательным подарком для любителей комиксов DC'),
+(14,'КЕПКА ЭЛИТНАЯ СТРАЖА',4,'С такой кепкой ты всегда сможешь пояснить за шмот'),
+(15,'РЮКЗАК ДОТА 2',4,'Покажи всем окружающим, что ты никогда не проигрываешь, а иногда и выигрываешь центральную линию'),
+(16,'РЮКЗАК OVERWATCH',4,'Покажи всем окружающим, что ты фанат игры Overwatch от Blizzard и по совместительству говноед'),
 (17,'PIDERJET VS. VENOM MECH PLAYSET BY LEGO',2,'With this Spiderjet vs. Venom Mech Playset by LEGO, Spider-Man is in danger! Venom, the evil alien, is at the controls of a deadly, gigantic, four-armed mech – and he\'s caught Spider-Man in its mechanical claws!'),
-(18,'PIDER-MAN 6V TODDLER QUAD RIDE-ON TOY',2,'Your little webhead will enjoy hours of heroic fun on this 6-Volt Spider-Man Toddler Quad toy. Molded plastic webbing adds powerful style to the front of this rechargeable ride with easy push-button drive system and a maximum speed of 2 MPH');
+(18,'PIDER-MAN 6V TODDLER QUAD RIDE-ON TOY',2,'Your little webhead will enjoy hours of heroic fun on this 6-Volt Spider-Man Toddler Quad toy. Molded plastic webbing adds powerful style to the front of this rechargeable ride with easy push-button drive system and a maximum speed of 2 MPH'),
+(19,'ФИГУРКА FUNKO POP! HAGRID WITH CAKE - HARRY POTTER',3,'Виниловая игровая фигурка Hagrid станет замечательным подарком для любителей серии HARRY POTTER'),
+(20,'ФИГУРКА FUNKO POP! GRUNKLE STAN - GRAVITY FALLS',3,'Виниловая игровая фигурка GRUNKLE STAN станет замечательным подарком для любителей серии GRAVITY FALLS'),
+(21,'ФИГУРКА FUNKO POP! GREEN GOBLIN - SPIDER-MAN: INTO THE SPIDER-VERSE - MARVEL',3,'Виниловая игровая фигурка GREEN GOBLIN станет замечательным подарком для любителей комиксов MARVEL'),
+(22,'ФИГУРКА FUNKO POP! GLADIATOR HULK - THOR RAGNAROK',3,'Виниловая игровая фигурка GLADIATOR HULK станет замечательным подарком для любителей комиксов MARVEL');
 
 /*Table structure for table `products_attributes` */
 
@@ -112,30 +116,27 @@ CREATE TABLE `products_attributes` (
   PRIMARY KEY (`id`),
   KEY `productID` (`productID`),
   CONSTRAINT `products_attributes_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 /*Data for the table `products_attributes` */
 
 insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`photo`) values 
 (1,1,'-','-',900,'images/1_talkingspiderman.jpg'),
-(2,2,'RED','S',850,'images/2_deadpoolTshirt.jpg'),
-(3,2,'RED','XXL',850,'images/2_deadpoolTshirt.jpg'),
-(4,2,'RED','3XL',880,'images/2_deadpoolTshirt.jpg'),
-(5,3,'BLACK','M',900,'images/3_loveyou3000.jpg'),
-(6,3,'BLACK','L',900,'images/3_loveyou3000.jpg'),
-(7,3,'BLACK','XL',900,'images/3_loveyou3000.jpg'),
-(8,4,'BLACK','M',1200,'images/4_10thAnniversary.jpg'),
-(9,4,'BLACK','L',1200,'images/4_10thAnniversary.jpg'),
-(10,4,'BLACK','XXL',1250,'images/4_10thAnniversary.jpg'),
-(11,5,'-','-',1000,'images/5_thorHammer.jpg'),
-(12,6,'DARK RED','XL',1200,'images/6_tlxmarvel.jpg'),
-(13,6,'BLUE','L',1100,'images/6_tlxmarvel.jpg'),
-(14,6,'BLUE','XL',1100,'images/6_tlxmarvel.jpg'),
-(15,7,'WHITE','L',1500,'images/7_tlwhite.jpg'),
-(16,7,'WHITE','XL',1500,'images/7_tlwhite.jpg'),
-(17,7,'BLUE','L',1400,'images/7_tlblue.jpg'),
-(18,7,'BLUE','M',1400,'images/7_tlblue.jpg'),
-(19,8,'-','-',400,'images/8_chubaka.jpg'),
+(2,2,'red','S',850,'images/2_tshirt_deadpool.jpg'),
+(3,2,'red','XXL',850,'images/2_tshirt_deadpool.jpg'),
+(4,2,'red','3XL',880,'images/2_tshirt_deadpool.jpg'),
+(5,3,'black','M',900,'images/3_tshirt_loveyou3000.jpg'),
+(6,3,'black','L',900,'images/3_tshirt_loveyou3000.jpg'),
+(7,3,'black','XL',900,'images/3_tshirt_loveyou3000.jpg'),
+(8,4,'black','M',1200,'images/4_tshirt_fan.jpg'),
+(9,4,'black','L',1200,'images/4_tshirt_fan.jpg'),
+(10,4,'black','XXL',1250,'images/4_tshirt_fan.jpg'),
+(11,5,'-','-',1000,'images/5_thorhammer.jpg'),
+(15,7,'white','L',1500,'images/7_tshirt_tlwhite.jpg'),
+(16,7,'white','XL',1500,'images/7_tshirt_tlwhite.jpg'),
+(17,7,'blue','L',1400,'images/7_tshirt_tlblue.jpg'),
+(18,7,'blue','M',1400,'images/7_tshirt_tlblue.jpg'),
+(19,8,'-','-',400,'images/8_eredin.jpg'),
 (20,9,'-','-',2000,'images/9_marvelbag.jpg'),
 (21,10,'-','-',450,'images/10_witcher.jpg'),
 (22,11,'-','-',425,'images/11_groot.jpg'),
@@ -145,7 +146,11 @@ insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`phot
 (26,15,'-','-',499,'images/15_dota2bag.jpg'),
 (27,16,'-','-',1000,'images/16_owbag.jpg'),
 (28,17,'-','-',1000,'images/17_spidermanlego.jpg'),
-(29,18,'-','-',5000,'images/18_spiderbike.jpg');
+(29,18,'-','-',5000,'images/18_spiderbike.jpg'),
+(30,19,'-','-',749,'images/19_hagrid.jpg'),
+(31,20,'-','-',495,'images/20_grunklestan.jpg'),
+(32,21,'-','-',495,'images/21_greengoblin.jpg'),
+(33,22,'-','-',549,'images/22_hulk.jpg');
 
 /*Table structure for table `products_in` */
 
@@ -175,9 +180,6 @@ insert  into `products_in`(`id`,`productAttributeID`,`amountIN`,`dateIN`) values
 (9,9,2,'2020-05-05 17:13:24'),
 (10,10,3,'2020-05-05 17:13:24'),
 (11,11,10,'2020-05-05 17:13:24'),
-(12,12,4,'2020-05-05 17:13:24'),
-(13,13,3,'2020-05-05 17:13:24'),
-(14,14,2,'2020-05-05 17:13:24'),
 (15,19,7,'2020-05-05 17:13:24'),
 (16,15,3,'2020-05-05 17:13:24'),
 (17,16,1,'2020-05-05 17:13:24'),
