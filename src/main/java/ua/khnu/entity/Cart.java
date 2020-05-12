@@ -37,7 +37,7 @@ public class Cart implements Serializable {
     }
 
     public double getSum() {
-        return cart.entrySet().stream().mapToDouble(e -> (e.getValue() * e.getKey().getPrice().doubleValue())).sum();
+        return cart.entrySet().stream().mapToDouble(e -> (e.getValue() * e.getKey().getProductAttributes().get(0).getPrice())).sum();
 
     }
 

@@ -376,10 +376,10 @@ a{
 .card{
 	margin: 0.83%;
 	width: 23.7%;
-	min-height: 300px;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
-    -webkit-transition: background-color 0.3s;
+	min-height: 350px;
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+	-webkit-transition: background-color 0.3s;
 }
 .card:hover{
 	background-color: rgba(0, 0, 0, 0.03);
@@ -401,14 +401,23 @@ a{
 }
 .card-description{
 	padding: 10px;
-	background-color: #fff;
-	height: 70px;
+	height: 130px;
 }
 .content-card-link-title{
 	font-size: 14px;
 }
 .content-card-link-price{
 	text-align: right;
+}
+.colors-array-container{
+	display: flex;
+	margin: 5px;
+}
+.color-array{
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	margin-right: 5px;
 }
 
 
