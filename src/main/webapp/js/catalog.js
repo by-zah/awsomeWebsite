@@ -31,6 +31,7 @@
 // });
 
 function getAll() {
+    //чистить контент
     let url = new URL('http://localhost:8080/catalog?');
     let params = new URLSearchParams(url.search.slice(1));
     url.searchParams.set('sortType', $('#sortType').val());
@@ -56,7 +57,7 @@ function getAll() {
         url.searchParams.append('priceTo', $("#priceTo").val());
     }
     alert(url);
-    history.pushState(null, null, url);
+    history.pushState(null, null, url);//заменяет урду сверху но не переходит
     getJson();
 }
 
@@ -71,7 +72,7 @@ function getJson() {
             for (i = 0; i < responseJSON.length; i++) {
                 if (isEmpty(responseJSON[i].title) === false) {
                     let html = "<div class='card' id='card" + i + "'>";
-                    html += "<a class='card-link' href='#''>";
+                    html += "<a class='card-link' href='http://localhost:8080/product.jsp?productId=" + responseJSON[i].id + "'/>";
                     html += "<div class='card-image-preview' " +
                         "id='card-image-preview' " +
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
@@ -93,7 +94,6 @@ function getJson() {
 }
 
 $(document).ready(function () {
-    alert("koko");
     let url = window.location.href;
     url = url.replace("catalog.jsp", "catalog");
     alert(url);
