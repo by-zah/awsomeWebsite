@@ -9,9 +9,6 @@ public final class Util {
     }
 
     public static <T> Optional<T> getFirstOptionalFromList(List<T> list) {
-        if (list.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(list.get(0));
+        return list.isEmpty() ? Optional.empty() : Optional.of(list.get(0));
     }
 }
