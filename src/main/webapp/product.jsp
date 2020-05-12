@@ -27,6 +27,7 @@
 					<h4 id="price" class="product-price">2 грн.</h4>
 					<div class="small-divider"></div>
 					<h4 class="size-title">размер</h4>
+					<input type="hidden" id="productId" value="">
 					<div class="size-container">
 						<select id="size" class="custom-select">
 							<option>M</option>
@@ -43,27 +44,28 @@
 					</div>
 					<div class="measure-link"><a href="javascript:PopUpShow()">подбор размера</a></div>
 					<button class="buy-button" id="buy-button" type="button" name="buy">добавить в корзину</button>
+					</input>
+				</div>
+				<div class="product-description-container">
+					<h3 class="description-title">описание</h3>
+					<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
+					<div id="description" class="product-description">
+					</div>
 				</div>
 			</div>
-			<div class="product-description-container">
-				<h3 class="description-title">описание</h3>
-				<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
-				<div id="description" class="product-description">
-				</div>
-			</div>
-		</div>
 
-		<div class="popup-wrapper-background" id="popupback">
-			<div class="b-popup" id="popup">
-				<div class="b-popup-content">
-					<div class="close-container"><a class="close" href="javascript:PopUpHide()">✖</a></div>
-					<h2 class="popup-title">таблица мерок</h2>
-					<div class="popup-container">
-						<div class="measurement-info">
-							Мерки нужно мерять на своей одежде. Положите на пол свою футболку и померяйте замеры как
-							нарисовано на картинке. Если вы все сделаете правильно, ошибиться с размером у вас не будет
-							шанса.
-							<div class="measurement-table">
+			<div class="popup-wrapper-background" id="popupback">
+				<div class="b-popup" id="popup">
+					<div class="b-popup-content">
+						<div class="close-container"><a class="close" href="javascript:PopUpHide()">✖</a></div>
+						<h2 class="popup-title">таблица мерок</h2>
+						<div class="popup-container">
+							<div class="measurement-info">
+								Мерки нужно мерять на своей одежде. Положите на пол свою футболку и померяйте замеры как
+								нарисовано на картинке. Если вы все сделаете правильно, ошибиться с размером у вас не
+								будет
+								шанса.
+								<div class="measurement-table">
 								<table class="tg">
 									<thead>
 									<tr>

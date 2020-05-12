@@ -65,7 +65,7 @@ public class CatalogController extends HttpServlet {
                     .add("image", product.getProductAttributes().get(0).getPhoto())
                     .add("title", product.getTitle())
                     .add("price", price)
-                    .add("colors", colors)
+                    .add("color", colors)
                     .build();
             logger.info("Prod" + jsonProd);
             rootBuilder.add(jsonProd);

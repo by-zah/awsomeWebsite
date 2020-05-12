@@ -55,7 +55,7 @@ public class MainPageProductController extends HttpServlet {
                 JsonObject jsonProd = prodBuilder.add("id", product.getId())
                         .add("image", product.getProductAttributes().get(0).getPhoto())
                         .add("title", product.getTitle())
-                        .add("colors", colors)
+                        .add("color", colors)
                         .add("price", price)
                         .build();
                 arrayBuilder.add(jsonProd);
