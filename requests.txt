@@ -55,5 +55,6 @@ WHERE price >= ?
   AND (color = ? OR color = ?)
   AND (c.title = ? OR c.title = ?)
   AND (size = ? OR size = ?)
+GROUP BY (p.id)
 ORDER BY title DESC
 LIMIT ?,?

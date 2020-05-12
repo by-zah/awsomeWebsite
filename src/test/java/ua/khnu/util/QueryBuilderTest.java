@@ -31,6 +31,7 @@ public class QueryBuilderTest {
     private static final String SIZE_PART = "(size=? OR size=?)";
     private static final String COLOR_PART = "(color=? OR color=?)";
     private static final String WHERE = " WHERE ";
+    private static final String GROUP_BY = " GROUP BY (p.id)";
     private static QueryBuilder queryBuilder;
     private CatalogRequestParams crp;
 
@@ -71,6 +72,7 @@ public class QueryBuilderTest {
                 AND + COLOR_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -83,6 +85,7 @@ public class QueryBuilderTest {
     @Test
     public void shouldReturnQueryWithJustBodyOrderAndLimit() {
         String expected = QUERY_BODY +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
 
@@ -99,6 +102,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + COLOR_PART +
                 AND + CATEGORY_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -118,6 +122,7 @@ public class QueryBuilderTest {
                 COLOR_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -136,6 +141,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -154,6 +160,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + COLOR_PART +
                 AND + SIZE_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -170,6 +177,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithPricePart() {
         String expected = QUERY_BODY +
                 WHERE + PRICE_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         crp.setPriceFrom(0.);
@@ -186,6 +194,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithPriceFrom() {
         String expected = QUERY_BODY +
                 WHERE + PRICE_FROM +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         crp.setPriceFrom(0.);
@@ -201,6 +210,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithCategories() {
         String expected = QUERY_BODY +
                 WHERE + CATEGORY_PART +
+                GROUP_BY +
                 ORDER_BY_PART +
                 LIMIT_PART;
         List<String> categories = new ArrayList<>();

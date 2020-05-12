@@ -59,6 +59,7 @@ public class QueryBuilder {
         if (!isWhereAdded) {
             query.append(SPACE);
         }
+        query.append("GROUP BY (p.id)").append(SPACE);
         query.append(sortTypes.get(crp.getSortType())).append(SPACE);
         query.append("LIMIT ?,?");
         return query.toString();
