@@ -31,7 +31,11 @@
 // });
 
 function getAll() {
-    //чистить контент
+    var contentCard = document.getElementById('content-card-holder-box0');
+    if(contentCard.innerHTML != ""){
+        contentCard.innerHTML = "";
+    }
+
     let url = new URL('http://localhost:8080/catalog?');
     let params = new URLSearchParams(url.search.slice(1));
     url.searchParams.set('sortType', $('#sortType').val());
@@ -78,6 +82,13 @@ function getJson() {
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
                     html += "<div class='card-description'>";
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
+                    if(responseJSON[i].category == "Tshirt"){
+                        html += "<div class='colors-array-container'>";
+                        for(let j = 0; j < responseJSON[i].color.length; j++ ){
+                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:"+ responseJSON[i].color[j] + "'></div>";
+                        }
+                        html += "</div>";
+                    }
                     html += "<h3 class='content-card-link-price' id='card-price'>" + responseJSON[i].price + "</h3>";
                     html += "</div></a></div>";
                     document.getElementById('content-card-holder-box0').innerHTML += html;
