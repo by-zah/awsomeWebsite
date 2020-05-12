@@ -57,7 +57,7 @@ public class CartController extends HttpServlet {
         resp.setContentType("application/json");
         resp.getWriter().write("{\n" +
                 "\"dataCount\":" + cart.getAmount() + "," +
-                "\"sum\":" + ((amount - 1) * product.getPrice()) + "," +
+             //   "\"sum\":" + ((amount - 1) * product.getPrice()) + "," +
                 "\"total\":" + cart.getSum() + "," +
                 "\"id\":" + product.getId() + "," +
                 "}");
