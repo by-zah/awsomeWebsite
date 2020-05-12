@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.khnu.entity.Order;
+import ua.khnu.entity.ProductAttribute;
 import ua.khnu.entity.ShippingAddress;
 import ua.khnu.util.DBConstant;
 
@@ -42,11 +43,13 @@ public class OrderRepository extends AbstractRepository<Order> {
         shippingAddress.setId(simpleJdbcInsertShippingAddress.
                 executeAndReturnKey(extractParams(shippingAddress)).intValue());
         int orderId = simpleJdbcInsertOrder.executeAndReturnKey(extractParams(order)).intValue();
-        order.getProductAndAmount().forEach((product, amount) ->
-                jdbcAccessor.update(ADD_PRODUCT_TO_ORDER,
-                        orderId, product.getId()
-                        , amount, product.getPrice()));
-        jdbcAccessor.update(ADD_ORDER_STATUS, orderId, "заказан");
+        order.getProductAndAmount().forEach((product, amount) -> {
+                    ProductAttribute pa = product.getProductAttributes().get(0);
+                    jdbcAccessor.update(ADD_PRODUCT_TO_ORDER,
+                            orderId, pa.getId()
+                            , amount, pa.getPrice());
+                });
+                jdbcAccessor.update(ADD_ORDER_STATUS, orderId, "заказан");
     }
 
     private Map<String, Object> extractParams(ShippingAddress sa) {
