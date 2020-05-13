@@ -131,7 +131,7 @@ insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`phot
 (8,4,'black','M',1200,'images/4_tshirt_fan.jpg'),
 (9,4,'black','L',1200,'images/4_tshirt_fan.jpg'),
 (10,4,'black','XXL',1250,'images/4_tshirt_fan.jpg'),
-(11,5,NULL,'-',1000,'images/5_thorhammer.jpg'),
+(11,5,NULL,NULL,1000,'images/5_thorhammer.jpg'),
 (15,7,'white','L',1500,'images/7_tshirt_tlwhite.jpg'),
 (16,7,'white','XL',1500,'images/7_tshirt_tlwhite.jpg'),
 (17,7,'blue','L',1400,'images/7_tshirt_tlblue.jpg'),
@@ -321,7 +321,7 @@ DROP TABLE IF EXISTS `products_in_stock`;
 /*!50001 DROP TABLE IF EXISTS `products_in_stock` */;
 /*!50001 DROP VIEW IF EXISTS `products_in_stock` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_in_stock` AS (select `products_attributes`.`id` AS `id`,sum(`products_in`.`amountIN`) AS `in_stock` from (`products_attributes` join `products_in` on(`products_attributes`.`id` = `products_in`.`productAttributeID`)) group by `products_attributes`.`id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_in_stock` AS (select `products_attributes`.`id` AS `id`,ifnull(sum(`products_in`.`amountIN`),0) AS `in_stock` from (`products_attributes` left join `products_in` on(`products_attributes`.`id` = `products_in`.`productAttributeID`)) group by `products_attributes`.`id`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

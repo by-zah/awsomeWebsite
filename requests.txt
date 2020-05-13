@@ -1,43 +1,46 @@
 /example -> {name:example}
 
-#MAIN PAGE PRODUCTS
+#GET PRODUCTS (FOR CATALOG AND MAIN PAGE)
 /*SELECT products_attributes.id AS id,
 products.title AS title,
 categories.title AS category,
-products_attributes.photo AS photo,
+GROUP_CONCAT(products_attributes.photo SEPARATOR ';') AS photo,
 GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,
 GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,
-GROUP_CONCAT(products_attributes.size SEPARATOR ';') AS size
+GROUP_CONCAT(products_attributes.size SEPARATOR ';') AS size,
+MIN(products_attributes.price) AS min_price
 FROM products
 INNER JOIN products_attributes
 ON products_attributes.productID = products.id
 INNER JOIN categories 
 ON products.categoryID = categories.id
 WHERE categories.title = "Одежда"
-#WHERE categories.title = "category name"
 GROUP BY products_attributes.productID
+ORDER BY min_price
 ORDER BY RAND()
 LIMIT 4*/
 
+
 #VIEW_producuts_in_stock
 SELECT
-  `products_attributes`.`id` AS `id`,
-  SUM(`products_in`.`amountIN`) AS `in_stock`
-FROM (`products_attributes`
-   JOIN `products_in`
-     ON (`products_attributes`.`id` = `products_in`.`productAttributeID`))
-GROUP BY `products_attributes`.`id`)$$
+products_attributes.id AS id,
+IFNULL(SUM(products_in.amountIN),0) AS in_stock
+FROM (products_attributes
+LEFT JOIN products_in
+     ON (products_attributes.id = products_in.productAttributeID))
+GROUP BY products_attributes.id)
+
 
 #IN STOCK
-/*select products_in_stock.id,
+SELECT products_in_stock.id AS id,
 products_in_stock.in_stock,
-ifnull(sum(products_out.amountOUT),0) as sold,
-(products_in_stock.in_stock-IFNULL(SUM(products_out.amountOUT),0)) as current_in_stock
-from products_in_stock
-left join products_out
-on products_in_stock.id = products_out.productAttributeID
+IFNULL(products_out.amountOUT,0) AS sold,
+products_in_stock.in_stock - IFNULL(SUM(products_out.amountOUT),0) AS current_in_stock
+FROM products_in_stock
+LEFT JOIN products_out
+ON products_in_stock.id = products_out.productAttributeID
 WHERE products_in_stock.id = "YOUR ID"
-group by products_in_stock.id*/
+GROUP BY id
 
 
 #GET PRODUCTS BY CATEGORY
