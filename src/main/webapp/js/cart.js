@@ -1,9 +1,9 @@
 $(document).ready(function () {
     $("tr td input").mouseleave(
         function () {
-            var dataId = $(this).attr("productId");
+            alert($(this).attr("productId"));
             $.get('cart', {
-                shoesId: $(this).attr("productId"),
+                productId: $(this).attr("productId"),
                 amount: $(this).val()
             }, function (responseJSON) {
                 var sum = '#sum' + dataId;
