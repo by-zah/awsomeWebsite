@@ -404,6 +404,7 @@ a{
 .card-description{
 	padding: 10px;
 	height: 130px;
+	position: relative;
 }
 .content-card-link-title{
 	font-size: 14px;
@@ -411,10 +412,17 @@ a{
 .content-card-link-price{
 	font-size: 18px;
 	text-align: right;
+	position: absolute;
+	margin: 0 10px 10px 0;
+	bottom: 0;
+	right: 0;
 }
 .colors-array-container{
 	display: flex;
-	margin: 5px;
+	margin: 5px 5px 5px 10px;
+	position: absolute;
+	bottom: 30px;
+	left: 0;
 }
 .color-array{
 	width: 20px;
