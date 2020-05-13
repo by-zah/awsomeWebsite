@@ -1,5 +1,7 @@
 package ua.khnu.entity;
 
+import org.apache.commons.math3.util.Precision;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,10 @@ public class Cart implements Serializable {
     public double getSum() {
         return cart.entrySet().stream().mapToDouble(e -> (e.getValue() * e.getKey().getProductAttributes().get(0).getPrice())).sum();
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Precision.round(4.28432124567890954, 2));
     }
 
     public void putAll(Cart cartBeforeLogIn) {
