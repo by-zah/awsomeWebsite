@@ -1,29 +1,58 @@
-let isEmpty = function (variable) {
-    return variable === undefined || variable === null || variable === '' || variable.length === 0;
+function getJsonMini(url) {
+    $.get(url,
+        function (responseJSON) {
+
+            $("#idUnic").attr("value", responseJSON.idUnic);
+            $("#price").text(responseJSON.price);
+            $("#image").attr("src", responseJSON.image);
+            $("#available").text(responseJSON.amountAvail);
+            console.log("lybyf  " + responseJSON.colors.length);
+        });
 }
 
-function getJson() {
-    $.get(window.location.href,
+function getJson(url) {
+
+    $.get(url,
         function (responseJSON) {
-            alert(responseJSON);
+
             $("#title").text(responseJSON.title);
+            $("#productId").attr("value", responseJSON.idProd);
+            $("#idUnic").attr("value", responseJSON.idUnic);
             $("#category").text(responseJSON.category);
             $("#price").text(responseJSON.price);
             $("#description").text(responseJSON.description);
             $("#image").attr("src", responseJSON.image);
+            $("#available").text(responseJSON.amountAvail);
+            for (let i = 0; i < responseJSON.colors.length; i++) {
+                let option = new Option(responseJSON.colors[i]);
+                if (responseJSON.colorSelect === option) {
+                    option.selected = true;
+                }
+                $(option).appendTo('#color');
+            }
+            for (let i = 0; i < responseJSON.sizes.length; i++) {
+                let option = new Option(responseJSON.sizes[i]);
+                if (responseJSON.sizeSelect === option.value) {
+                    option.selected = true;
+                }
+                $(option).appendTo('#size');
+            }
+            console.log(responseJSON.colors[0]);
+            if (responseJSON.colors[0] === "null") {
+                $("#color").remove();
+                $("#size").remove();
+                $(".measure-link").remove();
+                $(".size-title").remove();
+            }
         });
-    let url = window.location.href;
-    url = url.replace("product", "product.jsp");
-    history.pushState(null, null, url);
+
 
 }
 
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("product.jsp", "product");
-    alert(url);
-    history.pushState(null, null, url);
-    getJson();
+    getJson(url);
     $("#size").change(
         function () {
 
@@ -50,9 +79,8 @@ function getAll() {
         url.searchParams.append('size', $(this).val());
     });
     url.searchParams.append('productId', $("#productId").val());
-    alert(url);
-    history.pushState(null, null, url);//заменяет урду сверху но не переходит
-    getJson();
+
+    getJsonMini(url);
 }
 
 let isEmpty = function (variable) {

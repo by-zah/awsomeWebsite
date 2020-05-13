@@ -28,20 +28,17 @@
 					<div class="small-divider"></div>
 					<h4 class="size-title">размер</h4>
 					<input type="hidden" id="productId" value="">
+					<input type="hidden" id="idUnic" value="">
 					<div class="size-container">
 						<select id="size" class="custom-select">
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-							<option>XXL</option>
 						</select>
 					</div>
 					<h4 class="size-title">цвет</h4>
 					<div class="size-container">
 						<select id="color" class="custom-select">
-							<option>Red</option>
 						</select>
 					</div>
+					<h5 id="available">цвет</h5>
 					<div class="measure-link"><a href="javascript:PopUpShow()">подбор размера</a></div>
 					<button class="buy-button" id="buy-button" type="button" name="buy">добавить в корзину</button>
 					</input>

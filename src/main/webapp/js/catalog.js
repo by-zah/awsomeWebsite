@@ -82,10 +82,10 @@ function getJson() {
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
                     html += "<div class='card-description'>";
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
-                    if(responseJSON[i].category == "Tshirt"){
+                    if (responseJSON[i].category === "Одежда") {
                         html += "<div class='colors-array-container'>";
-                        for(let j = 0; j < responseJSON[i].color.length; j++ ){
-                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:"+ responseJSON[i].color[j] + "'></div>";
+                        for (let j = 0; j < responseJSON[i].color.length; j++) {
+                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:" + responseJSON[i].color[j] + "'></div>";
                         }
                         html += "</div>";
                     }
@@ -104,6 +104,7 @@ function getJson() {
 
 }
 
+
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("catalog.jsp", "catalog");
@@ -119,7 +120,6 @@ $(document).ready(function () {
     if (url.includes("Accessory")) {
         $("#Accessory").prop("checked", true);
     }
-    alert(url);
     history.pushState(null, null, url);
     getJson();
 });
