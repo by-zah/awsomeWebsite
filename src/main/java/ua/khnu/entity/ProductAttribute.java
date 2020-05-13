@@ -1,17 +1,17 @@
 package ua.khnu.entity;
 
 public class ProductAttribute {
-    private String id;
+    private Integer id;
     private String color;
     private String size;
     private Double price;
     private String photo;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

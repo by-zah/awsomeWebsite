@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import ua.khnu.entity.CatalogRequestParams;
 import ua.khnu.entity.SortType;
 import ua.khnu.exception.QueryBuildException;
+import ua.khnu.service.ProductService;
 
 import java.util.*;
 
@@ -14,14 +15,6 @@ public class QueryBuilder {
     private static final String CAN_NOT_BUILD_QUERY = "can not build query";
     private static final String WHERE = "WHERE";
     private static final String SPACE = " ";
-    private static final String GET_PRODUCTS_BY_PARAMS_BODY = "SELECT products_attributes.id,\n" +
-            "       p.title,\n" +
-            "       price,\n" +
-            "       photo,\n" +
-            "       productID " +
-            "FROM products_attributes\n" +
-            "         JOIN products p on products_attributes.productID = p.id\n" +
-            "         JOIN categories c on p.categoryID = c.id";
     private Map<SortType, String> sortTypes;
 
     public QueryBuilder() {
@@ -42,7 +35,7 @@ public class QueryBuilder {
 
     public String getQueryFromCategoryRequestParams(CatalogRequestParams crp) {
         validateCrp(crp);
-        StringBuilder query = new StringBuilder(GET_PRODUCTS_BY_PARAMS_BODY);
+        StringBuilder query = new StringBuilder(ProductService.QUERY_BODY);
         boolean isWhereAdded = false;
         if (crp.getPriceFrom() != null && crp.getPriceTo() != null) {
             isWhereAdded = addWhere(query, false);
@@ -55,11 +48,12 @@ public class QueryBuilder {
             query.append("price<=?").append(SPACE);
         }
         isWhereAdded = addParamsFromList(crp.getColor(), query, "color", isWhereAdded);
-        isWhereAdded = addParamsFromList(crp.getCategory(), query, "c.title", isWhereAdded);
+        isWhereAdded = addParamsFromList(crp.getCategory(), query, "categories.title", isWhereAdded);
         isWhereAdded = addParamsFromList(crp.getSize(), query, "size", isWhereAdded);
         if (!isWhereAdded) {
             query.append(SPACE);
         }
+        query.append("GROUP BY (products_attributes.productID)").append(SPACE);
         query.append(sortTypes.get(crp.getSortType())).append(SPACE);
         query.append("LIMIT ?,?");
         return query.toString();
