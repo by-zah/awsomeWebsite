@@ -69,15 +69,19 @@ public class ProductService {
         return repository.query(query, params);
     }
 
-    private static final String GET_PRODUCT_BY_ID = QUERY_BODY+
+    private static final String GET_PRODUCT_BY_ATTRIBUTE_ID = QUERY_BODY+
             ", products.description "+ FROM+
             " WHERE products_attributes.id=?";
 
-    /**
-     *
-     * @param id product_attribute id
-     * @return optional of Product
-     */
+    public Optional<Product> GetProductByAttributeId(int id) {
+        return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ATTRIBUTE_ID, id));
+    }
+
+
+    private static final String GET_PRODUCT_BY_ID = QUERY_BODY+
+            ", products.description "+ FROM+
+            " WHERE products.id=?";
+
     public Optional<Product> getProductById(int id) {
         return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ID, id));
     }
