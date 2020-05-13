@@ -107,6 +107,18 @@ function getJson() {
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("catalog.jsp", "catalog");
+    if (url.includes("Tshirt")) {
+        $("#Tshirt").prop("checked", true);
+    }
+    if (url.includes("Toy")) {
+        $("#Toy").prop("checked", true);
+    }
+    if (url.includes("Figure")) {
+        $("#Figure").prop("checked", true);
+    }
+    if (url.includes("Accessory")) {
+        $("#Accessory").prop("checked", true);
+    }
     alert(url);
     history.pushState(null, null, url);
     getJson();

@@ -20,36 +20,40 @@
 <a class="back-to-top-button" id="back-to-top-button" href="#">↑</a>
 <%@ include file="jspf/header.jspf" %>
 
-		<content class="content">
-			<div class="content-container">
-				<h2 id="content-title">каталог</h2>
-				<div class="sort-buttons-container">
-					<div class="catalog-menu-panel">
-						<form class="catalog-menu-panel-form" method="GET" action="catalog">
+<content class="content">
+	<div class="content-container">
+		<h2 id="content-title">каталог</h2>
+		<div class="sort-buttons-container">
+			<div class="catalog-menu-panel">
+				<form class="catalog-menu-panel-form" method="GET" action="catalog">
 
-							<div class="checkbox-full-container">
+					<div class="checkbox-full-container">
 
-								<div class="checkbox-container">
-									<input class="search-checkbox" type='checkbox' name='tshirt' value='Tshirt'><p>одежда</p>
-							    </div>
-							    <div class="checkbox-container">
-							   		<input class="search-checkbox" type='checkbox' name='toy' value='Toy'><p>игрушки</p>
-							    </div>
-							    <div class="checkbox-container">
-							   		<input class="search-checkbox" type='checkbox' name='figure' value='Figure'><p>фигурки</p>
-								</div>
-								<div class="checkbox-container">
-									<input class="search-checkbox" type='checkbox' name='accessory' value='Accessory'>
-									<p>аксессуары</p>
-								</div>
+						<div class="checkbox-container">
+							<input class="search-checkbox" type='checkbox' name='tshirt' id='Tshirt' value='Tshirt'>
+							<p>одежда</p>
+						</div>
+						<div class="checkbox-container">
+							<input class="search-checkbox" type='checkbox' name='toy' id='Toy' value='Toy'>
+							<p>игрушки</p>
+						</div>
+						<div class="checkbox-container">
+							<input class="search-checkbox" type='checkbox' name='figure' id='Figure' value='Figure'>
+							<p>фигурки</p>
+						</div>
+						<div class="checkbox-container">
+							<input class="search-checkbox" type='checkbox' name='accessory' id='Accessory'
+								   value='Accessory'>
+							<p>аксессуары</p>
+						</div>
 
-							</div>
+					</div>
 
-							<div class="form-checkbox-attributes">
+					<div class="form-checkbox-attributes">
 
-								<label for="custom-select" class="attribute-label">цвет:</label>
-								<select class="selectpicker  form-control" data-selected-text-format="count > 3"
-										data-width="auto" id="color" multiple="multiple">
+						<label for="custom-select" class="attribute-label">цвет:</label>
+						<select class="selectpicker  form-control" data-selected-text-format="count > 3"
+								data-width="auto" id="color" multiple="multiple">
 									<option class="color-option" name="color" value="red">красный</option>
 									<option class="color-option" name="color" value="black">черный</option>
 									<option class="color-option" name="color" value="grey">серый</option>

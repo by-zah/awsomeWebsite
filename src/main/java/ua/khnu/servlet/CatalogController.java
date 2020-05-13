@@ -22,6 +22,7 @@ import java.util.*;
 @WebServlet("/catalog")
 public class CatalogController extends HttpServlet {
     private static final Map<String, String> category = new HashMap<>();
+    private static final Map<String, String> categoryRep = new HashMap<>();
 
     static {
         category.put("Tshirt", "Одежда");
@@ -29,6 +30,12 @@ public class CatalogController extends HttpServlet {
         category.put("Toy", "Игрушки");
         category.put("Accessory", "Аксессуары");
     }
+
+    static {
+        categoryRep.put("Одежда", "Tshirt");
+
+    }
+
 
     private static final int NUM_ON_PAGE = 8;
     private static final Logger logger = Logger.getLogger(CatalogController.class);
@@ -72,6 +79,7 @@ public class CatalogController extends HttpServlet {
                     .add("title", product.getTitle())
                     .add("price", price)
                     .add("color", colors)
+                    .add("category", product.getCategory())
                     .build();
             logger.info("Prod" + jsonProd);
             rootBuilder.add(jsonProd);
