@@ -22,7 +22,7 @@ public class QueryBuilderTest {
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
             "       productID\n" +
-            "MIN(products_attributes.price) AS min_price\n" +
+            ",MIN(products_attributes.price) AS min_price\n" +
             "FROM products\n" +
             "         INNER JOIN products_attributes\n" +
             "                    ON products_attributes.productID = products.id\n" +
@@ -35,7 +35,7 @@ public class QueryBuilderTest {
     private static final String PRICE_FROM = "price>=?";
     private static final String PRICE_TO = "price<=?";
     private static final String PRICE_PART = PRICE_FROM + AND + PRICE_TO;
-    private static final String CATEGORY_PART = "(c.title=? OR c.title=?)";
+    private static final String CATEGORY_PART = "(categories.title=? OR categories.title=?)";
     private static final String SIZE_PART = "(size=? OR size=?)";
     private static final String COLOR_PART = "(color=? OR color=?)";
     private static final String WHERE = " WHERE ";

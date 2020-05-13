@@ -36,8 +36,7 @@ public class ProductService {
             "       GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,\n" +
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
-            "       productID\n" +
-            "\n";
+            "       productID\n";
     private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY + FROM+
             "WHERE categories.title =?\n" +
             "GROUP BY (products_attributes.productID)\n" +
@@ -70,7 +69,8 @@ public class ProductService {
         return repository.query(query, params);
     }
 
-    private static final String GET_PRODUCT_BY_ID = QUERY_BODY + FROM+
+    private static final String GET_PRODUCT_BY_ID = QUERY_BODY+
+            ", products.description "+ FROM+
             " WHERE products_attributes.id=?";
 
     /**
