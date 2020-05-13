@@ -55,14 +55,14 @@ function getJson() {
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
                     html += "<div class='card-description'>";
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
-                    if (responseJSON[i].category === "Одежда") {
+                    if(responseJSON[i].category == "Одежда"){
                         html += "<div class='colors-array-container'>";
                         for (let j = 0; j < responseJSON[i].color.length; j++) {
                             html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:" + responseJSON[i].color[j] + "'></div>";
                         }
                         html += "</div>";
                     }
-                    html += "<h3 class='content-card-link-price' id='card-price'>" + responseJSON[i].price + "</h3>";
+                    html += "<h3 class='content-card-link-price' id='card-price'>" + responseJSON[i].price + " грн.</h3>";
                     html += "</div></a></div>";
                     document.getElementById('content-card-holder-box0').innerHTML += html;
 
@@ -77,10 +77,52 @@ function getJson() {
 
 }
 
+function setMore(){
+    let url = window.location.href;
+    url = url.replace("catalog.jsp", "catalog");
+    let params = new URLSearchParams(url.search.slice(1));
+    url.searchParams.append("more", value);
+    let value = $('#more').val();
+    $("#more").attr("value", ++value);
+    document.getElementById("more").value = value;
+    console.log(value);
+    $.get(url,
+        function (responseJSON) {
+            let i;
+            if (responseJSON.length < 8) {
+                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
+            }
+            for (i = 0; i < responseJSON.length; i++) {
+                if (isEmpty(responseJSON[i].title) === false) {
+                    let html = "<div class='card' id='card" + i + "'>";
+                    html += "<a class='card-link' href='http://localhost:8080/product.jsp?productId=" + responseJSON[i].id + "'/>";
+                    html += "<div class='card-image-preview' " +
+                        "id='card-image-preview' " +
+                        "style='background-image: url(" + responseJSON[i].image + ")'></div>";
+                    html += "<div class='card-description'>";
+                    html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
+                    if(responseJSON[i].category == "Одежда"){
+                        html += "<div class='colors-array-container'>";
+                        for(let j = 0; j < responseJSON[i].color.length; j++ ){
+                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:"+ responseJSON[i].color[j] + "'></div>";
+                        }
+                        html += "</div>";
+                    }
+                    html += "<h3 class='content-card-link-price' id='card-price'>" + responseJSON[i].price + " грн.</h3>";
+                    html += "</div></a></div>";
+                    document.getElementById('content-card-holder-box0').innerHTML += html;
+
+                    console.log(responseJSON[i].title);
+                    console.log(responseJSON[i].id);
+                }
+            }
+        });
+}
 
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("catalog.jsp", "catalog");
+
     if (url.includes("Tshirt")) {
         $("#Tshirt").prop("checked", true);
     }
@@ -93,7 +135,13 @@ $(document).ready(function () {
     if (url.includes("Accessory")) {
         $("#Accessory").prop("checked", true);
     }
+    alert(url);
+    /*let params = new URLSearchParams(url.search.slice(1));
+    if(url.includes("more")){
+        params.delete("more");
+    }*/
     history.pushState(null, null, url);
+
     getJson();
 });
 
@@ -104,18 +152,15 @@ function setMore() {
     let params = new URLSearchParams(url.search.slice(1));
     let value = $('#more').attr("more");
     url.searchParams.append('more', value);
-    alert(value);
     value++;
     $("#more").attr("more", value);
-    alert(value);
-    alert(url);
     $.get(url,
         function (responseJSON) {
             let i;
+            if (responseJSON.length < 8) {
+                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
+            }
             for (i = 0; i < responseJSON.length; i++) {
-                if (responseJSON.length < 8) {
-                    $("#more").attr("disabled", "disabled").css("background-color", "grey");
-                }
                 if (isEmpty(responseJSON[i].title) === false) {
                     let html = "<div class='card' id='card" + i + "'>";
                     html += "<a class='card-link' href='http://localhost:8080/product.jsp?productId=" + responseJSON[i].id + "'/>";
@@ -126,8 +171,8 @@ function setMore() {
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
                     if (responseJSON[i].category == "Одежда") {
                         html += "<div class='colors-array-container'>";
-                        for (let j = 0; j < responseJSON[i].color.length; j++) {
-                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:" + responseJSON[i].color[j] + "'></div>";
+                        for(let j = 0; j < responseJSON[i].color.length; j++ ){
+                            html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:"+ responseJSON[i].color[j] + "'></div>";
                         }
                         html += "</div>";
                     }

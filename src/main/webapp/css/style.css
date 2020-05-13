@@ -553,22 +553,24 @@ a{
 	width: 100%;
 }
 .page{
+
+}
+.page-link{
 	border: 1px solid #000;
 	width: 150px;
 	height: 50px;
+	color: #000;
 	text-align: center;
 	-webkit-transition: border 0.2s;
 	text-transform: uppercase;
 	border-radius: 5px;
+	background-color: #fff;
 }
-.page-link{
-	display: block;
-	height: 50px;
-	padding: 13px 0;
-}
-.page:hover{
+.page-link:hover{
 	border: 1px solid #EB001C;
 	transition: 0.2s;
+	background-color: #fff;
+	color: #000;
 }
 
 .catalog-menu-panel{
@@ -672,7 +674,7 @@ a{
 }
 .size-container{
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	width: 50%;
 }
 .product-size{
@@ -738,6 +740,10 @@ a{
 }
 .product-description{
 	margin: 30px 0;
+}
+.array-of-colors{
+	display: flex;
+	padding: 0 20px;
 }
 
 
@@ -829,4 +835,79 @@ a{
 	text-align: center;
 	vertical-align: middle;
 	border: none;
+}
+
+
+
+/* ORDER.HTML */
+
+
+
+.orders-container{
+	margin: 50px 0;
+}
+.order-wrapper{
+	margin: 50px;
+}
+.order{
+	display: flex;
+	min-height: 200px;
+	width: 100%;
+	box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
+	border-radius: 20px;
+	margin: 0 auto;
+	width: 70%;
+	justify-content: space-around;
+}
+.order-image{
+	width: 200px;
+	margin: 20px;
+}
+.goods-description-container{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	margin: 0 100px 0 0;
+}
+.order-product-title-container{
+	margin: 30px 0 10px 0;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+.order-product-color-container{
+	display: flex;
+	align-items: center;
+	margin: 0 0 10px 0;
+}
+.order-color-title{
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.order-product-color{
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	margin: 5px 30px;
+}
+.order-product-price{
+	font-weight: normal;
+	text-transform: uppercase;
+	margin: 5px 0 10px 0;
+}
+.order-product-amount-container{
+	display: flex;
+	align-items: center;
+	margin: 5px 0 10px 0;
+}
+.order-amount-title{
+	text-transform: uppercase;
+	font-weight: normal;
+}
+.order-product-amount{
+	width: 30px;
+	height: 30px;
+	margin: 0 3px;
+	font-size: 20px;
+	text-align: center;
+	background-color: #DCD0FA;
 }
