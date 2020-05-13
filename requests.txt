@@ -1,19 +1,21 @@
 /example -> {name:example}
 
 #MAIN PAGE PRODUCTS
-/*SELECT products_attributes.id as id,
-products.title as title,
-categories.title as category,
-products_attributes.photo as photo,
-products_attributes.price as price
+/*SELECT products_attributes.id AS id,
+products.title AS title,
+categories.title AS category,
+products_attributes.photo AS photo,
+GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,
+GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,
+GROUP_CONCAT(products_attributes.size SEPARATOR ';') AS size
 FROM products
-inner join products_attributes
-on products_attributes.productID = products.id
-inner join categories 
-on products.categoryID = categories.id
-where categories.title = "Одежда"
-#WHERE categories.title = "название категории"
-GROUP BY products.title
+INNER JOIN products_attributes
+ON products_attributes.productID = products.id
+INNER JOIN categories 
+ON products.categoryID = categories.id
+WHERE categories.title = "Одежда"
+#WHERE categories.title = "category name"
+GROUP BY products_attributes.productID
 ORDER BY RAND()
 LIMIT 4*/
 
