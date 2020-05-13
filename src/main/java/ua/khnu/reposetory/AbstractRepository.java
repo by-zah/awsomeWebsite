@@ -1,6 +1,7 @@
 package ua.khnu.reposetory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.khnu.exception.InitException;
@@ -28,7 +29,11 @@ public abstract class AbstractRepository<T> {
     }
 
     public Optional<Integer> queryForInt(String query, Object... args) {
-        return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
+        try {
+            return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
+        } catch (EmptyResultDataAccessException e){
+            return Optional.of(0);
+        }
     }
 
     protected List<T> getObjectListFromResultList(List<Map<String, Object>> resList) {
