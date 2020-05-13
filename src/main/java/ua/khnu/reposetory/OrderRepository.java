@@ -11,6 +11,7 @@ import ua.khnu.entity.ShippingAddress;
 import ua.khnu.util.DBConstant;
 
 import javax.sql.DataSource;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class OrderRepository extends AbstractRepository<Order> {
         params.put(orderColumnNames[5], order.getDeliveryPrice());
         params.put(orderColumnNames[6], order.getDiscount());
         params.put(orderColumnNames[7], order.getTotalPrice());
-        params.put(orderColumnNames[8], order.getDatePlaced());
+        params.put(orderColumnNames[8], new Date(order.getDatePlaced()));
         params.put(orderColumnNames[9], order.getComment());
         return params;
     }
@@ -83,7 +84,7 @@ public class OrderRepository extends AbstractRepository<Order> {
         shippingAddressColumnNames[1] = "region";
         shippingAddressColumnNames[2] = "street";
         shippingAddressColumnNames[3] = "building";
-        shippingAddressColumnNames[4] = "index";
+        shippingAddressColumnNames[4] = "`index`";
 
         orderColumnNames = new String[10];
         orderColumnNames[0] = "userID";
