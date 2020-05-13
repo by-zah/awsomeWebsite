@@ -1,9 +1,12 @@
 package ua.khnu.reposetory;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.khnu.exception.InitException;
+import ua.khnu.listener.ConfigListener;
 import ua.khnu.util.DBName;
 
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public abstract class AbstractRepository<T> {
     public static final String CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS = "can not read column properties for this class";
+    private static final Logger LOG = Logger.getLogger(AbstractRepository.class);
     protected JdbcTemplate jdbcAccessor;
     private Class<T> genClass;
 
@@ -28,7 +32,12 @@ public abstract class AbstractRepository<T> {
     }
 
     public Optional<Integer> queryForInt(String query, Object... args) {
-        return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
+        try {
+            return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
+        } catch (EmptyResultDataAccessException e){
+            LOG.info(e);
+            return Optional.of(0);
+        }
     }
 
     protected List<T> getObjectListFromResultList(List<Map<String, Object>> resList) {
