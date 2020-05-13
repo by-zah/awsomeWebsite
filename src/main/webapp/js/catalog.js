@@ -46,6 +46,9 @@ function getJson() {
     $.get(window.location.href,
         function (responseJSON) {
             let i;
+            if (responseJSON.length < 8) {
+                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
+            }
             for (i = 0; i < responseJSON.length; i++) {
                 if (isEmpty(responseJSON[i].title) === false) {
                     let html = "<div class='card' id='card" + i + "'>";
@@ -55,7 +58,7 @@ function getJson() {
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
                     html += "<div class='card-description'>";
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
-                    if(responseJSON[i].category == "Одежда"){
+                    if (responseJSON[i].category == "Одежда") {
                         html += "<div class='colors-array-container'>";
                         for (let j = 0; j < responseJSON[i].color.length; j++) {
                             html += "<div class='color-array' id='" + responseJSON[i].color[j] + "' style='background-color:" + responseJSON[i].color[j] + "'></div>";
@@ -135,11 +138,6 @@ $(document).ready(function () {
     if (url.includes("Accessory")) {
         $("#Accessory").prop("checked", true);
     }
-    alert(url);
-    /*let params = new URLSearchParams(url.search.slice(1));
-    if(url.includes("more")){
-        params.delete("more");
-    }*/
     history.pushState(null, null, url);
 
     getJson();

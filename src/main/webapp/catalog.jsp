@@ -69,19 +69,15 @@
                         <label for="custom-select" class="sort-label">сортировать по:</label>
                         <select id="sortType" class="custom-select">
                             <option
-                                    <c:if test="${userRequestParameter.sortType==1}">selected</c:if>
                                     value="PRICE_UP">по возрастанию
                             </option>
                             <option
-                                    <c:if test="${userRequestParameter.sortType==2}">selected</c:if>
                                     value="PRICE_DOWN">по убыванию
                             </option>
                             <option
-                                    <c:if test="${userRequestParameter.sortType==3}">selected</c:if>
                                     value="ALPHABET_UP">по алфавиту (а-я)
                             </option>
                             <option
-                                    <c:if test="${userRequestParameter.sortType==4}">selected</c:if>
                                     value="ALPHABET_DOWN">по алфавиту (я-а)
                             </option>
                         </select>
