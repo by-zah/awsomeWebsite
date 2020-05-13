@@ -379,7 +379,7 @@ a{
 	width: 100%;
 }
 .card{
-	margin: 0.83%;
+	margin: 0.83% 1.66% 0.83% 0;
 	width: 23.7%;
 	min-height: 350px;
 	border: 1px solid #ccc;
@@ -391,10 +391,7 @@ a{
 	transition: all 0.3s;
 	cursor: pointer;
 }
-.card:first-child{
-	margin-left: 0px;
-}
-.card:last-child{
+.card:nth-child(4n){
 	margin-right: 0px;
 }
 .card-image-preview{
