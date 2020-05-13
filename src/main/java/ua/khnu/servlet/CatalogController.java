@@ -1,5 +1,6 @@
 package ua.khnu.servlet;
 
+import org.apache.commons.math3.util.Precision;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import ua.khnu.entity.CatalogRequestParams;
@@ -43,22 +44,27 @@ public class CatalogController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Product> products = productService.getProductsByParams(setCatalogRequestParams(req));
         JsonArrayBuilder rootBuilder = Json.createArrayBuilder();
+        logger.debug(req.getParameterMap().toString());
         logger.info("From bd" + products);
         for (Product product : products) {
             JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
             JsonArrayBuilder arrayBuilderColor = Json.createArrayBuilder();
-            double min = -1;
-            double max = Double.MAX_VALUE;
+            double min = Double.MAX_VALUE;
+            double max = -1;
+            Set<String> colorSet = new HashSet<>();
             for (ProductAttribute pr : product.getProductAttributes()) {
-                arrayBuilderColor.add(pr.getColor());
+                colorSet.add(pr.getColor());
                 max = Double.max(max, pr.getPrice());
                 min = Double.min(min, pr.getPrice());
             }
+            for (String s : colorSet) {
+                arrayBuilderColor.add(s);
+            }
             String price;
             if (min == max) {
-                price = String.valueOf(max);
+                price = String.valueOf(Precision.round(max, 2));
             } else {
-                price = min + "-" + max;
+                price = Precision.round(min, 2) + "-" + Precision.round(max, 2);
             }
             JsonArray colors = arrayBuilderColor.build();
             JsonObject jsonProd = prodBuilder.add("id", product.getId())
@@ -85,13 +91,18 @@ public class CatalogController extends HttpServlet {
         logger.info("request: " + request.getParameterMap().toString());
         crp.setSortType(SortType.valueOf(request.getParameter("sortType")));
         if (Objects.nonNull(request.getParameter("category"))) {
-            crp.setCategory(Collections.singletonList(category.get(request.getParameter("category"))));
+            String[] colr = request.getParameterValues("category");
+            List<String> norm = new ArrayList<>();
+            for (String c : colr) {
+                norm.add(category.get(c));
+            }
+            crp.setCategory(norm);
         }
         if (Objects.nonNull(request.getParameter("size"))) {
-            crp.setSize(Collections.singletonList(request.getParameter("size")));
+            crp.setSize(Arrays.asList(request.getParameterValues("size")));
         }
         if (Objects.nonNull(request.getParameter("color"))) {
-            crp.setColor(Collections.singletonList(request.getParameter("color")));
+            crp.setColor(Arrays.asList(request.getParameterValues("color")));
         }
         try {
             Double d = Double.valueOf(request.getParameter("priceFrom"));
