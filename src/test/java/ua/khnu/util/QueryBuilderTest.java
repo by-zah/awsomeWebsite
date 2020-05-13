@@ -22,7 +22,7 @@ public class QueryBuilderTest {
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
             "       productID\n" +
-            "\n" +
+            "MIN(products_attributes.price) AS min_price\n" +
             "FROM products\n" +
             "         INNER JOIN products_attributes\n" +
             "                    ON products_attributes.productID = products.id\n" +

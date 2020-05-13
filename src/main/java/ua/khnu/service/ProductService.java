@@ -24,6 +24,11 @@ public class ProductService {
         this.queryBuilder = queryBuilder;
     }
 
+    public static final String FROM = "FROM products\n" +
+            "         INNER JOIN products_attributes\n" +
+            "                    ON products_attributes.productID = products.id\n" +
+            "         INNER JOIN categories\n" +
+            "                    ON products.categoryID = categories.id\n";
     public static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS id,\n" +
             "       products.title                                        AS title,\n" +
             "       categories.title                                      AS category,\n" +
@@ -32,13 +37,8 @@ public class ProductService {
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
             "       productID\n" +
-            "\n" +
-            "FROM products\n" +
-            "         INNER JOIN products_attributes\n" +
-            "                    ON products_attributes.productID = products.id\n" +
-            "         INNER JOIN categories\n" +
-            "                    ON products.categoryID = categories.id\n";
-    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY +
+            "\n";
+    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY + FROM+
             "WHERE categories.title =?\n" +
             "GROUP BY (products_attributes.productID)\n" +
             "ORDER BY RAND()\n" +
@@ -70,7 +70,7 @@ public class ProductService {
         return repository.query(query, params);
     }
 
-    private static final String GET_PRODUCT_BY_ID = QUERY_BODY +
+    private static final String GET_PRODUCT_BY_ID = QUERY_BODY + FROM+
             " WHERE products_attributes.id=?";
 
     /**
