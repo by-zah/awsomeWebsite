@@ -54,9 +54,9 @@ public class ProductRepository extends AbstractRepository<Product> {
                 ProductAttribute pa = new ProductAttribute();
                 pa.setId(Integer.valueOf(ids[i]));
                 Double price = i < prices.length ? Double.valueOf(prices[i]) : null;
-                String photo = i < photos.length ? photos[i] : null;
-                String color = i < colors.length ? colors[i] : null;
-                String size = i < sizes.length ? sizes[i] : null;
+                String photo = getFromArrayIfExist(photos, i);
+                String color = getFromArrayIfExist(colors, i);
+                String size = getFromArrayIfExist(sizes, i);
                 pa.setPrice(price);
                 pa.setPhoto(photo);
                 pa.setColor(color);
@@ -67,6 +67,10 @@ public class ProductRepository extends AbstractRepository<Product> {
         products.add(product);
         products.removeFirst();
         return products;
+    }
+
+    private String getFromArrayIfExist(String[] arr, int i) {
+        return i < arr.length ? arr[i] : null;
     }
 
     private String[] getArrBySeparator(Object s) {
