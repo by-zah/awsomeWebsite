@@ -57,7 +57,7 @@ public class ProductController extends HttpServlet {
                 .add("price", product.getProductAttributes().get(0).getPrice())
                 .add("description", product.getDescription())
                 .add("category", product.getCategory())
-                .add("amountAvail", productService.getCountOfAvailableProductsById(Integer.parseInt(product.getProductAttributes().get(0).getId())))
+                .add("amountAvail", productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()))
                 .add("colorSelect", product.getProductAttributes().get(0).getColor())
                 .add("sizeSelect", product.getProductAttributes().get(0).getSize())
                 .add("colors", colors)
