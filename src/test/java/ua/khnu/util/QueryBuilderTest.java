@@ -14,14 +14,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class QueryBuilderTest {
-    private static final String QUERY_BODY = "SELECT products_attributes.id,\n" +
-            "       p.title,\n" +
-            "       price,\n" +
-            "       photo,\n" +
-            "       productID " +
-            "FROM products_attributes\n" +
-            "         JOIN products p on products_attributes.productID = p.id\n" +
-            "         JOIN categories c on p.categoryID = c.id";
+    private static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS id,\n" +
+            "       products.title                                        AS title,\n" +
+            "       categories.title                                      AS category,\n" +
+            "       GROUP_CONCAT(products_attributes.photo SEPARATOR ';') AS photo,\n" +
+            "       GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,\n" +
+            "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
+            "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
+            "       productID\n" +
+            "\n" +
+            "FROM products\n" +
+            "         INNER JOIN products_attributes\n" +
+            "                    ON products_attributes.productID = products.id\n" +
+            "         INNER JOIN categories\n" +
+            "                    ON products.categoryID = categories.id\n";
+    ;
     private static final String ORDER_BY_PART = " ORDER BY title DESC ";
     private static final String LIMIT_PART = "LIMIT ?,?";
     private static final String AND = " AND ";
@@ -32,6 +39,7 @@ public class QueryBuilderTest {
     private static final String SIZE_PART = "(size=? OR size=?)";
     private static final String COLOR_PART = "(color=? OR color=?)";
     private static final String WHERE = " WHERE ";
+    private static final String GROUP_BY = " GROUP BY (products_attributes.productID)";
     private static QueryBuilder queryBuilder;
     private CatalogRequestParams crp;
 
@@ -72,6 +80,7 @@ public class QueryBuilderTest {
                 AND + COLOR_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -84,6 +93,7 @@ public class QueryBuilderTest {
     @Test
     public void shouldReturnQueryWithJustBodyOrderAndLimit() {
         String expected = QUERY_BODY +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
 
@@ -100,6 +110,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + COLOR_PART +
                 AND + CATEGORY_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -119,6 +130,7 @@ public class QueryBuilderTest {
                 COLOR_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -137,6 +149,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + CATEGORY_PART +
                 AND + SIZE_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -155,6 +168,7 @@ public class QueryBuilderTest {
                 WHERE + PRICE_PART +
                 AND + COLOR_PART +
                 AND + SIZE_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         fillAllFields();
@@ -171,6 +185,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithPricePart() {
         String expected = QUERY_BODY +
                 WHERE + PRICE_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         crp.setPriceFrom(0.);
@@ -187,6 +202,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithPriceFrom() {
         String expected = QUERY_BODY +
                 WHERE + PRICE_FROM +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         crp.setPriceFrom(0.);
@@ -202,6 +218,7 @@ public class QueryBuilderTest {
     public void shouldReturnQueryJustWithCategories() {
         String expected = QUERY_BODY +
                 WHERE + CATEGORY_PART +
+                GROUP_BY+
                 ORDER_BY_PART +
                 LIMIT_PART;
         List<String> categories = new ArrayList<>();

@@ -12,6 +12,7 @@ import java.util.*;
 @Component
 public class ProductRepository extends AbstractRepository<Product> {
     private static final Logger LOG = Logger.getLogger(ProductRepository.class);
+    private static final String SEPARATOR = ";";
 
     @Autowired
     public ProductRepository(JdbcTemplate jdbcAccessor) {
@@ -42,17 +43,34 @@ public class ProductRepository extends AbstractRepository<Product> {
                 product.setDescription((String) map.get("description"));
                 product.setTitle((String) map.get("title"));
                 product.setCategory((String) map.get("category"));
-            } else {
+            }
+            String[] ids = getArrBySeparator((map.get("id")));
+            String[] prices = getArrBySeparator(map.get("price"));
+            String[] photos = getArrBySeparator(map.get("photo"));
+
+            String[] colors = getArrBySeparator(map.get("color"));
+            String[] sizes = getArrBySeparator(map.get("size"));
+            for (int i = 0; i < ids.length; i++) {
                 ProductAttribute pa = new ProductAttribute();
-                pa.setId((String) map.get("id"));
-                pa.setColor((String) map.get("color"));
-                pa.setPhoto((String) map.get("photo"));
-                pa.setPrice((Double) map.get("price"));
-                pa.setSize((String) map.get("size"));
+                pa.setId(Integer.valueOf(ids[i]));
+                Double price = i < prices.length ? Double.valueOf(prices[i]) : null;
+                String photo = i < photos.length ? photos[i] : null;
+                String color = i < colors.length ? colors[i] : null;
+                String size = i < sizes.length ? sizes[i] : null;
+                pa.setPrice(price);
+                pa.setPhoto(photo);
+                pa.setColor(color);
+                pa.setSize(size);
                 product.addProductAttribute(pa);
             }
         }
+        products.add(product);
         products.removeFirst();
         return products;
+    }
+
+    private String[] getArrBySeparator(Object s) {
+        String str = String.valueOf(s);
+        return str.split(SEPARATOR);
     }
 }

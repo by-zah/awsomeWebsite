@@ -111,8 +111,8 @@ CREATE TABLE `products_attributes` (
   `productID` int(11) DEFAULT NULL,
   `color` varchar(20) DEFAULT NULL,
   `size` varchar(10) DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `photo` varchar(255) DEFAULT NULL,
+  `price` double NOT NULL,
+  `photo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `productID` (`productID`),
   CONSTRAINT `products_attributes_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`id`) ON UPDATE CASCADE
@@ -121,7 +121,7 @@ CREATE TABLE `products_attributes` (
 /*Data for the table `products_attributes` */
 
 insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`photo`) values 
-(1,1,'-','-',900,'images/1_talkingspiderman.jpg'),
+(1,1,NULL,NULL,900,'images/1_talkingspiderman.jpg'),
 (2,2,'red','S',850,'images/2_tshirt_deadpool.jpg'),
 (3,2,'red','XXL',850,'images/2_tshirt_deadpool.jpg'),
 (4,2,'red','3XL',880,'images/2_tshirt_deadpool.jpg'),
@@ -131,26 +131,26 @@ insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`phot
 (8,4,'black','M',1200,'images/4_tshirt_fan.jpg'),
 (9,4,'black','L',1200,'images/4_tshirt_fan.jpg'),
 (10,4,'black','XXL',1250,'images/4_tshirt_fan.jpg'),
-(11,5,'-','-',1000,'images/5_thorhammer.jpg'),
+(11,5,NULL,'-',1000,'images/5_thorhammer.jpg'),
 (15,7,'white','L',1500,'images/7_tshirt_tlwhite.jpg'),
 (16,7,'white','XL',1500,'images/7_tshirt_tlwhite.jpg'),
 (17,7,'blue','L',1400,'images/7_tshirt_tlblue.jpg'),
 (18,7,'blue','M',1400,'images/7_tshirt_tlblue.jpg'),
-(19,8,'-','-',400,'images/8_eredin.jpg'),
-(20,9,'-','-',2000,'images/9_marvelbag.jpg'),
-(21,10,'-','-',450,'images/10_witcher.jpg'),
-(22,11,'-','-',425,'images/11_groot.jpg'),
-(23,12,'-','-',450,'images/12_hanzo.jpg'),
-(24,13,'-','-',430,'images/13_harleyquinn.jpg'),
-(25,14,'-','-',650,'images/14_eliteguard.jpg'),
-(26,15,'-','-',499,'images/15_dota2bag.jpg'),
-(27,16,'-','-',1000,'images/16_owbag.jpg'),
-(28,17,'-','-',1000,'images/17_spidermanlego.jpg'),
-(29,18,'-','-',5000,'images/18_spiderbike.jpg'),
-(30,19,'-','-',749,'images/19_hagrid.jpg'),
-(31,20,'-','-',495,'images/20_grunklestan.jpg'),
-(32,21,'-','-',495,'images/21_greengoblin.jpg'),
-(33,22,'-','-',549,'images/22_hulk.jpg');
+(19,8,NULL,NULL,400,'images/8_eredin.jpg'),
+(20,9,NULL,NULL,2000,'images/9_marvelbag.jpg'),
+(21,10,NULL,NULL,450,'images/10_witcher.jpg'),
+(22,11,NULL,NULL,425,'images/11_groot.jpg'),
+(23,12,NULL,NULL,450,'images/12_hanzo.jpg'),
+(24,13,NULL,NULL,430,'images/13_harleyquinn.jpg'),
+(25,14,NULL,NULL,650,'images/14_eliteguard.jpg'),
+(26,15,NULL,NULL,499,'images/15_dota2bag.jpg'),
+(27,16,NULL,NULL,1000,'images/16_owbag.jpg'),
+(28,17,NULL,NULL,1000,'images/17_spidermanlego.jpg'),
+(29,18,NULL,NULL,5000,'images/18_spiderbike.jpg'),
+(30,19,NULL,NULL,749,'images/19_hagrid.jpg'),
+(31,20,NULL,NULL,495,'images/20_grunklestan.jpg'),
+(32,21,NULL,NULL,495,'images/21_greengoblin.jpg'),
+(33,22,NULL,NULL,549,'images/22_hulk.jpg');
 
 /*Table structure for table `products_in` */
 

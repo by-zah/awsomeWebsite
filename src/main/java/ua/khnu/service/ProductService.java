@@ -24,17 +24,23 @@ public class ProductService {
         this.queryBuilder = queryBuilder;
     }
 
-    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = "SELECT products_attributes.id,\n" +
-            "       p.title,\n" +
-            "       c.title as category,\n" +
-            "       photo,\n" +
-            "       size,\n" +
-            "       productID " +
-            "FROM products_attributes\n" +
-            "         JOIN products p on products_attributes.productID = p.id\n" +
-            "         JOIN categories c on p.categoryID = c.id\n" +
-            "WHERE c.title = ?\n" +
-            "GROUP BY (p.id)\n" +
+    public static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS id,\n" +
+            "       products.title                                        AS title,\n" +
+            "       categories.title                                      AS category,\n" +
+            "       GROUP_CONCAT(products_attributes.photo SEPARATOR ';') AS photo,\n" +
+            "       GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,\n" +
+            "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
+            "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
+            "       productID\n" +
+            "\n" +
+            "FROM products\n" +
+            "         INNER JOIN products_attributes\n" +
+            "                    ON products_attributes.productID = products.id\n" +
+            "         INNER JOIN categories\n" +
+            "                    ON products.categoryID = categories.id\n";
+    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY +
+            "WHERE categories.title =?\n" +
+            "GROUP BY (products_attributes.productID)\n" +
             "ORDER BY RAND()\n" +
             "LIMIT ?";
 
@@ -64,18 +70,7 @@ public class ProductService {
         return repository.query(query, params);
     }
 
-    private static final String GET_PRODUCT_BY_ID = "SELECT products_attributes.id as id,\n" +
-            "       c.title as category,\n" +
-            "       p.title,\n" +
-            "       p.description,\n" +
-            "       color,\n" +
-            "       size,\n" +
-            "       price,\n" +
-            "       photo\n" +
-            "       productID " +
-            "FROM products_attributes\n" +
-            "         JOIN products p on products_attributes.productID = p.id\n" +
-            "         JOIN categories c on p.categoryID = c.id" +
+    private static final String GET_PRODUCT_BY_ID = QUERY_BODY +
             " WHERE products_attributes.id=?";
 
     /**
