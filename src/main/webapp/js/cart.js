@@ -1,31 +1,16 @@
-$(document).ready(function () {
-    $("tr td input").mouseleave(
-        function () {
-            alert($(this).attr("productId"));
-            $.get('cart', {
-                productId: $(this).attr("productId"),
-                amount: $(this).val()
-            }, function (responseJSON) {
-                var sum = '#sum' + dataId;
-                $(sum).html(responseJSON.sum);
-                $('#cartSum').html(responseJSON.total);
-                $("#cartCount").text(responseJSON.dataCount);
-            });
+function addCart() {
+    let av = $("#available").text().replace("На складе осталось", "");
+    alert($("#amount").val());
+    alert(av);
+    if (parseInt($("#amount").val()) > parseInt(av)) {
+        alert("Слишком большое количество, выберите меньше")
+    } else {
+        $.get('cart', {
+            amount: $("#amount").val(),
+            productId: $("#idUnic").val()
+        }, function (responseJSON) {
+            alert("Успешно добавленно")
         });
-    $(".btn i").on('click',
-        function () {
-            var dataId = $(this).attr("productId");
-            $.get('cart', {
-                amount: 0,
-                productId: $(this).attr("productId")
-            }, function (responseJSON) {
-                if (dataId > 0) {
-                    $('#' + dataId).remove();
-                } else {
-                    $('tbody').remove();
-                }
-                $('#cartSum').html(responseJSON.total);
-                $("#cartCount").text(responseJSON.dataCount);
-            });
-        });
-})
+    }
+
+}

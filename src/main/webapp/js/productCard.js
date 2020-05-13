@@ -3,7 +3,9 @@ function getJsonMini(url) {
         function (responseJSON) {
 
             $("#idUnic").attr("value", responseJSON.idUnic);
-            $("#price").text(responseJSON.price);
+            if (!isEmpty(responseJSON.price)) {
+                $("#price").text(responseJSON.price);
+            }
             $("#image").attr("src", responseJSON.image);
             $("#available").text(responseJSON.amountAvail);
             console.log("lybyf  " + responseJSON.colors.length);
@@ -28,7 +30,12 @@ function getJson(url) {
                 if (responseJSON.colorSelect === option) {
                     option.selected = true;
                 }
+
                 $(option).appendTo('#color');
+            }
+            if (responseJSON.amountAvail === "Нет в наличии") {
+                $("#price").css("color", "grey");
+                $("#buy-button").attr("disabled", "disabled");
             }
             for (let i = 0; i < responseJSON.sizes.length; i++) {
                 let option = new Option(responseJSON.sizes[i]);
@@ -85,4 +92,8 @@ function getAll() {
 
 let isEmpty = function (variable) {
     return variable === undefined || variable === null || variable === '' || variable.length === 0;
+}
+
+function addCart() {
+    alert("000")
 }

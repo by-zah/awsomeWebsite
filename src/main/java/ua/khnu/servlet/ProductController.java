@@ -51,6 +51,10 @@ public class ProductController extends HttpServlet {
             colorSet.add(pa.getColor());
             sizeSet.add(pa.getSize());
         }
+        String avail = "Нет в наличии";
+        if (productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()) != 0) {
+            avail = "На складе осталось " + productService.getCountOfAvailableProductsById(productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()));
+        }
         for (String s : colorSet) {
             arrayBuilderColor.add(s);
         }
@@ -67,7 +71,7 @@ public class ProductController extends HttpServlet {
                 .add("price", product.getProductAttributes().get(0).getPrice())
                 .add("description", product.getDescription())
                 .add("category", product.getCategory())
-                .add("amountAvail", "На складе осталось " + productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()))
+                .add("amountAvail", avail)
                 .add("colorSelect", product.getProductAttributes().get(0).getColor())
                 .add("sizeSelect", product.getProductAttributes().get(0).getSize())
                 .add("colors", colors)
@@ -87,15 +91,19 @@ public class ProductController extends HttpServlet {
         JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
         Product product = productService.getProductById(id).get();
         String image = product.getProductAttributes().get(0).getPhoto();
+        String avail = "Нет в наличии";
         for (ProductAttribute pa : product.getProductAttributes()) {
             if (color.equals(pa.getColor())) {
                 image = pa.getPhoto();
             }
             if (color.equals(pa.getColor()) && size.equals(pa.getSize())) {
+                if (productService.getCountOfAvailableProductsById(pa.getId()) != 0) {
+                    avail = "На складе осталось " + productService.getCountOfAvailableProductsById(pa.getId());
+                }
                 JsonObject jsonProd = prodBuilder.add("idUnic", pa.getId())
                         .add("image", pa.getPhoto())
                         .add("price", pa.getPrice())
-                        .add("amountAvail", "На складе осталось " + productService.getCountOfAvailableProductsById(pa.getId()))
+                        .add("amountAvail", avail)
                         .build();
                 resp.setContentType("application/json");
                 logger.info(jsonProd);
@@ -107,8 +115,8 @@ public class ProductController extends HttpServlet {
         }
         JsonObject jsonProd = prodBuilder.add("idUnic", -1)
                 .add("image", image)
-                .add("price", "0")
-                .add("amountAvail", "Нет в наличии")
+                //.add("price", "0")
+                .add("amountAvail", avail)
                 .build();
         resp.setContentType("application/json");
         logger.info(jsonProd);

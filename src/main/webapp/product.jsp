@@ -38,9 +38,12 @@
 						<select id="color" class="custom-select">
 						</select>
 					</div>
-					<h5 id="available">цвет</h5>
+					<input id="amount" type="text" value="1"/>
+					<h5 id="available"></h5>
 					<div class="measure-link"><a href="javascript:PopUpShow()">подбор размера</a></div>
-					<button class="buy-button" id="buy-button" type="button" name="buy">добавить в корзину</button>
+					<button class="buy-button" id="buy-button" onclick="addCart()" type="button" name="buy">добавить в
+						корзину
+					</button>
 					</input>
 				</div>
 				<div class="product-description-container">
@@ -130,5 +133,6 @@
 	<script src="js/jQuery.min.js"></script>
 	<script src="js/popup.js"></script>
 	<script src="js/productCard.js"></script>
+	<script src="js/cart.js"></script>
 	</body>
 </html>
