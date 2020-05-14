@@ -4,9 +4,18 @@ function getJsonMini(url) {
 
             $("#idUnic").attr("value", responseJSON.idUnic);
             if (!isEmpty(responseJSON.price)) {
-                $("#price").text(responseJSON.price);
+                $("#price").text(responseJSON.price + " грн.");
             }
             $("#image").attr("src", responseJSON.image);
+            /*for(let i = 0; i < responseJSON[i].colors.length; i++){
+                $.each($("#color option:selected"), function () {
+                    if($("#color").val() == responseJSON.colors[i]){
+                        let html = "<div class='color-array' id='" + responseJSON.colors[i] + "' style='background-color:"+ responseJSON.colors[i] +"'></div>";
+                        $("#colors").innerHTML = html;
+                    }
+                });
+            }*/
+
             $("#available").text(responseJSON.amountAvail);
             console.log("lybyf  " + responseJSON.colors.length);
         });
@@ -20,8 +29,8 @@ function getJson(url) {
             $("#title").text(responseJSON.title);
             $("#productId").attr("value", responseJSON.idProd);
             $("#idUnic").attr("value", responseJSON.idUnic);
-            $("#category").text(responseJSON.category);
-            $("#price").text(responseJSON.price);
+            $("#category").text("категория: " + responseJSON.category);
+            $("#price").text(responseJSON.price + " грн.");
             $("#description").text(responseJSON.description);
             $("#image").attr("src", responseJSON.image);
             $("#available").text(responseJSON.amountAvail);
@@ -32,6 +41,9 @@ function getJson(url) {
                 }
 
                 $(option).appendTo('#color');
+
+                //document.getElementById("colors").innerHTML = html;
+
             }
             if (responseJSON.amountAvail === "Нет в наличии") {
                 $("#price").css("color", "grey");
