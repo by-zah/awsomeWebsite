@@ -7,7 +7,7 @@ function getAll() {
         contentCard.innerHTML = "";
     }
 
-    $("#more").removeAttr("disabled").attr("more", 2).css("background-color", "white");
+    $("#more").removeAttr("hidden").attr("more", 2).css("background-color", "white");
 
     let url = new URL('http://localhost:8080/catalog?');
     let params = new URLSearchParams(url.search.slice(1));
@@ -47,7 +47,7 @@ function getJson() {
         function (responseJSON) {
             let i;
             if (responseJSON.length < 8) {
-                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
+                $("#more").attr("hidden", "true").css("background-color", "#ccc");
             }
             for (i = 0; i < responseJSON.length; i++) {
                 if (isEmpty(responseJSON[i].title) === false) {
@@ -89,18 +89,17 @@ function setMore(){
     $("#more").attr("value", ++value);
     document.getElementById("more").value = value;
     console.log(value);
-    $.get(url,
-        function (responseJSON) {
-            let i;
-            if (responseJSON.length < 8) {
-                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
-            }
-            for (i = 0; i < responseJSON.length; i++) {
-                if (isEmpty(responseJSON[i].title) === false) {
-                    let html = "<div class='card' id='card" + i + "'>";
-                    html += "<a class='card-link' href='http://localhost:8080/product.jsp?productId=" + responseJSON[i].id + "'/>";
-                    html += "<div class='card-image-preview' " +
-                        "id='card-image-preview' " +
+    $.get(url, function (responseJSON) {
+        let i;
+        if (responseJSON.length < 8) {
+            $("#more").attr("hidden", "true").css("background-color", "#ccc");
+        }
+        for (i = 0; i < responseJSON.length; i++) {
+            if (isEmpty(responseJSON[i].title) === false) {
+                let html = "<div class='card' id='card" + i + "'>";
+                html += "<a class='card-link' href='http://localhost:8080/product.jsp?productId=" + responseJSON[i].id + "'/>";
+                html += "<div class='card-image-preview' " +
+                    "id='card-image-preview' " +
                         "style='background-image: url(" + responseJSON[i].image + ")'></div>";
                     html += "<div class='card-description'>";
                     html += "<h2 class='content-card-link-title' id='card-title'>" + responseJSON[i].title + "</h2>";
@@ -156,7 +155,7 @@ function setMore() {
         function (responseJSON) {
             let i;
             if (responseJSON.length < 8) {
-                $("#more").attr("disabled", "disabled").css("background-color", "#ccc");
+                $("#more").attr("hidden", "true").css("background-color", "#ccc");
             }
             for (i = 0; i < responseJSON.length; i++) {
                 if (isEmpty(responseJSON[i].title) === false) {
