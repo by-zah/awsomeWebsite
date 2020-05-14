@@ -18,13 +18,13 @@
 		<div class="content-container">
 			<div class="main-product-container">
 				<div class="main-image-container">
-					<img id="image" class="product-image" src="img/image-showcase-0.png">
+					<img id="image" class="product-image" src="">
 				</div>
 
 				<div class="main-product-info-container">
-					<h2 id="title" class="product-main-title">что-то там для примера</h2>
-					<h4 id="category" class="product-category">аа категория продукт аа</h4>
-					<h4 id="price" class="product-price">2 грн.</h4>
+					<h2 id="title" class="product-main-title">пример</h2>
+					<h4 id="category" class="product-category">категория</h4>
+					<h4 id="price" class="product-price">100 грн.</h4>
 					<div class="small-divider"></div>
 					<input type="hidden" id="productId" value="">
 					<input type="hidden" id="idUnic" value="">
