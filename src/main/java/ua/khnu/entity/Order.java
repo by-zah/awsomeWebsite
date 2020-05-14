@@ -1,18 +1,31 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
 import java.util.Map;
 
 public class Order {
+    private Integer id;
     private Integer userId;
     private String paymentMethod;
     private ShippingMethod shippingMethod;
     private ShippingAddress shippingAddress;
     private Double totalProductPrice;
     private Double deliveryPrice;
+    @DBName(name = "discountAmount")
     private Double discount;
     private Double totalPrice;
     private Long datePlaced;
     private String comment;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     /**
      * key - Product with at least id and price
      * value - amount

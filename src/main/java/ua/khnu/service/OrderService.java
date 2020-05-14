@@ -24,6 +24,7 @@ public class OrderService {
                 .reduce(Double::sum).orElse(0.);
         order.setTotalProductPrice(totalProductPrice);
         order.setTotalPrice(order.getTotalProductPrice()-order.getDiscount());
+        order.setDatePlaced(System.currentTimeMillis());
         repository.add(order);
     }
 }

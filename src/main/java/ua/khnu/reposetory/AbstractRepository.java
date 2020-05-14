@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import ua.khnu.exception.InitException;
 import ua.khnu.util.DBName;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
@@ -34,21 +35,39 @@ public abstract class AbstractRepository<T> {
     protected List<T> getObjectListFromResultList(List<Map<String, Object>> resList) {
         return resList.stream().map(m -> {
             try {
-                T obj = (T) Arrays.stream(genClass.getDeclaredConstructors()).filter(c -> c.getParameterCount() == 0).findAny().get().newInstance();
-                Arrays.stream(genClass.getDeclaredFields()).forEach(f -> {
-                    DBName[] annotations = f.getAnnotationsByType(DBName.class);
-                    String fieldDBName = annotations.length == 0 ? f.getName() : annotations[0].name();
-                    try {
-                        f.setAccessible(true);
-                        f.set(obj, m.get(fieldDBName));
-                    } catch (IllegalAccessException e) {
-                        throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
-                    }
-                });
+                T obj = (T) gerObject(m, genClass);
                 return obj;
             } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
                 throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
             }
         }).collect(Collectors.toList());
+    }
+
+    protected Object gerObject(Map<String, Object> map, Class<?> innerClass) throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Object obj = getDefaultConstructor(innerClass).newInstance();
+        Arrays.stream(innerClass.getDeclaredFields()).forEach(f -> {
+            DBName[] annotations = f.getAnnotationsByType(DBName.class);
+            String fieldDBName = annotations.length == 0 ? f.getName() : annotations[0].name();
+            try {
+                f.setAccessible(true);
+                if (f.getClass().isAnnotationPresent(DBName.class)) {
+                    Object tmp = gerObject(map, f.getClass());
+                    f.set(obj, tmp);
+                } else {
+                    f.set(obj, map.get(fieldDBName));
+                }
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
+            }
+        });
+        return obj;
+    }
+
+    private Constructor<?> getDefaultConstructor(Class<?> aClass) {
+        return Arrays.stream(aClass.getDeclaredConstructors())
+                .filter(c -> {
+                    c.setAccessible(true);
+                    return c.getParameterCount() == 0;
+                }).findAny().orElse(null);
     }
 }
