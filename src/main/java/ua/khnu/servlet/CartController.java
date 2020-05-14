@@ -46,7 +46,7 @@ public class CartController extends HttpServlet {
 
     private void setNewAmountToProduct(HttpServletRequest req, HttpServletResponse resp, Cart cart, int id) throws IOException {
         Product product = null;
-        Optional<Product> opt = productService.GetProductByAttributeId(id);
+        Optional<Product> opt = productService.getProductByAttributeId(id);
         if (opt.isPresent()) {
             product = opt.get();
         }

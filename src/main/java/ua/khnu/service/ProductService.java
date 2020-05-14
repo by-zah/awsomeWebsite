@@ -73,7 +73,7 @@ public class ProductService {
             ", products.description "+ FROM+
             " WHERE products_attributes.id=?";
 
-    public Optional<Product> GetProductByAttributeId(int id) {
+    public Optional<Product> getProductByAttributeId(int id) {
         return getFirstOptionalFromList(repository.query(GET_PRODUCT_BY_ATTRIBUTE_ID, id));
     }
 
