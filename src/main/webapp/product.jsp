@@ -26,19 +26,23 @@
 					<h4 id="category" class="product-category">аа категория продукт аа</h4>
 					<h4 id="price" class="product-price">2 грн.</h4>
 					<div class="small-divider"></div>
-					<h4 class="size-title">размер</h4>
 					<input type="hidden" id="productId" value="">
 					<input type="hidden" id="idUnic" value="">
+
 					<div class="size-container">
+						<h4 class="size-title">размер:</h4>
 						<select id="size" class="custom-select">
 						</select>
 					</div>
-					<h4 class="size-title">цвет</h4>
 					<div class="size-container">
+						<h4 class="size-title">цвет:</h4>
 						<select id="color" class="custom-select">
 						</select>
 					</div>
-					<input id="amount" type="text" value="1"/>
+					<div class="size-container">
+						<h4 class="amount-input-title">кол-во:</h4>
+						<input id="amount" class="custom-select amount-input" type="text" value="1"/>
+					</div>
 					<h5 id="available"></h5>
 					<div class="measure-link"><a href="javascript:PopUpShow()">подбор размера</a></div>
 					<button class="buy-button" id="buy-button" onclick="addCart()" type="button" name="buy">добавить в
@@ -46,11 +50,12 @@
 					</button>
 					</input>
 				</div>
-				<div class="product-description-container">
-					<h3 class="description-title">описание</h3>
-					<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
-					<div id="description" class="product-description">
-					</div>
+
+			</div>
+			<div class="product-description-container">
+				<h3 class="description-title">описание</h3>
+				<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
+				<div id="description" class="product-description">
 				</div>
 			</div>
 
@@ -125,6 +130,7 @@
 			    	</div>	    	
 			    </div>
 			</div>
+		</div>
 		</div>
 
 		</content>

@@ -50,45 +50,52 @@
                     </div>
 
                     <div class="form-checkbox-attributes">
-
-                        <label for="custom-select" class="attribute-label">цвет:</label>
-                        <select class="selectpicker  form-control" data-selected-text-format="count > 3"
-                                data-width="auto" id="color" multiple="multiple">
-                            <option class="color-option" name="color" value="red">красный</option>
-                            <option class="color-option" name="color" value="black">черный</option>
-                            <option class="color-option" name="color" value="grey">серый</option>
-                        </select>
-                        <label for="custom-select" class="attribute-label">размер:</label>
-                        <select class="selectpicker  form-control" data-selected-text-format="count > 3"
-                                data-width="auto"
-                                id="size" class="custom-select" multiple="multiple">
-                            <option class="size-option" name="size" value="m">m</option>
-                            <option class="size-option" name="size" value="l">l</option>
-                            <option class="size-option" name="size" value="xl">xl</option>
-                        </select>
-                        <label for="custom-select" class="sort-label">сортировать по:</label>
-                        <select id="sortType" class="custom-select">
-                            <option
-                                    value="PRICE_UP">по возрастанию
-                            </option>
-                            <option
-                                    value="PRICE_DOWN">по убыванию
-                            </option>
-                            <option
-                                    value="ALPHABET_UP">по алфавиту (а-я)
-                            </option>
-                            <option
-                                    value="ALPHABET_DOWN">по алфавиту (я-а)
-                            </option>
-                        </select>
-                        <button class="checkbox-attributes-button" name="button" type="button"
-                                id="submit-search-button" onclick="getAll()">поиск
-                        </button>
+                        <div class="custom-select-container">
+                            <label for="custom-select" class="attribute-label">цвет:</label>
+                            <select class="selectpicker  form-control" data-selected-text-format="count > 3"
+                                    data-width="auto" id="color" multiple="multiple">
+                                <option class="color-option" name="color" value="red">красный</option>
+                                <option class="color-option" name="color" value="black">черный</option>
+                                <option class="color-option" name="color" value="grey">серый</option>
+                                <option class="color-option" name="color" value="white">белый</option>
+                                <option class="color-option" name="color" value="blue">синий</option>
+                            </select>
+                            <label for="custom-select" class="attribute-label">размер:</label>
+                            <select class="selectpicker  form-control" data-selected-text-format="count > 3"
+                                    data-width="auto"
+                                    id="size" class="custom-select" multiple="multiple">
+                                <option class="size-option" name="size" value="m">xs</option>
+                                <option class="size-option" name="size" value="m">s</option>
+                                <option class="size-option" name="size" value="m">m</option>
+                                <option class="size-option" name="size" value="l">l</option>
+                                <option class="size-option" name="size" value="xl">xl</option>
+                                <option class="size-option" name="size" value="xl">2xl</option>
+                                <option class="size-option" name="size" value="xl">3xl</option>
+                            </select>
+                        </div>
+                        <div class="custom-select-container">
+                            <label for="custom-select" class="sort-label">сортировать по:</label>
+                            <select id="sortType" class="custom-select">
+                                <option
+                                        value="PRICE_UP">по возрастанию
+                                </option>
+                                <option
+                                        value="PRICE_DOWN">по убыванию
+                                </option>
+                                <option
+                                        value="ALPHABET_UP">по алфавиту (а-я)
+                                </option>
+                                <option
+                                        value="ALPHABET_DOWN">по алфавиту (я-а)
+                                </option>
+                            </select>
+                        </div>
 
                     </div>
-                    <div class="sort-buttons">
+                    <button class="checkbox-attributes-button" name="button" type="button"
+                            id="submit-search-button" onclick="getAll()">поиск
+                    </button>
 
-                    </div>
                 </form>
             </div>
 
