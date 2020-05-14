@@ -488,6 +488,9 @@ a{
 	height: 25px;
 	margin: 5px 0;
 }
+.checkbox-full-container{
+	margin: 0 25px;
+}
 .checkbox-container{
 	display: flex;
 	align-items: center;
@@ -526,8 +529,7 @@ a{
 	font-weight: normal;
 }
 .sort-buttons-container{
-	display: flex;
-	justify-content: space-between;
+	margin: 50px 0 30px 0;
 }
 .sort-label{
 	text-transform: uppercase;
@@ -542,6 +544,10 @@ a{
 	margin: 0 0 0 10px;
 	border-radius: 3px;
 	font-size: 16px;
+	width: 50%;
+}
+.custom-select-container{
+	margin: 0 0 10px 0;
 }
 .pages-container{
 	margin: 20px 0 50px 0;
@@ -580,7 +586,7 @@ a{
 .catalog-menu-panel-form{
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0 0 0;
+	margin: 0 auto;
 
 }
 .checkbox-container{
@@ -600,6 +606,9 @@ a{
 .form-checkbox-attributes{
 	text-transform: uppercase;
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 25px;
 }
 .checkbox-attributes-button{
 	text-transform: uppercase;
@@ -608,7 +617,7 @@ a{
 	height: 40px;
 	text-align: center;
 	padding: 6px;
-	margin: 25px 90px 0 90px;
+	margin: 0 25px;
 	border: none;
 	border-radius: 5px;
 	background-color: #DCD0FA;
@@ -640,6 +649,9 @@ a{
 .main-image-container{
 	width: 49%;
 	margin: 0 1% 0 0;
+}
+.product-image{
+	width: 80%;
 }
 .main-product-info-container{
 	width: 49%;
@@ -676,6 +688,18 @@ a{
 	display: flex;
 	align-items: center;
 	width: 50%;
+	justify-content: space-between;
+	margin: 20px 0;
+}
+.amount-input{
+	box-shadow: none;
+	border: 1px solid #aaa;
+	padding: 2px 6px;
+}
+.amount-input-title{
+	font-size: 16px;
+	font-weight: normal;
+	text-transform: uppercase;
 }
 .product-size{
 	width: 30px;
