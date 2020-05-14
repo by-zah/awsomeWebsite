@@ -27,7 +27,7 @@
         <a class="login-button" href="#"><img class="login-button-image" src="img/user.png"></a>
     </c:otherwise>
 </c:choose>
-            <a href="cart.jsp"><img class="icon-img" src="img/cart.png"></a>
+            <a href="http://localhost:8080/cart"><img class="icon-img" src="img/cart.png"></a>
         </div>
     </div>
 </header>

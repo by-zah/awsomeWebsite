@@ -7,15 +7,6 @@ function getJsonMini(url) {
                 $("#price").text(responseJSON.price + " грн.");
             }
             $("#image").attr("src", responseJSON.image);
-            /*for(let i = 0; i < responseJSON[i].colors.length; i++){
-                $.each($("#color option:selected"), function () {
-                    if($("#color").val() == responseJSON.colors[i]){
-                        let html = "<div class='color-array' id='" + responseJSON.colors[i] + "' style='background-color:"+ responseJSON.colors[i] +"'></div>";
-                        $("#colors").innerHTML = html;
-                    }
-                });
-            }*/
-
             $("#available").text(responseJSON.amountAvail);
             console.log("lybyf  " + responseJSON.colors.length);
         });
@@ -41,9 +32,6 @@ function getJson(url) {
                 }
 
                 $(option).appendTo('#color');
-
-                //document.getElementById("colors").innerHTML = html;
-
             }
             if (responseJSON.amountAvail === "Нет в наличии") {
                 $("#price").css("color", "grey");
@@ -107,5 +95,15 @@ let isEmpty = function (variable) {
 }
 
 function addCart() {
-    alert("000")
+    let av = $("#available").text().replace("На складе осталось", "");
+    if (parseInt($("#amount").val()) > parseInt(av)) {
+        alert("Слишком большое количество, выберите меньше")
+    } else {
+        $.get('cart', {
+            amount: $("#amount").val(),
+            productId: $("#idUnic").val()
+        }, function (responseJSON) {
+            alert("Успешно добавленно")
+        });
+    }
 }

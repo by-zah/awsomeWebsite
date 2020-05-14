@@ -139,6 +139,5 @@
 	<script src="js/jQuery.min.js"></script>
 	<script src="js/popup.js"></script>
 	<script src="js/productCard.js"></script>
-	<script src="js/cart.js"></script>
 	</body>
 </html>

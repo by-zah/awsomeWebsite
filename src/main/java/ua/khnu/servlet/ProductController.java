@@ -53,7 +53,7 @@ public class ProductController extends HttpServlet {
         }
         String avail = "Нет в наличии";
         if (productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()) != 0) {
-            avail = "На складе осталось " + productService.getCountOfAvailableProductsById(productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId()));
+            avail = "На складе осталось " + productService.getCountOfAvailableProductsById(product.getProductAttributes().get(0).getId());
         }
         for (String s : colorSet) {
             arrayBuilderColor.add(s);
