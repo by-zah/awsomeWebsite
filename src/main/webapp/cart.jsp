@@ -10,33 +10,6 @@
 	<title>Корзина</title>
 	<link rel="icon" href="img/icon.png" type="image/png">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-
-	<style>
-		.bd-placeholder-img {
-			font-size: 1.125rem;
-			text-anchor: middle;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-
-		@media (min-width: 768px) {
-			.bd-placeholder-img-lg {
-				font-size: 3.5rem;
-			}
-		}
-
-
-	</style>
-	<!-- Custom styles for this template -->
-	<style>
-		.container {
-			max-width: 960px;
-			margin: auto;
-		}
-
-	</style>
 </head>
 <body>
 <%@ include file="jspf/header.jspf" %>
@@ -55,7 +28,9 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-			<div class="container mb-4">
+		<div class="content-container cart-container">
+			<h2 id="content-title">корзина</h2>
+			<div class="mb-4 div-table">
 				<div class="row">
 					<div class="panel-body-catalog">
 						<div class="left-sidebar">
@@ -65,11 +40,10 @@
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<thead>
-										<tr>
+										<tr class="first-tr">
 											<th scope="col"></th>
 											<th scope="col">Продукт</th>
 											<th scope="col">Размер</th>
-											<th scope="col">Сколько доступно</th>
 											<th class="text-center" scope="col">Количество</th>
 											<th class="text-right" scope="col">Цена</th>
 											<th></th>
@@ -78,9 +52,7 @@
 										<tbody>
 										<c:forEach items="${cart.getCart()}" var="entry">
 											<tr id="${entry.key.productAttributes.get(0).id}">
-												<td><img src="/${entry.key.productAttributes.get(0).photo}" style="
-                                        width: 140px;
-                                        height: 105px;"/></td>
+												<td><img src="/${entry.key.productAttributes.get(0).photo}" style="width: 140px;"/></td>
 												<td>${entry.key.title}</td>
 												<c:choose>
 													<c:when test="${entry.key.productAttributes.get(0).size=='null'}">
@@ -90,12 +62,18 @@
 														<td>${entry.key.productAttributes.get(0).size}</td>
 													</c:otherwise>
 												</c:choose>
-												<td id="available${entry.key.productAttributes.get(0).id}"></td>
-												<td><input class="form-control" available=""
+												<%--<td id="available${entry.key.productAttributes.get(0).id}"></td>--%>
+												<td>
+													<div class="td-available-container">
+														<button class="input-available-button">-</button>
+														<input class="form-control" available=""
 														   id="priceOne${entry.key.productAttributes.get(0).id}"
 														   productId="${entry.key.productAttributes.get(0).id}"
 														   type="text"
-														   value="${entry.value}"/></td>
+														   value="${entry.value}" readonly="readonly"/>
+														<button class="input-available-button">+</button>
+													</div>
+												</td>
 												<td class="text-right"
 													id="price${entry.key.productAttributes.get(0).id}">${entry.key.productAttributes.get(0).price*entry.value}</td>
 												<td class="text-right">
@@ -106,27 +84,27 @@
 												</td>
 											</tr>
 										</c:forEach>
-										<tr>
+										<tr class="last-tr">
 											<td></td>
 											<td></td>
 											<td></td>
 											<td></td>
-											<td><strong>Total</strong></td>
+											<td><strong>сумма к оплате</strong></td>
 											<td class="text-right" id="cartSum"><strong>${cart.getSum()}</strong></td>
 										</tr>
 										</tbody>
 									</table>
 								</div>
-								<td class="text-right">
-									<button class="buy-button" onclick="cleanCart()">Clean All</button>
-								</td>
 							</div>
 							<div class="col mb-2">
 								<div class="row">
 									<div class="col-sm-12  col-md-6">
+										<button class="buy-button" onclick="cleanCart()">отчистить корзину</button>
+									</div>
+									<div class="col-sm-12  col-md-6">
 										<button class="buy-button"
 												onclick="location.href='http://localhost:8080/catalog.jsp?sortType=PRICE_UP'">
-											Continue Shopping
+											вернуться в каталог
 										</button>
 									</div>
 									<div class="col-sm-12 col-md-6 text-right">
@@ -134,7 +112,7 @@
 											<c:when test="${empty currentUser}">
 												<button class="buy-button"
 														onclick="location.href='http://localhost:8080/registration.jsp'">
-													SignUp
+													войти
 												</button>
 											</c:when>
 											<c:otherwise>
@@ -151,6 +129,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 		</c:otherwise>
 	</c:choose>
 

@@ -254,6 +254,88 @@ a{
 }
 
 
+
+/* CART */
+
+
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+.cart-container{
+	width: 60% !important;
+}
+.div-table{
+	margin: 100px 0 0
+}
+.table{
+	text-transform: uppercase;
+	border-collapse: collapse;
+	border-spacing: 0;
+	text-align: center;
+}
+.table td{
+	padding: 0 5px;
+	border-bottom: 1px solid #000;
+}
+.first-tr{
+	border-bottom: 1px solid #000;
+}
+.last-tr td{
+	border: none;
+	padding: 5px 5px;
+}
+.row{
+	display: flex;
+	justify-content: space-between;
+}
+.form-control{
+	width: 60px;
+	height: 30px;
+	font-size: 14px;
+	padding: 0 10px;
+
+}
+.td-available-container{
+	display: flex;
+	align-items: center;
+}
+.input-available-button{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 5px;
+	margin: 0 5px;
+	border: none;
+	border-radius: 5px;
+	background-color: #DCD0FA;
+	-webkit-transition: background-color 0.3s;
+}
+.input-available-button:hover{
+	background-color: #DCA3FA;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+
+
+
+
+
+
+
+
 /* INDEX.HTML BANNER AND FILLUP */
 
 
