@@ -56,3 +56,30 @@ INNER JOIN categories
 ON products.categoryID = categories.id
 WHERE product.id = "YOUR ID"
 GROUP BY products_attributes.productID
+
+
+#TRIGGER VALIDATOR: CHECK IF NEW OUTCOME AMOUNT CANT BE MORE THEN WE HAVE IN STOCK CURRENTLY
+DECLARE whereID INT;
+DECLARE currentInStock INT;
+SET whereID = NEW.productAttributeID;
+SELECT products_in_stock.in_stock-IFNULL(SUM(products_out.amountOUT),0)
+INTO currentInStock
+FROM products_in_stock
+LEFT JOIN products_out
+ON products_in_stock.id = products_out.productAttributeID
+WHERE products_in_stock.id = whereID;
+IF (currentInStock - NEW.amountOUT) < 0 THEN
+SET NEW.amountOUT = 0;
+END IF; 
+
+#TRIGGER LOGGER: ADD INFO IN LOGGER TABLE
+DECLARE str VARCHAR(50);
+IF NEW.amountOUT = 0 THEN
+SELECT "ERROR"
+INTO str;
+ELSE
+SELECT CONCAT('Продажа товара id = ',NEW.productAttributeID) 
+INTO str;
+END IF;
+INSERT INTO logger(`action`,amount,`date`) VALUES (str,NEW.amountOUT,NEW.dateOUT);
+
