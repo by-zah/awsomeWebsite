@@ -40,17 +40,38 @@ function cleanCart() {
 
 }
 
+function plus(it) {
+    let v = it.closest("div");
+    let inp = v.find("input");
+    let r = parseInt(inp.val());
+    r = r + 1;
+    $(inp).val(r);
+    updateCart(inp);
+}
+
+function minus(it) {
+    let v = it.closest("div");
+    let inp = v.find("input");
+    let r = parseInt(inp.val());
+    r = r - 1;
+    if (r < 1) {
+        r = 1;
+    }
+    $(inp).val(r);
+    updateCart(inp);
+}
+
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("cart", "cart?availableAll=true");
     getJson(url);
-    $("tr td input ").mousemove(
+    $("div input").change(
         function () {
             updateCart($(this))
         }
     )
-})
 
+})
 function deleteFromCart(btn) {
     $.get('cart', {
         amount: -1,

@@ -64,14 +64,18 @@
 												</c:choose>
 												<%--<td id="available${entry.key.productAttributes.get(0).id}"></td>--%>
 												<td>
-													<div class="td-available-container">
-														<button class="input-available-button">-</button>
-														<input class="form-control" available=""
-														   id="priceOne${entry.key.productAttributes.get(0).id}"
-														   productId="${entry.key.productAttributes.get(0).id}"
-														   type="text"
-														   value="${entry.value}" readonly="readonly"/>
-														<button class="input-available-button">+</button>
+													<div o="popo" class="td-available-container">
+														<button onclick="minus($(this))" class="input-available-button">
+															-
+														</button>
+														<input o="popo" class="form-control" available=""
+															   id="priceOne${entry.key.productAttributes.get(0).id}"
+															   productId="${entry.key.productAttributes.get(0).id}"
+															   type="text"
+															   value="${entry.value}" readonly="readonly"/>
+														<button o="popo" onclick="plus($(this))"
+																class="input-available-button">+
+														</button>
 													</div>
 												</td>
 												<td class="text-right"
@@ -134,6 +138,28 @@
 	</c:choose>
 
 </content>
+<script>
+	function plus(it) {
+		let v = it.closest("div");
+		let inp = v.find("input");
+		let r = parseInt(inp.val());
+		r = r + 1;
+		$(inp).val(r);
+		updateCart(inp);
+	}
+
+	function minus(it) {
+		let v = it.closest("div");
+		let inp = v.find("input");
+		let r = parseInt(inp.val());
+		r = r - 1;
+		if (r < 1) {
+			r = 1;
+		}
+		$(inp).val(r);
+		updateCart(inp);
+	}
+</script>
 <%@ include file="jspf/footer.jspf" %>
 <script src="js/jQuery.min.js"></script>
 <script src="/js/cart.js"></script>
