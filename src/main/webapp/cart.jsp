@@ -18,8 +18,8 @@
 	<c:choose>
 		<c:when test="${cart.cart=='{}'}">
 			<div class="empty-cart">
-				<h2 class="content-title">
-					корзина
+				<h2>
+						${orderAlert}
 				</h2>
 				<img class="empty-cart-img" src="img/empty-cart.svg">
 				<h4>в корзине нет товаров</h4>

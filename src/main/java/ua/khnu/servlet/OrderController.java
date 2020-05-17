@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Random;
 
 @WebServlet("/order")
 public class OrderController extends HttpServlet {
@@ -29,6 +30,7 @@ public class OrderController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cart cart = (Cart) req.getSession().getAttribute("cart");
         if (cart.getSum() == 0) {
+            System.out.println("popopo");
             req.setAttribute("orderAlert", "For making order you need add something in cart");
             req.getRequestDispatcher("cart.jsp");
         } else {
@@ -37,7 +39,7 @@ public class OrderController extends HttpServlet {
             //int orderId = productService.makeOrder(order);
             //  productService.cleanUserTemporaryCart(order.getUserMail());
 
-            req.setAttribute("orderAlert", "You order №" + Math.random() * 100 + " is ready");
+            req.setAttribute("orderAlert", "You order №" + (new Random().nextInt()) + " is ready");
             cart.clear();
             req.getSession().setAttribute("cart", cart);
         }
