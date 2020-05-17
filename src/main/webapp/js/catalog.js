@@ -33,7 +33,7 @@ function getAll() {
     if (!!$("#priceTo").val()) {
         url.searchParams.append('priceTo', $("#priceTo").val());
     }
-    alert(url);
+
     history.pushState(null, null, url);//заменяет урду сверху но не переходит
     getJson();
 }
