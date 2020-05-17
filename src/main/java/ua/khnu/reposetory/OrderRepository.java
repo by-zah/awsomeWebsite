@@ -11,9 +11,7 @@ import ua.khnu.entity.ShippingAddress;
 import ua.khnu.util.DBConstant;
 
 import javax.sql.DataSource;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class OrderRepository extends AbstractRepository<Order> {
@@ -98,4 +96,14 @@ public class OrderRepository extends AbstractRepository<Order> {
         orderColumnNames[8] = "datePlaced";
         orderColumnNames[9] = "comment";
     }
+
+    @Override
+    protected List<Order> getObjectListFromResultList(List<Map<String, Object>> resList) {
+        List<Order> orders = new ArrayList<>();
+        resList.forEach(m -> {
+
+        });
+        return super.getObjectListFromResultList(resList);
+    }
+
 }
