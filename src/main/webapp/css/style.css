@@ -964,22 +964,32 @@ a{
 .order{
 	display: flex;
 	min-height: 200px;
-	width: 100%;
 	box-shadow: 2px 2px 6px 0px  rgba(0,0,0,0.3);
 	border-radius: 20px;
 	margin: 0 auto;
-	width: 70%;
+	width: 100%;
+	flex-direction: column;
+}
+.order-main-holder{
+	display: flex;
 	justify-content: space-around;
+}
+.order-image-container{
+	width: 50%;
+	padding: 20px;
+	display: flex;
+	align-items: center;
 }
 .order-image{
 	width: 200px;
-	margin: 20px;
+	margin: 0 auto;
 }
 .goods-description-container{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	margin: 0 100px 0 0;
+	padding: 0 100px 0 0;
+	width: 50%;
 }
 .order-product-title-container{
 	margin: 30px 0 10px 0;
@@ -1023,7 +1033,6 @@ a{
 	text-align: center;
 	background-color: #DCD0FA;
 }
-
 
 /* ORDER.JSP V2 */
 
@@ -1077,5 +1086,64 @@ a{
 	background-color: #DCA3FA;
 	transition: 0.3s;
 }
+
+
+
+
+/* PROFILE.JSP */
+
+
+
+
+.profile-info-container{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	margin: 100px 0;
+}
+.profile-default-icon{
+	display: flex;
+	align-items: center;
+	width: 50%;
+	border-right: 1px solid #000;
+}
+.profile-image{
+	width: 200px;
+	margin: 0 auto;
+}
+.account-text-info{
+	margin: 0 auto;
+	width: 80%;
+}
+.profile-account-info{
+	text-transform: uppercase;
+	width: 50%;
+}
+.profile-info-title{
+	font-weight: normal;
+}
+.account-info-title{
+	font-weight: normal;
+	margin: 20px 0;
+}
+.profile-order-container{
+	margin: 0 0 100px 0;
+}
+.profile-order-main-title{
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 22px;
+	letter-spacing: 8px;
+	text-align: center;
+}
+.profile-empty-orders{
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 18px;
+	text-align: center;
+	margin: 20px 0 40px 0;
+}
+
+
 
 

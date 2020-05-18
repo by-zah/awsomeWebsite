@@ -24,7 +24,7 @@
         <a class="login-button" href="login.jsp">войти</a>
     </c:when>
     <c:otherwise>
-        <a class="login-button" href="#"><img class="login-button-image" src="img/user.png"></a>
+        <a class="login-button" href="profile.jsp"><img class="login-button-image" src="img/user.png"></a>
     </c:otherwise>
 </c:choose>
             <a href="http://localhost:8080/cart"><img class="icon-img" src="img/cart.png"></a>
