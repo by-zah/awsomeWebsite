@@ -17,6 +17,11 @@ public class Order {
     private Double totalPrice;
     private Long datePlaced;
     private String comment;
+    /**
+     * key - Product with at least id and price
+     * value - amount
+     */
+    private Map<Product, Integer> productAndAmount;
 
     public Integer getId() {
         return id;
@@ -25,12 +30,6 @@ public class Order {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    /**
-     * key - Product with at least id and price
-     * value - amount
-     */
-    private Map<Product, Integer> productAndAmount;
 
     public Double getTotalProductPrice() {
         return totalProductPrice;
