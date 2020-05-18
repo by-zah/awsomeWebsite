@@ -1,14 +1,19 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
 import java.util.Map;
 
 public class Order {
+    private Integer id;
     private Integer userId;
     private String paymentMethod;
+    @DBName(name = "shippingMethodID")
     private ShippingMethod shippingMethod;
     private ShippingAddress shippingAddress;
     private Double totalProductPrice;
     private Double deliveryPrice;
+    @DBName(name = "discountAmount")
     private Double discount;
     private Double totalPrice;
     private Long datePlaced;
@@ -18,6 +23,14 @@ public class Order {
      * value - amount
      */
     private Map<Product, Integer> productAndAmount;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Double getTotalProductPrice() {
         return totalProductPrice;
@@ -105,6 +118,24 @@ public class Order {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", shippingMethod=" + shippingMethod +
+                ", shippingAddress=" + shippingAddress +
+                ", totalProductPrice=" + totalProductPrice +
+                ", deliveryPrice=" + deliveryPrice +
+                ", discount=" + discount +
+                ", totalPrice=" + totalPrice +
+                ", datePlaced=" + datePlaced +
+                ", comment='" + comment + '\'' +
+                ", productAndAmount=" + productAndAmount +
+                '}';
     }
 }
 

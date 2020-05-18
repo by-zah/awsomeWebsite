@@ -1,12 +1,15 @@
 package ua.khnu.entity;
 
 
+import ua.khnu.util.DBName;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Product {
-    private int id;
+    @DBName(name = "productID")
+    private Integer id;
     private String title;
     private String description;
     private String category;

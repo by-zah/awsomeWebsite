@@ -1,11 +1,16 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
+@DBName(name = "shipping_addresses")
 public class ShippingAddress {
+    @DBName(name = "shippingAddressID")
     private int id;
     private String city;
     private String region;
     private String street;
     private String building;
+    @DBName(name = "`index`")
     private String index;
 
     public int getId() {

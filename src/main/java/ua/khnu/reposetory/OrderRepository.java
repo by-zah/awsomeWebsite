@@ -6,13 +6,15 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.khnu.entity.Order;
+import ua.khnu.entity.Product;
 import ua.khnu.entity.ProductAttribute;
 import ua.khnu.entity.ShippingAddress;
+import ua.khnu.exception.InitException;
 import ua.khnu.util.DBConstant;
 
 import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 @Component
 public class OrderRepository extends AbstractRepository<Order> {
@@ -72,7 +74,7 @@ public class OrderRepository extends AbstractRepository<Order> {
         params.put(orderColumnNames[5], order.getDeliveryPrice());
         params.put(orderColumnNames[6], order.getDiscount());
         params.put(orderColumnNames[7], order.getTotalPrice());
-        params.put(orderColumnNames[8], order.getDatePlaced());
+        params.put(orderColumnNames[8], new Date(order.getDatePlaced()));
         params.put(orderColumnNames[9], order.getComment());
         return params;
     }
@@ -83,7 +85,7 @@ public class OrderRepository extends AbstractRepository<Order> {
         shippingAddressColumnNames[1] = "region";
         shippingAddressColumnNames[2] = "street";
         shippingAddressColumnNames[3] = "building";
-        shippingAddressColumnNames[4] = "index";
+        shippingAddressColumnNames[4] = "`index`";
 
         orderColumnNames = new String[10];
         orderColumnNames[0] = "userID";
@@ -97,4 +99,29 @@ public class OrderRepository extends AbstractRepository<Order> {
         orderColumnNames[8] = "datePlaced";
         orderColumnNames[9] = "comment";
     }
+
+    @Override
+    protected List<Order> getObjectListFromResultList(List<Map<String, Object>> resList) {
+        List<Order> orders = new ArrayList<>();
+        resList.forEach(m -> {
+            try {
+                Order order = getObject(m, Order.class);
+                List<Product> products = getInnerList(m, Product.class);
+                List<ProductAttribute> pa = getInnerList(m, ProductAttribute.class);
+                String[] amounts = getArrBySeparator(m.get("amount"));
+                Map<Product, Integer> productAndAmount = new HashMap<>();
+                for (int i = 0; i < products.size(); i++) {
+                    Product product = products.get(i);
+                    product.addProductAttribute(pa.get(i));
+                    productAndAmount.put(product, Integer.parseInt(amounts[i]));
+                }
+                order.setProductAndAmount(productAndAmount);
+                orders.add(order);
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
+            }
+        });
+        return orders;
+    }
+
 }
