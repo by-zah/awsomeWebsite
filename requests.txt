@@ -83,3 +83,37 @@ INTO str;
 END IF;
 INSERT INTO logger(`action`,amount,`date`) VALUES (str,NEW.amountOUT,NEW.dateOUT);
 
+SELECT active_orders.id AS id,
+userID,
+paymentMethod,
+shippingMethodID,
+shippingAddressID,
+city,
+region,
+street,
+building,
+'index',
+totalProductPrice,
+deliveryPrice,
+discountAmount,
+totalPrice,
+datePlaced,
+'comment',
+GROUP_CONCAT(products_orders.productsAttributesID SEPARATOR ';') AS productAttributeID,
+GROUP_CONCAT(products_attributes.productID SEPARATOR ';')  AS productID,
+GROUP_CONCAT(products.title SEPARATOR ';') AS productTitle,
+GROUP_CONCAT(products.description SEPARATOR ';') AS description,
+GROUP_CONCAT(categories.title SEPARATOR ';') AS category,
+GROUP_CONCAT(products_attributes.photo SEPARATOR ';') AS photo,
+GROUP_CONCAT(products_attributes.price SEPARATOR ';') AS price,
+GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,
+GROUP_CONCAT(products_attributes.size SEPARATOR ';') AS size,
+GROUP_CONCAT(products_orders.amount SEPARATOR ';') AS amount
+FROM active_orders
+INNER JOIN shipping_addresses ON active_orders.shippingAddressID = shipping_addresses.id
+INNER JOIN products_orders ON active_orders.id = products_orders.activeOrderID
+INNER JOIN products_attributes ON products_orders.productsAttributesID = products_attributes.id
+INNER JOIN products ON products_attributes.productID = products.id
+INNER JOIN categories ON products.categoryID = categories.id
+GROUP BY active_orders.id;
+
