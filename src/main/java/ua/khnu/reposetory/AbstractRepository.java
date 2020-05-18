@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Component
 public abstract class AbstractRepository<T> {
-    private static final Logger LOG = Logger.getLogger(UserRepository.class);
     public static final String CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS = "can not read column properties for this class";
     private static final String SEPARATOR = ";";
     private static final Logger LOG = Logger.getLogger(AbstractRepository.class);
