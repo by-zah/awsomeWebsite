@@ -5,6 +5,7 @@ import ua.khnu.util.DBName;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Product {
     @DBName(name = "productID")
@@ -71,5 +72,22 @@ public class Product {
                 ", category='" + category + '\'' +
                 ", productAttributes=" + productAttributes +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id &&
+                Objects.equals(title, product.title) &&
+                Objects.equals(description, product.description) &&
+                Objects.equals(category, product.category) &&
+                Objects.equals(productAttributes, product.productAttributes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, category, productAttributes);
     }
 }

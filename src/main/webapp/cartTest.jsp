@@ -45,34 +45,36 @@
     </style>
     <!-- Custom styles for this template -->
     <script src="https://1303571256.rsc.cdn77.org/doc_big.js?v=10#"></script>
+    <style>
+        .container {
+            max-width: 960px;
+            margin: auto;
+        }
+
+    </style>
 
 </head>
 <body>
 <%--<tagFile:header/>--%>
-<style>
-    .container {
-        max-width: 960px;
-        margin: auto;
-    }
 
-</style>
-
-
+<%@ include file="jspf/header.jspf" %>
 <div class="container mb-4">
     <div class="row">
         <div class="panel-body-catalog">
             <div class="left-sidebar">
                 <h4>${orderAlert}</h4>
+                <h5 id="alert">${alert}</h5>
                 <div class="col-12">
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
-                                <th scope="col">Product</th>
-                                <th scope="col">Available</th>
-                                <th class="text-center" scope="col">Quantity</th>
-                                <th class="text-right" scope="col">Price</th>
+                                <th scope="col">Продукт</th>
+                                <th scope="col">Размер</th>
+                                <th scope="col">Сколько доступно</th>
+                                <th class="text-center" scope="col">Количество</th>
+                                <th class="text-right" scope="col">Цена</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -83,13 +85,21 @@
                                         width: 140px;
                                         height: 105px;"/></td>
                                     <td>${entry.key.title}</td>
-                                    <td>In stock</td>
-                                    <td><input class="form-control"
+                                    <c:choose>
+                                        <c:when test="${entry.key.productAttributes.get(0).size=='null'}">
+                                            <td>-</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>${entry.key.productAttributes.get(0).size}</td>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <td id="available${entry.key.productAttributes.get(0).id}"></td>
+                                    <td><input class="form-control" available=""
                                                id="priceOne${entry.key.productAttributes.get(0).id}"
                                                productId="${entry.key.productAttributes.get(0).id}" type="text"
                                                value="${entry.value}"/></td>
                                     <td class="text-right"
-                                        id="sum${entry.key.productAttributes.get(0).id}">${entry.key.productAttributes.get(0).price*entry.value}</td>
+                                        id="price${entry.key.productAttributes.get(0).id}">${entry.key.productAttributes.get(0).price*entry.value}</td>
                                     <td class="text-right">
                                         <button class="btn btn-sm btn-danger"><i class="fa fa-trash"
                                                                                  productId="${entry.key.productAttributes.get(0).id}"></i>
@@ -109,7 +119,7 @@
                         </table>
                     </div>
                     <td class="text-right">
-                        <button class="btn btn-sm btn-danger" shoesId="-1">Clean All</button>
+                        <button class="btn btn-sm btn-danger" onclick="cleanCart()">Clean All</button>
                     </td>
                 </div>
                 <div class="col mb-2">
@@ -140,7 +150,8 @@
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@ include file="jspf/footer.jspf" %>
+<script src="js/jQuery.min.js"></script>
 <script crossorigin="anonymous"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>

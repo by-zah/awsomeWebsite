@@ -62,6 +62,25 @@ insert  into `categories`(`id`,`title`,`description`) values
 (3,'Фигурки','статуэтки,коллекционные фигурки'),
 (4,'Аксессуары',NULL);
 
+/*Table structure for table `logger` */
+
+DROP TABLE IF EXISTS `logger`;
+
+CREATE TABLE `logger` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `action` varchar(25) DEFAULT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `logger` */
+
+insert  into `logger`(`ID`,`action`,`amount`,`date`) values 
+(1,'Продажа товара id = 20',2,'2020-05-16 23:18:23'),
+(2,'Продажа товара id = 20',2,'2020-05-16 23:18:35'),
+(3,'Продажа товара id = 20',3,'2020-05-16 23:18:39');
+
 /*Table structure for table `products` */
 
 DROP TABLE IF EXISTS `products`;
@@ -131,7 +150,7 @@ insert  into `products_attributes`(`id`,`productID`,`color`,`size`,`price`,`phot
 (8,4,'black','M',1200,'images/4_tshirt_fan.jpg'),
 (9,4,'black','L',1200,'images/4_tshirt_fan.jpg'),
 (10,4,'black','XXL',1250,'images/4_tshirt_fan.jpg'),
-(11,5,NULL,'-',1000,'images/5_thorhammer.jpg'),
+(11,5,NULL,NULL,1000,'images/5_thorhammer.jpg'),
 (15,7,'white','L',1500,'images/7_tshirt_tlwhite.jpg'),
 (16,7,'white','XL',1500,'images/7_tshirt_tlwhite.jpg'),
 (17,7,'blue','L',1400,'images/7_tshirt_tlblue.jpg'),
@@ -222,8 +241,8 @@ CREATE TABLE `products_out` (
 /*Data for the table `products_out` */
 
 insert  into `products_out`(`id`,`productAttributeID`,`amountOUT`,`dateOUT`) values 
-(1,20,2,'2020-05-08 15:21:16'),
-(2,20,1,'2020-05-08 15:31:14');
+(1,20,2,'2020-05-16 23:18:35'),
+(2,20,3,'2020-05-16 23:18:39');
 
 /*Table structure for table `shipping_addresses` */
 
@@ -292,7 +311,7 @@ CREATE TABLE `users` (
   `mailingEnabled` tinyint(1) DEFAULT 0,
   `contactNumber` varchar(14) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `users` */
 
@@ -302,7 +321,57 @@ insert  into `users`(`id`,`email`,`password`,`mailingEnabled`,`contactNumber`) v
 (3,'liciy_ne_prigovor@yahoo.com','pythonlove',0,'+380395556410'),
 (4,'nokoronaviruspls@gmail.com','sqltop',0,'+380400655592'),
 (6,'takemylove314@gmail.com','test',0,'+380400655592'),
-(7,'yvaweniep4elkam@gmail.com','test',0,'+380400655592');
+(7,'yvaweniep4elkam@gmail.com','test',0,'+380400655592'),
+(8,'dsadasdasd@gmail.com','200820e3227815ed1756a6b531e7e0d2',1,'+380955721071'),
+(9,'sundeltop322@gmail.com','200820e3227815ed1756a6b531e7e0d2',1,'+380955721071');
+
+/* Trigger structure for table `products_out` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `validator` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `validator` BEFORE INSERT ON `products_out` FOR EACH ROW BEGIN
+	DECLARE whereID INT;
+	DECLARE currentInStock INT;
+	
+	SET whereID = NEW.productAttributeID;
+	select products_in_stock.in_stock-IFNULL(SUM(products_out.amountOUT),0)
+	into currentInStock
+	FROM products_in_stock
+	LEFT JOIN products_out
+	ON products_in_stock.id = products_out.productAttributeID
+	WHERE products_in_stock.id = whereID;
+	
+	if (currentInStock - NEW.amountOUT) < 0 THEN
+		set NEW.amountOUT = 0;
+	END IF;
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `products_out` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `logg_trigger` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'localhost' */ /*!50003 TRIGGER `logg_trigger` AFTER INSERT ON `products_out` FOR EACH ROW BEGIN
+	DECLARE str VARCHAR(50);
+	
+	IF NEW.amountOUT = 0 then
+		SELECT "ERROR"
+		INTO str;
+	ELSE
+		SELECT CONCAT('Продажа товара id = ',NEW.productAttributeID) 
+		INTO str;
+	END IF;
+	INSERT INTO logger(`action`,amount,`date`) VALUES (str,NEW.amountOUT,NEW.dateOUT);
+    END */$$
+
+
+DELIMITER ;
 
 /*Table structure for table `products_in_stock` */
 
@@ -321,7 +390,7 @@ DROP TABLE IF EXISTS `products_in_stock`;
 /*!50001 DROP TABLE IF EXISTS `products_in_stock` */;
 /*!50001 DROP VIEW IF EXISTS `products_in_stock` */;
 
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_in_stock` AS (select `products_attributes`.`id` AS `id`,sum(`products_in`.`amountIN`) AS `in_stock` from (`products_attributes` join `products_in` on(`products_attributes`.`id` = `products_in`.`productAttributeID`)) group by `products_attributes`.`id`) */;
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `products_in_stock` AS (select `products_attributes`.`id` AS `id`,ifnull(sum(`products_in`.`amountIN`),0) AS `in_stock` from (`products_attributes` left join `products_in` on(`products_attributes`.`id` = `products_in`.`productAttributeID`)) group by `products_attributes`.`id`) */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

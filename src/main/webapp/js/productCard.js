@@ -1,29 +1,65 @@
-let isEmpty = function (variable) {
-    return variable === undefined || variable === null || variable === '' || variable.length === 0;
+function getJsonMini(url) {
+    $.get(url,
+        function (responseJSON) {
+
+            $("#idUnic").attr("value", responseJSON.idUnic);
+            if (!isEmpty(responseJSON.price)) {
+                $("#price").text(responseJSON.price + " грн.");
+            }
+            $("#image").attr("src", responseJSON.image);
+            $("#available").text(responseJSON.amountAvail);
+            console.log("lybyf  " + responseJSON.colors.length);
+        });
 }
 
-function getJson() {
-    $.get(window.location.href,
+function getJson(url) {
+
+    $.get(url,
         function (responseJSON) {
-            alert(responseJSON);
+
             $("#title").text(responseJSON.title);
-            $("#category").text(responseJSON.category);
-            $("#price").text(responseJSON.price);
+            $("#productId").attr("value", responseJSON.idProd);
+            $("#idUnic").attr("value", responseJSON.idUnic);
+            $("#category").text("категория: " + responseJSON.category);
+            $("#price").text(responseJSON.price + " грн.");
             $("#description").text(responseJSON.description);
             $("#image").attr("src", responseJSON.image);
+            $("#available").text(responseJSON.amountAvail);
+            for (let i = 0; i < responseJSON.colors.length; i++) {
+                let option = new Option(responseJSON.colors[i]);
+                if (responseJSON.colorSelect === option) {
+                    option.selected = true;
+                }
+
+                $(option).appendTo('#color');
+            }
+            if (responseJSON.amountAvail === "Нет в наличии") {
+                $("#price").css("color", "grey");
+                $("#buy-button").attr("disabled", "disabled");
+            }
+            for (let i = 0; i < responseJSON.sizes.length; i++) {
+                let option = new Option(responseJSON.sizes[i]);
+                if (responseJSON.sizeSelect === option.value) {
+                    option.selected = true;
+                }
+                $(option).appendTo('#size');
+            }
+            console.log(responseJSON.colors[0]);
+            if (responseJSON.colors[0] === "null") {
+                $("#color").remove();
+                $("#size").remove();
+                $(".measure-link").remove();
+                $(".size-title").remove();
+            }
         });
-    let url = window.location.href;
-    url = url.replace("product", "product.jsp");
-    history.pushState(null, null, url);
+
 
 }
 
 $(document).ready(function () {
     let url = window.location.href;
     url = url.replace("product.jsp", "product");
-    alert(url);
-    history.pushState(null, null, url);
-    getJson();
+    getJson(url);
     $("#size").change(
         function () {
 
@@ -50,11 +86,24 @@ function getAll() {
         url.searchParams.append('size', $(this).val());
     });
     url.searchParams.append('productId', $("#productId").val());
-    alert(url);
-    history.pushState(null, null, url);//заменяет урду сверху но не переходит
-    getJson();
+
+    getJsonMini(url);
 }
 
 let isEmpty = function (variable) {
     return variable === undefined || variable === null || variable === '' || variable.length === 0;
+}
+
+function addCart() {
+    let av = $("#available").text().replace("На складе осталось", "");
+    if (parseInt($("#amount").val()) > parseInt(av)) {
+        alert("Слишком большое количество, выберите меньше")
+    } else {
+        $.get('cart', {
+            amount: $("#amount").val(),
+            productId: $("#idUnic").val()
+        }, function (responseJSON) {
+            alert("Успешно добавленно")
+        });
+    }
 }

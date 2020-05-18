@@ -1,6 +1,10 @@
 package ua.khnu.entity;
 
+
 import ua.khnu.util.DBName;
+
+import java.util.Objects;
+
 
 public class ProductAttribute {
     @DBName(name = "attributeID")
@@ -60,5 +64,22 @@ public class ProductAttribute {
                 ", price=" + price +
                 ", photo='" + photo + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductAttribute that = (ProductAttribute) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(color, that.color) &&
+                Objects.equals(size, that.size) &&
+                Objects.equals(price, that.price) &&
+                Objects.equals(photo, that.photo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, color, size, price, photo);
     }
 }

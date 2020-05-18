@@ -18,39 +18,44 @@
 		<div class="content-container">
 			<div class="main-product-container">
 				<div class="main-image-container">
-					<img id="image" class="product-image" src="img/image-showcase-0.png">
+					<img id="image" class="product-image" src="">
 				</div>
 
 				<div class="main-product-info-container">
-					<h2 id="title" class="product-main-title">что-то там для примера</h2>
-					<h4 id="category" class="product-category">аа категория продукт аа</h4>
-					<h4 id="price" class="product-price">2 грн.</h4>
+					<h2 id="title" class="product-main-title">пример</h2>
+					<h4 id="category" class="product-category">категория</h4>
+					<h4 id="price" class="product-price">100 грн.</h4>
 					<div class="small-divider"></div>
-					<h4 class="size-title">размер</h4>
 					<input type="hidden" id="productId" value="">
+					<input type="hidden" id="idUnic" value="">
+
 					<div class="size-container">
+						<h4 class="size-title">размер:</h4>
 						<select id="size" class="custom-select">
-							<option>M</option>
-							<option>L</option>
-							<option>XL</option>
-							<option>XXL</option>
 						</select>
 					</div>
-					<h4 class="size-title">цвет</h4>
 					<div class="size-container">
+						<h4 class="size-title">цвет:</h4>
 						<select id="color" class="custom-select">
-							<option>Red</option>
 						</select>
 					</div>
+					<div class="size-container">
+						<h4 class="amount-input-title">кол-во:</h4>
+						<input id="amount" class="custom-select amount-input" type="text" value="1"/>
+					</div>
+					<h5 id="available"></h5>
 					<div class="measure-link"><a href="javascript:PopUpShow()">подбор размера</a></div>
-					<button class="buy-button" id="buy-button" type="button" name="buy">добавить в корзину</button>
+					<button class="buy-button" id="buy-button" onclick="addCart()" type="button" name="buy">добавить в
+						корзину
+					</button>
 					</input>
 				</div>
-				<div class="product-description-container">
-					<h3 class="description-title">описание</h3>
-					<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
-					<div id="description" class="product-description">
-					</div>
+
+			</div>
+			<div class="product-description-container">
+				<h3 class="description-title">описание</h3>
+				<div class="small-divider" style="width: 13%; margin: 0 auto;"></div>
+				<div id="description" class="product-description">
 				</div>
 			</div>
 
@@ -125,6 +130,7 @@
 			    	</div>	    	
 			    </div>
 			</div>
+		</div>
 		</div>
 
 		</content>

@@ -35,7 +35,8 @@ public class QueryBuilder {
 
     public String getQueryFromCategoryRequestParams(CatalogRequestParams crp) {
         validateCrp(crp);
-        StringBuilder query = new StringBuilder(ProductService.QUERY_BODY);
+        StringBuilder query = new StringBuilder(ProductService.QUERY_BODY+
+                ",MIN(products_attributes.price) AS min_price\n"+ProductService.FROM);
         boolean isWhereAdded = false;
         if (crp.getPriceFrom() != null && crp.getPriceTo() != null) {
             isWhereAdded = addWhere(query, false);
@@ -85,8 +86,8 @@ public class QueryBuilder {
 
     private void initSortTypes() {
         sortTypes = new EnumMap<>(SortType.class);
-        sortTypes.put(PRICE_UP, "ORDER BY price");
-        sortTypes.put(PRICE_DOWN, "ORDER BY price DESC");
+        sortTypes.put(PRICE_UP, "ORDER BY min_price");
+        sortTypes.put(PRICE_DOWN, "ORDER BY min_price DESC");
         sortTypes.put(ALPHABET_UP, "ORDER BY title");
         sortTypes.put(ALPHABET_DOWN, "ORDER BY title DESC");
     }

@@ -29,6 +29,7 @@ public class ProductService {
             "                    ON products_attributes.productID = products.id\n" +
             "         INNER JOIN categories\n" +
             "                    ON products.categoryID = categories.id\n";
+
     public static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS attributeID,\n" +
             "       products.title                                        AS title,\n" +
             "       categories.title                                      AS category,\n" +
@@ -37,6 +38,7 @@ public class ProductService {
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
             "       productID\n";
+  
     private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY + FROM +
             "WHERE categories.title =?\n" +
             "GROUP BY (products_attributes.productID)\n" +
@@ -52,12 +54,13 @@ public class ProductService {
         return res;
     }
 
-    private static final String GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID = "select (products_in_stock.in_stock - IFNULL(SUM(products_out.amountOUT), 0)) as current_in_stock\n" +
-            "from products_in_stock\n" +
-            "         left join products_out\n" +
-            "                   on products_in_stock.id = products_out.productAttributeID\n" +
+    private static final String GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID = "SELECT "+
+            "products_in_stock.in_stock - IFNULL(SUM(products_out.amountOUT),0) AS current_in_stock\n" +
+            "FROM products_in_stock\n" +
+            "LEFT JOIN products_out\n" +
+            "ON products_in_stock.id = products_out.productAttributeID\n" +
             "WHERE products_in_stock.id = ?\n" +
-            "group by products_in_stock.id";
+            "GROUP BY products_in_stock.id";
 
     public int getCountOfAvailableProductsById(int id) {
         return repository.queryForInt(GET_COUNT_OF_AVAILABLE_PRODUCTS_BY_ID, id).orElse(0);

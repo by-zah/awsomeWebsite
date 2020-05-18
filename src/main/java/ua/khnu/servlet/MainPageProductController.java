@@ -1,5 +1,6 @@
 package ua.khnu.servlet;
 
+import org.apache.commons.math3.util.Precision;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import ua.khnu.entity.Product;
@@ -14,7 +15,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet("/getRandomProductOnMain")
 public class MainPageProductController extends HttpServlet {
@@ -37,19 +40,24 @@ public class MainPageProductController extends HttpServlet {
             for (Product product : prod) {
                 JsonObjectBuilder prodBuilder = Json.createObjectBuilder();
                 JsonArrayBuilder arrayBuilderColor = Json.createArrayBuilder();
-                double min = -1;
-                double max = Double.MAX_VALUE;
+                double min = Double.MAX_VALUE;
+                double max = -1;
+                Set<String> colorSet = new HashSet<>();
                 for (ProductAttribute pr : product.getProductAttributes()) {
-                    arrayBuilderColor.add(pr.getColor());
+                    colorSet.add(pr.getColor());
                     max = Double.max(max, pr.getPrice());
                     min = Double.min(min, pr.getPrice());
                 }
+                for (String s : colorSet) {
+                    arrayBuilderColor.add(s);
+                }
                 String price;
                 if (min == max) {
-                    price = String.valueOf(max);
+                    price = String.valueOf(Precision.round(max, 2));
                 } else {
-                    price = min + "-" + max;
+                    price = Precision.round(min, 2) + "-" + Precision.round(max, 2);
                 }
+                logger.debug("Price:" + price);
                 JsonArray colors = arrayBuilderColor.build();
                 logger.debug(product.getProductAttributes().get(0));
                 JsonObject jsonProd = prodBuilder.add("id", product.getId())
