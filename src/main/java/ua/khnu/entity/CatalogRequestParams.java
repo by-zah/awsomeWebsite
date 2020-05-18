@@ -1,7 +1,6 @@
 package ua.khnu.entity;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CatalogRequestParams {
     private SortType sortType;

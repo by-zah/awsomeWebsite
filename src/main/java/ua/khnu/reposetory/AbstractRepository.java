@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ua.khnu.entity.ShippingMethod;
 import ua.khnu.exception.InitException;
-import ua.khnu.listener.ConfigListener;
 import ua.khnu.util.DBName;
 import ua.khnu.util.ThreeConsumer;
 
