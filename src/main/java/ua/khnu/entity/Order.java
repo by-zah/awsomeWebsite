@@ -8,6 +8,7 @@ public class Order {
     private Integer id;
     private Integer userId;
     private String paymentMethod;
+    @DBName(name = "shippingMethodID")
     private ShippingMethod shippingMethod;
     private ShippingAddress shippingAddress;
     private Double totalProductPrice;
@@ -117,6 +118,24 @@ public class Order {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                ", shippingMethod=" + shippingMethod +
+                ", shippingAddress=" + shippingAddress +
+                ", totalProductPrice=" + totalProductPrice +
+                ", deliveryPrice=" + deliveryPrice +
+                ", discount=" + discount +
+                ", totalPrice=" + totalPrice +
+                ", datePlaced=" + datePlaced +
+                ", comment='" + comment + '\'' +
+                ", productAndAmount=" + productAndAmount +
+                '}';
     }
 }
 

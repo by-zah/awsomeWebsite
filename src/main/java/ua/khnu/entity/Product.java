@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Product {
     @DBName(name = "productID")
-    private int id;
+    private Integer id;
     private String title;
     private String description;
     private String category;

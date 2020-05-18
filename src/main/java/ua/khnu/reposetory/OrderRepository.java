@@ -6,11 +6,14 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.khnu.entity.Order;
+import ua.khnu.entity.Product;
 import ua.khnu.entity.ProductAttribute;
 import ua.khnu.entity.ShippingAddress;
+import ua.khnu.exception.InitException;
 import ua.khnu.util.DBConstant;
 
 import javax.sql.DataSource;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 @Component
@@ -101,9 +104,24 @@ public class OrderRepository extends AbstractRepository<Order> {
     protected List<Order> getObjectListFromResultList(List<Map<String, Object>> resList) {
         List<Order> orders = new ArrayList<>();
         resList.forEach(m -> {
-
+            try {
+                Order order = getObject(m, Order.class);
+                List<Product> products = getInnerList(m, Product.class);
+                List<ProductAttribute> pa = getInnerList(m, ProductAttribute.class);
+                String[] amounts = getArrBySeparator(m.get("amount"));
+                Map<Product, Integer> productAndAmount = new HashMap<>();
+                for (int i = 0; i < products.size(); i++) {
+                    Product product = products.get(i);
+                    product.addProductAttribute(pa.get(i));
+                    productAndAmount.put(product, Integer.parseInt(amounts[i]));
+                }
+                order.setProductAndAmount(productAndAmount);
+                orders.add(order);
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                throw new InitException(CAN_NOT_READ_COLUMN_PROPERTIES_FOR_THIS_CLASS);
+            }
         });
-        return super.getObjectListFromResultList(resList);
+        return orders;
     }
 
 }

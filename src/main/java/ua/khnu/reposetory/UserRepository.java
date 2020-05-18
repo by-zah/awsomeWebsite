@@ -11,7 +11,6 @@ import ua.khnu.util.DBConstant;
 import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -42,16 +41,6 @@ public class UserRepository extends AbstractRepository<User> {
         int id = simpleJdbcInsert.executeAndReturnKey(extractParameters(user)).intValue();
         user.setId(id);
         return user;
-    }
-
-    public List<User> query(String query) {
-        return query(query, new Object[0]);
-    }
-
-    public List<User> query(String query, Object... args) {
-        LOG.debug("query --> " + query);
-        LOG.debug("args --> " + Arrays.toString(args));
-        return getObjectListFromResultList(jdbcAccessor.queryForList(query, args));
     }
 
     public boolean delete(int id) {

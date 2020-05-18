@@ -29,7 +29,7 @@ public class ProductService {
             "                    ON products_attributes.productID = products.id\n" +
             "         INNER JOIN categories\n" +
             "                    ON products.categoryID = categories.id\n";
-    public static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS id,\n" +
+    public static final String QUERY_BODY = "SELECT GROUP_CONCAT(products_attributes.id SEPARATOR ';')    AS attributeID,\n" +
             "       products.title                                        AS title,\n" +
             "       categories.title                                      AS category,\n" +
             "       GROUP_CONCAT(products_attributes.photo SEPARATOR ';') AS photo,\n" +
@@ -37,7 +37,7 @@ public class ProductService {
             "       GROUP_CONCAT(products_attributes.color SEPARATOR ';') AS color,\n" +
             "       GROUP_CONCAT(products_attributes.size SEPARATOR ';')  AS size,\n" +
             "       productID\n";
-    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY + FROM+
+    private static final String GET_RANDOM_PRODUCTS_FROM_CATEGORY = QUERY_BODY + FROM +
             "WHERE categories.title =?\n" +
             "GROUP BY (products_attributes.productID)\n" +
             "ORDER BY RAND()\n" +

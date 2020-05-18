@@ -1,6 +1,9 @@
 package ua.khnu.entity;
 
+import ua.khnu.util.DBName;
+
 public class ProductAttribute {
+    @DBName(name = "attributeID")
     private Integer id;
     private String color;
     private String size;
