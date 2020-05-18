@@ -47,7 +47,7 @@ $(document).ready(function () {
     getJson();
 });
 
-*/
+
 function ajax_get(url, callback) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -84,4 +84,19 @@ ajax_get('js/data.json', function(data) {
         document.getElementById("orders-container").innerHTML += html;
         console.log(Object.keys(data).length);
     }
+});
+
+ */
+$(document).ready(function () {
+
+    let newselect;
+    for (let i = 1; i<10; i++){
+        newselect += "<option class='expiration-select-option' value=0" + i + ">0"+ i +"</option>"
+    }
+    document.getElementById("cc-expiration-1").innerHTML += newselect;
+    newselect = "";
+    for (let i = 20; i<36; i++){
+        newselect += "<option class='expiration-select-option' value='20" + i + "'>20" + i +"</option>"
+    }
+    document.getElementById("cc-expiration-2").innerHTML += newselect;
 });

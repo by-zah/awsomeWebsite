@@ -300,6 +300,9 @@ a{
 	display: flex;
 	justify-content: space-between;
 }
+.panel-body-catalog{
+	margin: 0 auto;
+}
 .form-control{
 	width: 60px;
 	height: 30px;
@@ -1020,3 +1023,59 @@ a{
 	text-align: center;
 	background-color: #DCD0FA;
 }
+
+
+/* ORDER.JSP V2 */
+
+
+.content-order-title{
+	text-transform: uppercase;
+	letter-spacing: 10px;
+}
+.lead{
+	text-transform: uppercase;
+	color: #aaa;
+}
+.cart-product-image{
+	width:50px;
+	margin: 0 0 5px 0;
+}
+#address{
+	width: 100%;
+	font-size: 16px;
+}
+#country{
+	margin: 0;
+	width: 100% !important;
+}
+.order-payment-cart-container{
+	display: flex;
+	flex-direction: column;
+}
+.payment-row-holder{
+	display: flex;
+	justify-content: space-between;
+}
+.payment-card-block{
+	width: 49%;
+	margin: 1%;
+}
+.payment-card-block input{
+	width: 100%;
+	margin: 0;
+}
+.btn-block{
+	width: 50%;
+	margin: 0 auto;
+	text-transform: uppercase;
+	background-color: #DCD0FA;
+	-webkit-transition: all 0.3s;
+	border: none;
+	color: #000;
+}
+.btn-block:hover{
+	background-color: #DCA3FA;
+	transition: 0.3s;
+}
+
+

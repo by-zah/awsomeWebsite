@@ -79,7 +79,7 @@
 													</div>
 												</td>
 												<td class="text-right"
-													id="price${entry.key.productAttributes.get(0).id}">${entry.key.productAttributes.get(0).price*entry.value}</td>
+													id="price${entry.key.productAttributes.get(0).id}">${entry.key.productAttributes.get(0).price*entry.value} грн.</td>
 												<td class="text-right">
 													<button class="buy-button" onclick="deleteFromCart(this)"
 															productId="${entry.key.productAttributes.get(0).id}">
@@ -94,7 +94,7 @@
 											<td></td>
 											<td></td>
 											<td><strong>сумма к оплате</strong></td>
-											<td class="text-right" id="cartSum"><strong>${cart.getSum()}</strong></td>
+											<td class="text-right" id="cartSum"><strong>${cart.getSum()} грн.</strong></td>
 										</tr>
 										</tbody>
 									</table>
