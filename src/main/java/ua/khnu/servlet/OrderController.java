@@ -39,7 +39,7 @@ public class OrderController extends HttpServlet {
             //int orderId = productService.makeOrder(order);
             //  productService.cleanUserTemporaryCart(order.getUserMail());
 
-            req.setAttribute("orderAlert", "You order №" + (new Random().nextInt()) + " is ready");
+            req.setAttribute("orderAlert", "Ваш заказ №" + (new Random().nextInt()) + " готов");
             cart.clear();
             req.getSession().setAttribute("cart", cart);
         }
