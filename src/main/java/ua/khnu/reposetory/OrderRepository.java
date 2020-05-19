@@ -20,6 +20,7 @@ import java.util.*;
 public class OrderRepository extends AbstractRepository<Order> {
     private static final String ADD_PRODUCT_TO_ORDER = "INSERT INTO products_orders VALUE (?,?,?,?)";
     private static final String ADD_ORDER_STATUS = "INSERT INTO track_orders VALUE (?,?,null)";
+    private static final String ADD_PRODUCT_TO_OUT="INSERT INTO products_out value (default,?,?,?)";
     private SimpleJdbcInsert simpleJdbcInsertShippingAddress;
     private SimpleJdbcInsert simpleJdbcInsertOrder;
     private String[] shippingAddressColumnNames;
@@ -45,13 +46,16 @@ public class OrderRepository extends AbstractRepository<Order> {
         shippingAddress.setId(simpleJdbcInsertShippingAddress.
                 executeAndReturnKey(extractParams(shippingAddress)).intValue());
         int orderId = simpleJdbcInsertOrder.executeAndReturnKey(extractParams(order)).intValue();
+        Date date = new Date(order.getDatePlaced());
         order.getProductAndAmount().forEach((product, amount) -> {
-                    ProductAttribute pa = product.getProductAttributes().get(0);
-                    jdbcAccessor.update(ADD_PRODUCT_TO_ORDER,
-                            orderId, pa.getId()
-                            , amount, pa.getPrice());
-                });
-                jdbcAccessor.update(ADD_ORDER_STATUS, orderId, "заказан");
+            ProductAttribute pa = product.getProductAttributes().get(0);
+            jdbcAccessor.update(ADD_PRODUCT_TO_ORDER,
+                    orderId, pa.getId()
+                    , amount, pa.getPrice());
+            jdbcAccessor.update(ADD_PRODUCT_TO_OUT,pa.getId(),amount,date);
+        });
+        jdbcAccessor.update(ADD_ORDER_STATUS, orderId, "заказан");
+
     }
 
     private Map<String, Object> extractParams(ShippingAddress sa) {
