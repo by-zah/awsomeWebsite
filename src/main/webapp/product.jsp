@@ -8,6 +8,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Товар</title>
+
 		<link rel="icon" href="img/icon.png" type="image/png">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>

@@ -68,12 +68,12 @@
 														<button onclick="minus($(this))" class="input-available-button">
 															-
 														</button>
-														<input o="popo" class="form-control" available=""
+														<input class="form-control" available=""
 															   id="priceOne${entry.key.productAttributes.get(0).id}"
 															   productId="${entry.key.productAttributes.get(0).id}"
 															   type="text"
 															   value="${entry.value}" readonly="readonly"/>
-														<button o="popo" onclick="plus($(this))"
+														<button onclick="plus($(this))"
 																class="input-available-button">+
 														</button>
 													</div>
@@ -122,7 +122,7 @@
 											<c:otherwise>
 												<button class="buy-button"
 														onclick="location.href='http://localhost:8080/order.jsp'">
-													Checkout
+													Заказать
 												</button>
 											</c:otherwise>
 										</c:choose>

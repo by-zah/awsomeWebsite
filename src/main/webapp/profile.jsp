@@ -23,59 +23,92 @@
             <div class="profile-account-info">
                 <div class="account-text-info">
                     <h2 class="profile-info-title">информация об аккаунте</h2>
-                    <h3 class="account-info-title" id="account-email">ваш email: <strong>sapazale@gmail.com</strong></h3>
-                    <h3 class="account-info-title" id="account-phone">ваш телефон: <strong>+380984324783</strong></h3>
+                    <h3 class="account-info-title" id="account-email">ваш email: <strong>${currentUser.email}</strong>
+                    </h3>
+                    <h3 class="account-info-title" id="account-phone">ваш телефон:
+                        <strong>${currentUser.number}</strong></h3>
+                    <a class="buy-button" href="/logOut">Выйти</a>
                 </div>
             </div>
         </div>
-        <div class="content-divider" style="width: 100%;"></div>
-        <div class="profile-order-container">
-            <h3 class="profile-order-main-title">ваши заказы</h3>
-            <%--<h3 class="profile-empty-orders">здесь пока пусто :(</h3>
-            <a class="buy-button" type="button" href="catalog.jsp?sortType=PRICE_UP" style="display: block; margin: 0 auto;">перейти в каталог</a>--%>
-            <div class="profile-orders">
-                <div class='order-wrapper'>
-                    <div class='order'>
-                        <div class="order-main-holder">
-                            <div class='order-image-container'><img class='order-image' src='images/2_tshirt_deadpool.jpg'></div>
-                            <div class='goods-description-container'>
-                                <div class='order-product-title-container'>
-                                    <h3 class='order-product-title'>DEADPOOL T-SHIRT FOR ADULTDS</h3>
-                                </div>
-                                <div class='order-product-description-container'>
-                                    <div class='order-product-color-container'>
-                                        <h3 class='order-color-title'>цвет:</h3>
-                                        <div class='order-product-color' style='background-color: red'></div>
-                                    </div>
-                                    <h3 class='order-product-price'>цена: 850 грн.</h3>
-                                    <div class='order-product-amount-container'>
-                                        <h3 class='order-amount-title'>кол-во:</h3>
-                                        <input class='order-product-amount' value='1' disabled>
-                                    </div>
+        <c:choose>
+            <c:when test="${orders=='[]'}">
+                <div class="empty-cart">
+                    <img class="empty-cart-img" src="img/empty-cart.svg">
+                    <h4>У вас нет заказов</h4>
+                    <a class="sending-button" href="http://localhost:8080/catalog.jsp?sortType=PRICE_UP">перейти в
+                        каталог</a>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="content-divider" style="width: 100%;"></div>
+                <div class="profile-order-container">
+                    <h3 class="profile-order-main-title">ваши заказы</h3>
+                        <%--<h3 class="profile-empty-orders">здесь пока пусто :(</h3>
+                        <a class="buy-button" type="button" href="catalog.jsp?sortType=PRICE_UP" style="display: block; margin: 0 auto;">перейти в каталог</a>--%>
+                    <div class="profile-orders">
+                        <c:forEach items="${orders}" var="order">
+                            <div class='order-wrapper'>
+                                <jsp:useBean id="dateValue" class="java.util.Date"/>
+                                <jsp:setProperty name="dateValue" property="time" value="${order.datePlaced}"/>
+                                <h3>Заказ за: <fmt:formatDate value="${dateValue}" pattern="MM/dd/yyyy HH:mm"/></h3>
+
+                                <div class='order'>
+                                    <c:forEach items="${order.productAndAmount}" var="entry">
+                                        <div class="order-main-holder">
+                                            <div class='order-image-container'><img class='order-image'
+                                                                                    src='/${entry.key.productAttributes.get(0).photo}'>
+                                            </div>
+                                            <div class='goods-description-container'>
+                                                <div class='order-product-title-container'>
+                                                    <h3 class='order-product-title'>${entry.key.title}</h3>
+                                                </div>
+                                                <div class='order-product-description-container'>
+                                                    <c:choose>
+                                                        <c:when test="${entry.key.productAttributes.get(0).color=='null'}">
+                                                            <div class='order-product-color-container'>
+                                                                <h3 class='order-color-title'></h3>
+                                                                <div class='order-product-color'></div>
+                                                            </div>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class='order-product-color-container'>
+                                                                <h3 class='order-color-title'>цвет:</h3>
+                                                                <div class='order-product-color'
+                                                                     style='background-color: ${entry.key.productAttributes.get(0).color}'></div>
+                                                            </div>
+                                                            <div class='order-product-color-container'>
+                                                                <h3 class='order-color-title'>
+                                                                    размер:${entry.key.productAttributes.get(0).size}</h3>
+                                                                <div class='order-product-color'></div>
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
+                                                    <h3 class='order-product-price'>
+                                                        цена: ${entry.key.productAttributes.get(0).price*entry.value}
+                                                        грн.</h3>
+                                                    <div class='order-product-amount-container'>
+                                                        <h3 class='order-amount-title'>кол-во:</h3>
+                                                        <input class='order-product-amount' value='${entry.value}'
+                                                               disabled>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
-                        </div>
-                        <div class="order-main-holder">
-                            <div class='order-image-container'><img class='order-image' src='images/8_eredin.jpg'></div>
-                            <div class='goods-description-container'>
-                                <div class='order-product-title-container'>
-                                    <h3 class='order-product-title'>ФИГУРКА FUNKO POP! EREDIN - THE WITCHER</h3>
-                                </div>
-                                <div class='order-product-description-container'>
-                                    <h3 class='order-product-price'>цена: 400 грн.</h3>
-                                    <div class='order-product-amount-container'>
-                                        <h3 class='order-amount-title'>кол-во:</h3>
-                                        <input class='order-product-amount' value='1' disabled>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 class='order-product-price' style="margin: 10px 40px; text-align: right;">статус заказа: <span style="color: red;">в обработке</span></h3>
+                        </c:forEach>
+
                     </div>
                 </div>
-            </div>
-        </div>
+
+
+            </c:otherwise>
+        </c:choose>
     </div>
+
 </content>
 
 <%@ include file="jspf/footer.jspf" %>

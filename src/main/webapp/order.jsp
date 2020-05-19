@@ -49,8 +49,8 @@
 							</li>
 						</c:forEach>
 						<li class="list-group-item d-flex justify-content-between">
-							<span>Скидка</span>
-							<strong>50</strong>
+							<span>Скидка(1%)</span>
+							<strong>${cart.getSum()*0.01} грн.</strong>
 						</li>
 						<li class="list-group-item d-flex justify-content-between">
 							<span>Доставка</span>
@@ -58,7 +58,7 @@
 						</li>
 						<li class="list-group-item d-flex justify-content-between">
 							<span>Итого</span>
-							<strong>${cart.getSum()+50} грн.</strong>
+							<strong>${cart.getSum()+cart.getSum()*0.01} грн.</strong>
 						</li>
 					</ul>
 				</div>
@@ -68,18 +68,28 @@
 						<div class="order-full-container">
 							<div class="mb-3">
 								<label for="address">Адрес</label>
-								<input class="form-control" id="address" name="address" placeholder="Улица Сумская 1234"
+								<input class="form-control" id="address" name="street" placeholder="Улица Сумская 1234"
+									   required="" type="text">
+								<label for="address">Дом</label>
+								<input class="form-control" name="building" placeholder="34a"
 									   required="" type="text">
 								<div class="invalid-feedback">
 									Пожалуйста введите адрес доставки.
 								</div>
+								<label for="address">Город</label>
+								<input class="form-control" name="city" placeholder="Harkiv"
+									   required="" type="text">
+								<label for="address">Индекс</label>
+								<input class="form-control" name="index" placeholder="981234"
+									   required="" type="text">
 							</div>
 							<div class="col-md-5 mb-3 " id="post-method-container" style="padding: 0;">
 								<label for="country">Метод доставки</label>
 								<select class="custom-select d-block w-100" id="country" name="orderMethod" required="">
-									<option value="New Post">Новая почта</option>
-									<option value="Ukr Post">Укрпочта</option>
-									<option value="Intime">Intime</option>
+									<option value="NOVA_POSHTA">Новая почта</option>
+									<option value="UKR_POSHTA">Укрпочта</option>
+									<option value="JUSTIN">Justin</option>
+									<option value="MEEST_EXPRESS">Meest</option>
 								</select>
 								<div class="invalid-feedback">
 									Please select a valid country.
