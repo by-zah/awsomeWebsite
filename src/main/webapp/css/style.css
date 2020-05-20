@@ -1145,5 +1145,7 @@ a{
 }
 
 
-
+#hidden-div {
+	display: block;
+}
 
