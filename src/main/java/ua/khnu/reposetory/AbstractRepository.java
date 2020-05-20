@@ -39,7 +39,7 @@ public abstract class AbstractRepository<T> {
         try {
             return Optional.ofNullable(jdbcAccessor.queryForObject(query, Integer.class, args));
         } catch (EmptyResultDataAccessException e){
-            LOG.info(e);
+            LOG.error(e);
             return Optional.of(0);
         }
     }
@@ -49,8 +49,6 @@ public abstract class AbstractRepository<T> {
     }
 
     public List<T> query(String query, Object... args) {
-        LOG.debug("query --> " + query);
-        LOG.debug("args --> " + Arrays.toString(args));
         return getObjectListFromResultList(jdbcAccessor.queryForList(query, args));
     }
 
@@ -121,7 +119,6 @@ public abstract class AbstractRepository<T> {
             for (Map.Entry<Field, String[]> entry : values.entrySet()) {
                 Field f = entry.getKey();
                 String[] v = entry.getValue();
-                LOG.debug("field type -->  " + f.getType());
                 settersFromString.get(f.getType()).accept(element, f, getFromArrayIfExist(v, i));
             }
             res.add(element);
