@@ -49,6 +49,7 @@
                     <div class="profile-orders">
                         <c:forEach items="${orders}" var="order">
                             <div class='order-wrapper'>
+                                <h3>Статус: заказан</h3>
                                 <jsp:useBean id="dateValue" class="java.util.Date"/>
                                 <jsp:setProperty name="dateValue" property="time" value="${order.datePlaced}"/>
                                 <h3>Заказ за: <fmt:formatDate value="${dateValue}" pattern="MM/dd/yyyy HH:mm"/></h3>

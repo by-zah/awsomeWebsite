@@ -57,8 +57,8 @@ public class OrderController extends HttpServlet {
             order.setPaymentMethod(req.getParameter("cardNumber"));
             order.setUserId(user.getId());
             order.setProductAndAmount(cart.getCart());
-            orderService.createNewOrder(order);
-            req.setAttribute("orderAlert", "Ваш заказ отправлен на подготовку");
+            int num = orderService.createNewOrder(order);
+            req.setAttribute("orderAlert", "Ваш заказ №" + num + " отправлен на подготовку");
             cart.clear();
             req.getSession().setAttribute("cart", cart);
         }
