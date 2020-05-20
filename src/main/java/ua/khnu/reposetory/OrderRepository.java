@@ -41,7 +41,7 @@ public class OrderRepository extends AbstractRepository<Order> {
     }
 
     @Transactional
-    public void add(Order order) {
+    public int add(Order order) {
         ShippingAddress shippingAddress = order.getShippingAddress();
         shippingAddress.setId(simpleJdbcInsertShippingAddress.
                 executeAndReturnKey(extractParams(shippingAddress)).intValue());
@@ -55,7 +55,7 @@ public class OrderRepository extends AbstractRepository<Order> {
             jdbcAccessor.update(ADD_PRODUCT_TO_OUT,pa.getId(),amount,date);
         });
         jdbcAccessor.update(ADD_ORDER_STATUS, orderId, "заказан");
-
+        return orderId;
     }
 
     private Map<String, Object> extractParams(ShippingAddress sa) {
